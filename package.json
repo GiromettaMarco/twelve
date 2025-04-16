@@ -7,8 +7,9 @@
     "dev": "vite",
     "format": "prettier --write resources/",
     "format:check": "prettier --check resources/",
-    "lint": "eslint . --fix",
+    "lint": "eslint --cache --fix",
     "types": "tsc --noEmit",
+    "prepare": "husky",
     "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
@@ -48,6 +49,7 @@
     "concurrently": "^9.0.1",
     "date-fns": "^3.6.0",
     "globals": "^15.14.0",
+    "husky": "^9.1.7",
     "laravel-vite-plugin": "^1.0",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
