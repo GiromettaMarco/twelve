@@ -3,12 +3,10 @@ name: linter
 on:
   push:
     branches:
-      - develop
-      - main
+      - master
   pull_request:
     branches:
-      - develop
-      - main
+      - master
 
 permissions:
   contents: write
@@ -16,30 +14,50 @@ permissions:
 jobs:
   quality:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: [8.4]
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: ${{ matrix.php }}
+          extensions: json, dom, curl, libxml, mbstring
+          coverage: none
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
 
       - name: Install Dependencies
         run: |
           composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-          npm install
+          pnpm install
+
+      - name: Lint Frontend
+        run: pnpm run lint
+
+      - name: Format Frontend
+        run: pnpm run format
 
       - name: Run Pint
         run: vendor/bin/pint
 
-      - name: Format Frontend
-        run: npm run format
-
-      - name: Lint Frontend
-        run: npm run lint
-
-      # - name: Commit Changes
-      #   uses: stefanzweifel/git-auto-commit-action@v5
-      #   with:
-      #     commit_message: fix code style
-      #     commit_options: '--no-verify'
+      - name: Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "fix: auto-fix code style"
+          commit_options: '--no-verify'
