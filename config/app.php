@@ -1,5 +1,7 @@
 <?php
 
+use App\Helpers\Locale;
+
 return [
 
     /*
@@ -78,7 +80,7 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => Locale::getLanguage(),
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
