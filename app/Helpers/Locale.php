@@ -29,6 +29,7 @@ class Locale
                 return $locale;
             }
         }
+
         return self::$default;
     }
 }
