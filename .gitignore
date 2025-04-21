@@ -17,6 +17,8 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 /auth.json
+# No coverage reports
+/reports
 # No IDE project files and folders
 /.fleet
 /.idea
