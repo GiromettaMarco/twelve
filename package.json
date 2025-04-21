@@ -7,7 +7,7 @@
     "dev": "vite",
     "format": "prettier --write resources/",
     "format:check": "prettier --check resources/",
-    "lint": "eslint --cache --fix",
+    "lint": "eslint --cache --fix resources/",
     "types": "tsc --noEmit",
     "prepare": "husky",
     "preinstall": "npx only-allow pnpm"
