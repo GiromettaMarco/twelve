@@ -32,19 +32,20 @@ class HandleLocale
             $q = 1;
 
             if (isset($qLangArr[1]) && substr($qLangArr[1], 0, 2) === 'q=') {
-                $q = (float)substr($qLangArr[1], 2);
+                $q = (float) substr($qLangArr[1], 2);
             }
 
             $parsedLanguage[] = ['q' => $q, 'lang' => $qLangArr[0]];
 
             usort($parsedLanguage, function ($a, $b) {
-                return ($a < $b);
+                return $a < $b;
             });
         }
 
-        foreach($parsedLanguage as $lang) {
+        foreach ($parsedLanguage as $lang) {
             if (in_array($lang['lang'], $this->available)) {
                 App::setLocale($lang['lang']);
+
                 return $next($request);
             }
 
@@ -53,6 +54,7 @@ class HandleLocale
 
                 if (in_array($noCountryLang, $this->available)) {
                     App::setLocale($noCountryLang);
+
                     return $next($request);
                 }
             }
