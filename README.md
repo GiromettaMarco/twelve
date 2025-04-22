@@ -1,5 +1,7 @@
 # Eleven
 
+[![Tests](https://github.com/GiromettaMarco/twelve/actions/workflows/tests.yml/badge.svg)](https://github.com/GiromettaMarco/twelve/actions/workflows/tests.yml)
+
 Example Laravel 12 application with React.
 
 ## Installation
@@ -17,10 +19,10 @@ composer install
 ```
 
 ```
-npm i
+pnpm i
 ```
 
-Write a new ```.env``` file, then generate a new key:
+Write a new `.env` file, then generate a new key:
 
 ```
 php artisan key:generate
@@ -35,5 +37,5 @@ php artisan migrate
 Run the dev server and register a new user from the application itself:
 
 ```
-npm run dev
+pnpm run dev
 ```
