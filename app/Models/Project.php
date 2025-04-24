@@ -3,12 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Model;
 
-//use Illuminate\Database\Eloquent\Casts\Attribute;
-//use Illuminate\Support\Carbon;
+// use Illuminate\Database\Eloquent\Casts\Attribute;
+// use Illuminate\Support\Carbon;
 
 class Project extends Model
 {
@@ -44,8 +44,6 @@ class Project extends Model
 
     /**
      * One To Many Relationship
-     *
-     * @return HasMany
      */
     public function tasks(): HasMany
     {

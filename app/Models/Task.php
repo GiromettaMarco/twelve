@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-//use Illuminate\Support\Carbon;
+
+// use Illuminate\Support\Carbon;
 
 class Task extends Model
 {
@@ -31,8 +32,8 @@ class Task extends Model
     ];
 
     /**
-    * @var array
-    */
+     * @var array
+     */
     // protected $casts = [
     //     'deadline' => 'datetime',
     // ];
@@ -49,8 +50,6 @@ class Task extends Model
 
     /**
      * One To Many (Inverse) / Belongs To Relationship
-     *
-     * @return BelongsTo
      */
     public function project(): BelongsTo
     {
