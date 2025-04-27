@@ -1,30 +1,35 @@
-import { Calendar } from '@/components/ui/calendar'
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern'
 import AppLayout from '@/layouts/app-layout'
 import { type BreadcrumbItem } from '@/types'
-import { Head } from '@inertiajs/react'
+import type { Project } from '@/types/project'
+import { Head, Link } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
-import React from 'react'
 
-export default function Dashboard() {
+export default function Projects({ projects = [] }: { projects: Project[] }) {
   // Setup translations
-  const { t } = useLaravelReactI18n()
+  const { t, tChoice } = useLaravelReactI18n()
 
   const breadcrumbs: BreadcrumbItem[] = [
     {
       title: t('Dashboard'),
       href: route('dashboard')
+    },
+    {
+      title: tChoice('Project', 2),
+      href: route('projects.index')
     }
   ]
 
-  const [date, setDate] = React.useState<Date | undefined>(new Date())
-
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
-      <Head title="Dashboard" />
+      <Head title="Projects" />
       <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <Calendar mode="single" selected={date} onSelect={setDate} className="rounded-md border" />
+          {projects.map((project) => (
+            <p key={project.id}>
+              <Link href={'/dashboard/projects/' + project.id}>{project.title}</Link>
+            </p>
+          ))}
           <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
             <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
           </div>

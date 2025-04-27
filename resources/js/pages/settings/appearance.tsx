@@ -6,16 +6,16 @@ import { type BreadcrumbItem } from '@/types'
 import { Head } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 
-const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: 'Appearance settings',
-    href: '/settings/appearance'
-  }
-]
-
 export default function Appearance() {
   // Setup translations
   const { t } = useLaravelReactI18n()
+
+  const breadcrumbs: BreadcrumbItem[] = [
+    {
+      title: t('Appearance settings'),
+      href: route('appearance')
+    }
+  ]
 
   return (
     <AppLayout breadcrumbs={breadcrumbs}>

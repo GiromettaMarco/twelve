@@ -4,16 +4,9 @@ import { NavUser } from '@/components/nav-user'
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar'
 import { type NavItem } from '@/types'
 import { Link } from '@inertiajs/react'
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react'
+import { useLaravelReactI18n } from 'laravel-react-i18n'
+import { BookOpen, ChartColumn, Folder, LayoutGrid } from 'lucide-react'
 import AppLogo from './app-logo'
-
-const mainNavItems: NavItem[] = [
-  {
-    title: 'Dashboard',
-    href: '/dashboard',
-    icon: LayoutGrid
-  }
-]
 
 const footerNavItems: NavItem[] = [
   {
@@ -29,6 +22,22 @@ const footerNavItems: NavItem[] = [
 ]
 
 export function AppSidebar() {
+  // Setup translations
+  const { t, tChoice } = useLaravelReactI18n()
+
+  const mainNavItems: NavItem[] = [
+    {
+      title: t('Dashboard'),
+      href: route('dashboard'),
+      icon: LayoutGrid
+    },
+    {
+      title: tChoice('Project', 2),
+      href: route('projects.index'),
+      icon: ChartColumn
+    }
+  ]
+
   return (
     <Sidebar collapsible="icon" variant="inset">
       <SidebarHeader>

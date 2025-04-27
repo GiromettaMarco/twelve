@@ -11,16 +11,16 @@ import { Head, useForm } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 import { FormEventHandler, useRef } from 'react'
 
-const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: 'Password settings',
-    href: '/settings/password'
-  }
-]
-
 export default function Password() {
   // Setup translations
   const { t } = useLaravelReactI18n()
+
+  const breadcrumbs: BreadcrumbItem[] = [
+    {
+      title: t('Password settings'),
+      href: route('password.edit')
+    }
+  ]
 
   const passwordInput = useRef<HTMLInputElement>(null)
   const currentPasswordInput = useRef<HTMLInputElement>(null)

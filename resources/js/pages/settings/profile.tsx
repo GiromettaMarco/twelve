@@ -12,13 +12,6 @@ import { Head, Link, useForm, usePage } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 import { FormEventHandler } from 'react'
 
-const breadcrumbs: BreadcrumbItem[] = [
-  {
-    title: 'Profile settings',
-    href: '/settings/profile'
-  }
-]
-
 type ProfileForm = {
   name: string
   email: string
@@ -27,6 +20,13 @@ type ProfileForm = {
 export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
   // Setup translations
   const { t } = useLaravelReactI18n()
+
+  const breadcrumbs: BreadcrumbItem[] = [
+    {
+      title: t('Profile settings'),
+      href: route('profile.edit')
+    }
+  ]
 
   const { auth } = usePage<SharedData>().props
 
