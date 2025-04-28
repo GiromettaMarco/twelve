@@ -1,13 +1,12 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import format from '@/lib/format'
 import type { Project } from '@/types/project'
 import type { Task } from '@/types/task'
-import { differenceInCalendarDays, format } from 'date-fns'
+import { differenceInCalendarDays } from 'date-fns'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
-// import { it } from 'date-fns/locale'
 
 // @TODO check date compatibility between js and php
-// @TODO localize date @SEE https://date-fns.org/v4.1.0/docs/I18n
 
 const countTasksWithStatus = function (tasks: Task[], status: string) {
   return tasks.filter(function (task) {
@@ -21,7 +20,7 @@ const calcPercent = function (part: number, total: number) {
 
 export default function ProjectCard({ project }: { project: Project }) {
   // Setup translations
-  const { t, tChoice } = useLaravelReactI18n()
+  const { currentLocale, t, tChoice } = useLaravelReactI18n()
 
   const totalTasks = project.tasks.length
 
@@ -43,9 +42,6 @@ export default function ProjectCard({ project }: { project: Project }) {
   // const deadline = project.deadline ? new Date(project.deadline) : null
   const deadline = project.deadline ? new Date(2025, 4, 26) : null
   const deadlineCountdown = deadline ? differenceInCalendarDays(deadline, new Date()) : 0
-
-  // console.log(deadlineCountdown, new Date(project.deadline), new Date())
-  // console.log(project.deadline, new Date(), deadlineCountdown)
 
   return (
     <Card>
@@ -95,7 +91,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         <CardFooter>
           {deadlineCountdown > 7 ? (
             <p>
-              {t('Deadline')}: {format(deadline, 'PPP')}
+              {t('Deadline')}: {format(deadline, currentLocale())}
             </p>
           ) : deadlineCountdown > 1 ? (
             <p className="text-yellow-500">{tChoice('Deadline in :n days', deadlineCountdown, { n: deadlineCountdown })}</p>
