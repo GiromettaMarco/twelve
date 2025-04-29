@@ -26,11 +26,13 @@ class HandleLocale
     public function handle(Request $request, Closure $next): Response
     {
         // Use the language explicitly chosen by the user
-        $dbLanguage = Auth::user()->language;
-        if ($dbLanguage !== 'system') {
-            App::setLocale($dbLanguage);
+        if (Auth::check()) {
+            $dbLanguage = Auth::user()->language;
+            if ($dbLanguage !== 'system') {
+                App::setLocale($dbLanguage);
 
-            return $next($request);
+                return $next($request);
+            }
         }
 
         // Infer the language by Accept-Language header
