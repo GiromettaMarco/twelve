@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class HandleLocale
@@ -24,7 +25,16 @@ class HandleLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $acceptLanguage = explode(',', trim($request->header('Accept-Language', '*')));
+        // Use the language explicitly chosen by the user
+        $dbLanguage = Auth::user()->language;
+        if ($dbLanguage !== 'system') {
+            App::setLocale($dbLanguage);
+
+            return $next($request);
+        }
+
+        // Infer the language by Accept-Language header
+        $acceptLanguage = explode(',', strtolower(trim($request->header('Accept-Language', '*'))));
         $parsedLanguage = [];
 
         foreach ($acceptLanguage as $qualityLang) {
