@@ -20,7 +20,7 @@ class LanguageController extends Controller
         return Inertia::render('settings/language', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => $request->session()->get('status'),
-            'language' => Auth::user()->language
+            'language' => Auth::user()->language,
         ]);
     }
 
