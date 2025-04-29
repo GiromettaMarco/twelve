@@ -16,6 +16,8 @@ declare module 'ziggy-js' {
     'password.edit': []
     'password.update': []
     appearance: []
+    'language.edit': []
+    'language.update': []
     register: []
     login: []
     'password.request': []

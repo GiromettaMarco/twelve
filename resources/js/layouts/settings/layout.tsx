@@ -5,29 +5,35 @@ import { cn } from '@/lib/utils'
 import { type NavItem } from '@/types'
 import { Link } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
+import { KeyRound, Languages, SunMoon, User } from 'lucide-react'
 import { type PropsWithChildren } from 'react'
-
-const sidebarNavItems: NavItem[] = [
-  {
-    title: 'Profile',
-    href: '/settings/profile',
-    icon: null
-  },
-  {
-    title: 'Password',
-    href: '/settings/password',
-    icon: null
-  },
-  {
-    title: 'Appearance',
-    href: '/settings/appearance',
-    icon: null
-  }
-]
 
 export default function SettingsLayout({ children }: PropsWithChildren) {
   // Setup translations
   const { t } = useLaravelReactI18n()
+
+  const sidebarNavItems: NavItem[] = [
+    {
+      title: t('Profile'),
+      href: route('profile.edit'),
+      icon: User
+    },
+    {
+      title: t('Password'),
+      href: route('password.edit'),
+      icon: KeyRound
+    },
+    {
+      title: t('Appearance'),
+      href: route('appearance'),
+      icon: SunMoon
+    },
+    {
+      title: t('Language'),
+      href: route('language.edit'),
+      icon: Languages
+    }
+  ]
 
   // When server-side rendering, we only render the layout on the client...
   if (typeof window === 'undefined') {
@@ -54,7 +60,8 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                 })}
               >
                 <Link href={item.href} prefetch>
-                  {t(item.title)}
+                  {item.icon && <item.icon />}
+                  {item.title}
                 </Link>
               </Button>
             ))}
