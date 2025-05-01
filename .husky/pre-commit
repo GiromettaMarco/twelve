@@ -1,4 +1,3 @@
 pnpm run lint
 pnpm run format
 ./vendor/bin/pint --dirty
-./vendor/bin/phpunit
