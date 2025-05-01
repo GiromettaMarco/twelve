@@ -2,10 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LanguageTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_known_language(): void
     {
         $response = $this->withHeaders([
@@ -38,5 +42,38 @@ class LanguageTest extends TestCase
         $response = $this->get('/');
 
         $response->assertSee('<html lang="en"', false);
+    }
+
+    public function test_logged_user_system(): void
+    {
+        $user = User::factory()->create([
+            'language' => 'system',
+        ]);
+
+        $response = $this->actingAs($user)->get('/');
+
+        $response->assertSee('<html lang="en"', false);
+    }
+
+    public function test_logged_user_en(): void
+    {
+        $user = User::factory()->create([
+            'language' => 'en',
+        ]);
+
+        $response = $this->actingAs($user)->get('/');
+
+        $response->assertSee('<html lang="en"', false);
+    }
+
+    public function test_logged_user_it(): void
+    {
+        $user = User::factory()->create([
+            'language' => 'it',
+        ]);
+
+        $response = $this->actingAs($user)->get('/');
+
+        $response->assertSee('<html lang="it"', false);
     }
 }
