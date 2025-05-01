@@ -30,7 +30,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: json, dom, curl, libxml, mbstring
-          coverage: none
+          coverage: xdebug
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
