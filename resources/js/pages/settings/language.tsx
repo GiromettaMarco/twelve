@@ -49,7 +49,7 @@ export default function Language({ language = 'system' }: { language: string }) 
 
       <SettingsLayout>
         <div className="space-y-6">
-          <HeadingSmall title={t('Language settings')} description={t("Update your account language settings")} />
+          <HeadingSmall title={t('Language settings')} description={t('Update your account language settings')} />
 
           <form onSubmit={submit} className="space-y-6">
             <div className="grid gap-2">
