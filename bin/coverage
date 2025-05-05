@@ -36,6 +36,10 @@ ob_start();
 </svg>
 
 <?php
+if (!is_dir('docs')) {
+    mkdir('docs');
+}
+
 file_put_contents('docs/php-coverage.svg', ob_get_contents());
 
 ob_end_clean();
