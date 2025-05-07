@@ -17,7 +17,7 @@ class IndexTest extends TestCase
 
     public function test_authenticated_users_can_visit_the_projects_index_page()
     {
-        $this->actingAs($user = User::factory()->create());
+        $this->actingAs($user = User::first());
 
         $this->get('/dashboard/projects')->assertOk();
     }

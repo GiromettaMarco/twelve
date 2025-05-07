@@ -17,9 +17,7 @@ class ShowTest extends TestCase
 
     public function test_authenticated_users_can_visit_the_projects_show_page()
     {
-        $user = User::where('name', 'Mario Merola')->first();
-
-        $this->actingAs($user);
+        $this->actingAs($user = User::first());
 
         $this->get('/dashboard/projects/1')->assertOk();
     }
