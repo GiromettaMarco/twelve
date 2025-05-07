@@ -33,10 +33,10 @@ php artisan key:generate
 Run migrations
 
 ```
-php artisan migrate
+php artisan migrate --seed
 ```
 
-Run the dev server and register a new user from the application itself:
+Run the dev server
 
 ```
 pnpm run dev
