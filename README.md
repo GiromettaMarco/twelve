@@ -113,7 +113,7 @@ Add a Laravel Sail alias for convenience
 vim ~/.bashrc
 ```
 
-Add at the end of file:
+Enter insert mode by pressing `i` and add this line at the end:
 
 ```
 alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
