@@ -8,6 +8,7 @@
 /storage/pail
 /vendor
 .env
+.env.dusk.local
 .env.backup
 .env.production
 .env.testing
