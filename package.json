@@ -9,7 +9,7 @@
     "format:check": "prettier --check resources/",
     "lint": "eslint --cache --fix resources/",
     "types": "tsc --noEmit",
-    "prepare": "husky",
+    "prepare": "node .husky/install.mjs",
     "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
