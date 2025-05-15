@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "22afb7d6ea7ae200ca9ec5e229b92b3a",
+    "content-hash": "1dd81f530edd7c47612cd9e874389914",
     "packages": [
         {
             "name": "brick/math",
@@ -6413,6 +6413,63 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "jedymatt/laravel-sail-env",
+            "version": "v1.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jedymatt/laravel-sail-env.git",
+                "reference": "3eb67507b173d4dc9e429c856260d6b32ae20017"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jedymatt/laravel-sail-env/zipball/3eb67507b173d4dc9e429c856260d6b32ae20017",
+                "reference": "3eb67507b173d4dc9e429c856260d6b32ae20017",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/sail": "^1.20.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jedymatt\\LaravelSailEnv\\LaravelSailEnvServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jedymatt\\LaravelSailEnv\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jedy Matt Tabasco",
+                    "email": "jedymatt@gmail.com"
+                }
+            ],
+            "description": "Configures .env file to match the sail environment variable's requirements.",
+            "keywords": [
+                "env",
+                "laravel",
+                "laravel-sail",
+                "sail"
+            ],
+            "support": {
+                "issues": "https://github.com/jedymatt/laravel-sail-env/issues",
+                "source": "https://github.com/jedymatt/laravel-sail-env"
+            },
+            "time": "2023-03-11T05:28:04+00:00"
         },
         {
             "name": "laravel/dusk",
