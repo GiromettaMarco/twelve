@@ -8,7 +8,7 @@ Example Laravel 12 application with React.
 
 ## Installation (general)
 
-Clone this repo:
+Clone this repository:
 
 ```
 git clone https://github.com/GiromettaMarco/twelve.git
@@ -42,9 +42,9 @@ Run the dev server
 pnpm run dev
 ```
 
-## Minimum Ubuntu configuration
+## Minimum Sail configuration
 
-This is the minum system configuration starting from a fresh Ubuntu-24.04 installation.
+This is the minimum system configuration to run this application in a development environment with Laravel Sail, starting from a fresh Ubuntu-24.04 installation.
 
 ### Update system packages
 
@@ -64,7 +64,7 @@ git config --global user.name "Marco Girometta" && git config --global user.emai
 
 ### SSH
 
-Generate a new SSH key and don't use a passfrase if you want to use it with Visual Studio Code Source Control.
+Generate a new SSH key and don't use a passphrase if you want to use it with Visual Studio Code Source Control.
 
 ```
 ssh-keygen -t ed25519 -C "girometta.marco@gmail.com"
@@ -96,7 +96,6 @@ git clone git@github.com:GiromettaMarco/twelve.git
 
 When prompted answer "yes" to add github.com to the list of known hosts.
 
-
 ### PHP and Composer
 
 This service provided by Laravel Herd will install php8.4, composer and the Laravel installer with no need for further configurations.
@@ -104,6 +103,34 @@ This service provided by Laravel Herd will install php8.4, composer and the Lara
 ```
 /bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)"
 ```
+
+### pnpm
+
+Install pnpm
+
+```
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+```
+
+### Install packages
+
+Install composer and node packages.
+
+**NOTE**: pnpm installs dependencies in a global store which should always be on the same volume as the current project (in order to take advantage of hard links). Therefore, it is convenient to install pnpm packages from outside the container, when working in a development environment.
+
+From the project root:
+
+```
+composer install
+```
+
+```
+pnpm install
+```
+
+### Environment configuration
+
+Create a new `.env` file and fill "HOST" variables with docker services name (see .env.example).
 
 ### Sail alias
 
@@ -127,16 +154,6 @@ Restart your shell
 
 Install docker or enable it through Docker Desktop.
 
-From the project root:
-
-Install composer packages
-
-```
-composer install
-```
-
-Create a new `.env` file (.env configurations)
-
 Run docker compose with sail
 
 ```
@@ -155,15 +172,11 @@ Run migrations and seeds
 sail artisan migrate --seed
 ```
 
-Install node packages
-
-```
-sail pnpm install
-```
-
 ## Reference
 
 - [Git - First-Time Git Setup](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
 - [Generating a new SSH key and adding it to the ssh-agent - GitHub Docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 - [PHP Installer in seconds | php.new](https://php.new/)
 - [Laravel Sail - Laravel 12.x - The PHP Framework For Web Artisans](https://laravel.com/docs/12.x/sail#configuring-a-shell-alias)
+- [Symlinked `node_modules` structure | pnpm](https://pnpm.io/symlinked-node-modules-structure)
+- [Store Settings | pnpm](https://pnpm.io/settings#store-settings)
