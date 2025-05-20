@@ -1,0 +1,2 @@
+overrides:
+  "laravel-react-i18n>react": "$react"
