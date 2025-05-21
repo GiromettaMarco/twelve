@@ -6,7 +6,14 @@
 
 Example Laravel 12 application with React.
 
-## Installation (general)
+## Requirements
+
+- PHP 8.4
+- Composer
+- Node 22
+- pnpm
+
+## Installation
 
 Clone this repository:
 
