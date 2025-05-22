@@ -147,7 +147,7 @@ function Calendar({
     props.rangeMiddleClassName
   )
   const _selectedClassName = cn(
-    "[&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary [&>button]:hover:text-primary-foreground",
+    "[&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary [&>button]:hover:text-primary-foreground [&>button]:dark:hover:bg-primary [&>button]:dark:hover:text-primary-foreground",
     props.selectedClassName
   )
   const _todayClassName = cn(
