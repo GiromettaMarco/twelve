@@ -9,7 +9,11 @@ interface AppLayoutProps {
 }
 
 export default ({ children, breadcrumbs, headerChildren, ...props }: AppLayoutProps) => (
-  <AppLayoutTemplate breadcrumbs={breadcrumbs} headerChildren={headerChildren} {...props}>
+  <AppLayoutTemplate
+    breadcrumbs={breadcrumbs}
+    headerChildren={headerChildren}
+    {...props}
+  >
     {children}
   </AppLayoutTemplate>
 )

@@ -24,7 +24,12 @@ export default function Dashboard() {
       <Head title="Dashboard" />
       <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <Calendar mode="single" selected={date} onSelect={setDate} className="rounded-md border" />
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={setDate}
+            className="rounded-md border"
+          />
           <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
             <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
           </div>

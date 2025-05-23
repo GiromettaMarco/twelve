@@ -57,9 +57,15 @@ export default function Password() {
 
       <SettingsLayout>
         <div className="space-y-6">
-          <HeadingSmall title={t('Update password')} description={t('Ensure your account is using a long, random password to stay secure')} />
+          <HeadingSmall
+            title={t('Update password')}
+            description={t('Ensure your account is using a long, random password to stay secure')}
+          />
 
-          <form onSubmit={updatePassword} className="space-y-6">
+          <form
+            onSubmit={updatePassword}
+            className="space-y-6"
+          >
             <div className="grid gap-2">
               <Label htmlFor="current_password">{t('Current password')}</Label>
 

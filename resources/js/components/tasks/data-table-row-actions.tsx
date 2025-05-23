@@ -30,12 +30,18 @@ export function DataTableRowActions<TData extends Task>({ row }: DataTableRowAct
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="data-[state=open]:bg-muted flex h-8 w-8 p-0">
+        <Button
+          variant="ghost"
+          className="data-[state=open]:bg-muted flex h-8 w-8 p-0"
+        >
           <MoreHorizontal />
           <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[160px]">
+      <DropdownMenuContent
+        align="end"
+        className="w-[160px]"
+      >
         <DropdownMenuItem>Edit</DropdownMenuItem>
         <DropdownMenuItem>Make a copy</DropdownMenuItem>
         <DropdownMenuItem>Favorite</DropdownMenuItem>
@@ -45,7 +51,10 @@ export function DataTableRowActions<TData extends Task>({ row }: DataTableRowAct
           <DropdownMenuSubContent>
             <DropdownMenuRadioGroup value={task.label.title}>
               {labels.map((label) => (
-                <DropdownMenuRadioItem key={label.value} value={label.value}>
+                <DropdownMenuRadioItem
+                  key={label.value}
+                  value={label.value}
+                >
                   {label.label}
                 </DropdownMenuRadioItem>
               ))}

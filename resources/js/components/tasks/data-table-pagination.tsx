@@ -27,7 +27,10 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
             </SelectTrigger>
             <SelectContent side="top">
               {[10, 20, 30, 40, 50].map((pageSize) => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
+                <SelectItem
+                  key={pageSize}
+                  value={`${pageSize}`}
+                >
                   {pageSize}
                 </SelectItem>
               ))}
@@ -47,11 +50,21 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
             <span className="sr-only">Go to first page</span>
             <ChevronsLeft />
           </Button>
-          <Button variant="outline" className="h-8 w-8 p-0" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+          <Button
+            variant="outline"
+            className="h-8 w-8 p-0"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
             <span className="sr-only">Go to previous page</span>
             <ChevronLeft />
           </Button>
-          <Button variant="outline" className="h-8 w-8 p-0" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+          <Button
+            variant="outline"
+            className="h-8 w-8 p-0"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
             <span className="sr-only">Go to next page</span>
             <ChevronRight />
           </Button>

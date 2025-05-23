@@ -25,7 +25,9 @@ export default function Language({ language = 'system' }: { language: string }) 
     }
   ]
 
-  const { data, setData, patch, errors, processing, recentlySuccessful, wasSuccessful } = useForm<Required<LanguageForm>>({
+  const { data, setData, patch, errors, processing, recentlySuccessful, wasSuccessful } = useForm<
+    Required<LanguageForm>
+  >({
     language: language
   })
 
@@ -49,11 +51,20 @@ export default function Language({ language = 'system' }: { language: string }) 
 
       <SettingsLayout>
         <div className="space-y-6">
-          <HeadingSmall title={t('Language settings')} description={t('Update your account language settings')} />
+          <HeadingSmall
+            title={t('Language settings')}
+            description={t('Update your account language settings')}
+          />
 
-          <form onSubmit={submit} className="space-y-6">
+          <form
+            onSubmit={submit}
+            className="space-y-6"
+          >
             <div className="grid gap-2">
-              <Select value={data.language} onValueChange={(newLangTag) => setData('language', newLangTag)}>
+              <Select
+                value={data.language}
+                onValueChange={(newLangTag) => setData('language', newLangTag)}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder={t('Language')} />
                 </SelectTrigger>
@@ -64,7 +75,10 @@ export default function Language({ language = 'system' }: { language: string }) 
                 </SelectContent>
               </Select>
 
-              <InputError className="mt-2" message={errors.language} />
+              <InputError
+                className="mt-2"
+                message={errors.language}
+              />
             </div>
 
             <div className="flex items-center gap-4">

@@ -24,7 +24,10 @@ export default function ForgotPassword({ status }: { status?: string }) {
   }
 
   return (
-    <AuthLayout title={t('Forgot password')} description={t('Enter your email to receive a password reset link')}>
+    <AuthLayout
+      title={t('Forgot password')}
+      description={t('Enter your email to receive a password reset link')}
+    >
       <Head title={t('Forgot password')} />
 
       {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
@@ -48,7 +51,10 @@ export default function ForgotPassword({ status }: { status?: string }) {
           </div>
 
           <div className="my-6 flex items-center justify-start">
-            <Button className="w-full" disabled={processing}>
+            <Button
+              className="w-full"
+              disabled={processing}
+            >
               {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
               {t('Email password reset link')}
             </Button>

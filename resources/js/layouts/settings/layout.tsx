@@ -44,7 +44,10 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
 
   return (
     <div className="px-4 py-6">
-      <Heading title={t('Settings')} description={t('Manage your profile and account settings')} />
+      <Heading
+        title={t('Settings')}
+        description={t('Manage your profile and account settings')}
+      />
 
       <div className="flex flex-col space-y-8 lg:flex-row lg:space-y-0 lg:space-x-12">
         <aside className="w-full max-w-xl lg:w-48">
@@ -59,7 +62,10 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                   'bg-muted': currentPath === item.href
                 })}
               >
-                <Link href={item.href} prefetch>
+                <Link
+                  href={item.href}
+                  prefetch
+                >
                   {item.icon && <item.icon />}
                   {item.title}
                 </Link>

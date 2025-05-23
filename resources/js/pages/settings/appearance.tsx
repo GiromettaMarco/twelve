@@ -23,7 +23,10 @@ export default function Appearance() {
 
       <SettingsLayout>
         <div className="space-y-6">
-          <HeadingSmall title={t('Appearance settings')} description={t("Update your account's appearance settings")} />
+          <HeadingSmall
+            title={t('Appearance settings')}
+            description={t("Update your account's appearance settings")}
+          />
           <AppearanceTabs />
         </div>
       </SettingsLayout>

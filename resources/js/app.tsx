@@ -16,7 +16,10 @@ createInertiaApp({
       // SSR
       hydrateRoot(
         el,
-        <LaravelReactI18nProvider fallbackLocale={'en'} files={import.meta.glob('/lang/*.json')}>
+        <LaravelReactI18nProvider
+          fallbackLocale={'en'}
+          files={import.meta.glob('/lang/*.json')}
+        >
           <App {...props} />
         </LaravelReactI18nProvider>
       )
@@ -25,7 +28,10 @@ createInertiaApp({
       const root = createRoot(el)
 
       root.render(
-        <LaravelReactI18nProvider fallbackLocale={'en'} files={import.meta.glob('/lang/*.json')}>
+        <LaravelReactI18nProvider
+          fallbackLocale={'en'}
+          files={import.meta.glob('/lang/*.json')}
+        >
           <App {...props} />
         </LaravelReactI18nProvider>
       )

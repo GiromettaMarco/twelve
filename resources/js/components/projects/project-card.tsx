@@ -94,11 +94,15 @@ export default function ProjectCard({ project }: { project: Project }) {
               {t('Deadline')}: {format(deadline, currentLocale())}
             </p>
           ) : deadlineCountdown > 1 ? (
-            <p className="text-yellow-500">{tChoice('Deadline in :n days', deadlineCountdown, { n: deadlineCountdown })}</p>
+            <p className="text-yellow-500">
+              {tChoice('Deadline in :n days', deadlineCountdown, { n: deadlineCountdown })}
+            </p>
           ) : deadlineCountdown >= 0 ? (
             <p className="text-red-500">{tChoice('Deadline in :n days', deadlineCountdown)}</p>
           ) : (
-            <p className="text-red-500">{tChoice('Deadline expired by :n days', deadlineCountdown * -1, { n: deadlineCountdown * -1 })}</p>
+            <p className="text-red-500">
+              {tChoice('Deadline expired by :n days', deadlineCountdown * -1, { n: deadlineCountdown * -1 })}
+            </p>
           )}
         </CardFooter>
       )}

@@ -32,14 +32,24 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: 'id',
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Task" />,
+    header: ({ column }) => (
+      <DataTableColumnHeader
+        column={column}
+        title="Task"
+      />
+    ),
     cell: ({ row }) => <div className="w-[80px]">{row.getValue('id')}</div>,
     enableSorting: false,
     enableHiding: false
   },
   {
     accessorKey: 'title',
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Title" />,
+    header: ({ column }) => (
+      <DataTableColumnHeader
+        column={column}
+        title="Title"
+      />
+    ),
     cell: ({ row }) => {
       const label = labels.find((label) => label.value === row.original.label.title)
 
@@ -54,7 +64,12 @@ export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: 'status',
     accessorFn: (row) => row.status.title,
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
+    header: ({ column }) => (
+      <DataTableColumnHeader
+        column={column}
+        title="Status"
+      />
+    ),
     cell: ({ row }) => {
       const status = statuses.find((status) => status.value === row.getValue('status'))
 
@@ -76,7 +91,12 @@ export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: 'priority',
     accessorFn: (row) => row.priority.title,
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Priority" />,
+    header: ({ column }) => (
+      <DataTableColumnHeader
+        column={column}
+        title="Priority"
+      />
+    ),
     cell: ({ row }) => {
       const priority = priorities.find((priority) => priority.value === row.getValue('priority'))
 
