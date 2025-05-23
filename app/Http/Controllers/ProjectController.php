@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -64,4 +65,23 @@ class ProjectController extends Controller
     //         'project' => $project,
     //     ]);
     // }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param StoreProjectRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(StoreProjectRequest $request)
+    {
+        $project = new Project($request->validated());
+
+        $project->save();
+
+        $project->users()->attach(Auth::user()->id);
+
+        // $project->setRelation('tasks', collect());
+
+        return to_route('projects.show', ['id' => $project->id]);
+    }
 }

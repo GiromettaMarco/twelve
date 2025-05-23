@@ -21,6 +21,9 @@ Route::prefix('dashboard')
 
         Route::get('/projects/{id}', [ProjectController::class, 'show'])
             ->name('projects.show');
+
+        Route::post('/projects', [ProjectController::class, 'store'])
+            ->name('projects.store');
     });
 
 require __DIR__.'/settings.php';
