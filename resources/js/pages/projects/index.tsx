@@ -1,3 +1,4 @@
+import AddProject from '@/components/projects/add-project'
 import ProjectCard from '@/components/projects/project-card'
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern'
 import AppLayout from '@/layouts/app-layout'
@@ -22,32 +23,18 @@ export default function Projects({ projects = [] }: { projects: Project[] }) {
   ]
 
   return (
-    <AppLayout breadcrumbs={breadcrumbs}>
+    <AppLayout
+      breadcrumbs={breadcrumbs}
+      headerChildren={AddProject()}
+    >
       <Head title="Projects" />
       <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">
           {projects.map((project) => (
-            <Link key={project.id} href={'/dashboard/projects/' + project.id}>
-              <ProjectCard project={project} />
-            </Link>
-          ))}
-          {projects.map((project) => (
-            <Link key={project.id} href={'/dashboard/projects/' + project.id}>
-              <ProjectCard project={project} />
-            </Link>
-          ))}
-          {projects.map((project) => (
-            <Link key={project.id} href={'/dashboard/projects/' + project.id}>
-              <ProjectCard project={project} />
-            </Link>
-          ))}
-          {projects.map((project) => (
-            <Link key={project.id} href={'/dashboard/projects/' + project.id}>
-              <ProjectCard project={project} />
-            </Link>
-          ))}
-          {projects.map((project) => (
-            <Link key={project.id} href={'/dashboard/projects/' + project.id}>
+            <Link
+              key={project.id}
+              href={'/dashboard/projects/' + project.id}
+            >
               <ProjectCard project={project} />
             </Link>
           ))}
