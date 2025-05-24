@@ -64,7 +64,7 @@ class TaskSeeder extends Seeder
                 'priority' => 'high',
             ],
             [
-                'title' => "Generating the driver won\'t do anything, we need to quantify the 1080p SMTP bandwidth!",
+                'title' => "Generating the driver won't do anything, we need to quantify the 1080p SMTP bandwidth!",
                 'status' => 'in progress',
                 'label' => 'feature',
                 'priority' => 'medium',
@@ -76,7 +76,7 @@ class TaskSeeder extends Seeder
                 'priority' => 'low',
             ],
             [
-                'title' => "Calculating the bus won\'t do anything, we need to navigate the back-end JSON protocol!",
+                'title' => "Calculating the bus won't do anything, we need to navigate the back-end JSON protocol!",
                 'status' => 'in progress',
                 'label' => 'documentation',
                 'priority' => 'high',
@@ -106,7 +106,7 @@ class TaskSeeder extends Seeder
                 'priority' => 'low',
             ],
             [
-                'title' => "Backing up the pixel won\'t do anything, we need to transmit the primary IB array!",
+                'title' => "Backing up the pixel won't do anything, we need to transmit the primary IB array!",
                 'status' => 'in progress',
                 'label' => 'documentation',
                 'priority' => 'low',
@@ -142,19 +142,19 @@ class TaskSeeder extends Seeder
                 'priority' => 'high',
             ],
             [
-                'title' => "Overriding the microchip won\'t do anything, we need to transmit the digital OCR transmitter!",
+                'title' => "Overriding the microchip won't do anything, we need to transmit the digital OCR transmitter!",
                 'status' => 'in progress',
                 'label' => 'documentation',
                 'priority' => 'low',
             ],
             [
-                'title' => "You can\'t generate the capacitor without indexing the wireless HEX pixel!",
+                'title' => "You can't generate the capacitor without indexing the wireless HEX pixel!",
                 'status' => 'canceled',
                 'label' => 'bug',
                 'priority' => 'low',
             ],
             [
-                'title' => "Navigating the microchip won\'t do anything, we need to bypass the back-end SQL bus!",
+                'title' => "Navigating the microchip won't do anything, we need to bypass the back-end SQL bus!",
                 'status' => 'todo',
                 'label' => 'bug',
                 'priority' => 'high',
@@ -178,19 +178,19 @@ class TaskSeeder extends Seeder
                 'priority' => 'medium',
             ],
             [
-                'title' => "Compressing the interface won\'t do anything, we need to compress the online SDD matrix!",
+                'title' => "Compressing the interface won't do anything, we need to compress the online SDD matrix!",
                 'status' => 'canceled',
                 'label' => 'documentation',
                 'priority' => 'medium',
             ],
             [
-                'title' => "I\'ll synthesize the digital COM pixel, that should transmitter the UTF8 protocol!",
+                'title' => "I'll synthesize the digital COM pixel, that should transmitter the UTF8 protocol!",
                 'status' => 'backlog',
                 'label' => 'documentation',
                 'priority' => 'high',
             ],
             [
-                'title' => "Parsing the feed won\'t do anything, we need to copy the bluetooth DRAM bus!",
+                'title' => "Parsing the feed won't do anything, we need to copy the bluetooth DRAM bus!",
                 'status' => 'todo',
                 'label' => 'documentation',
                 'priority' => 'low',
@@ -220,7 +220,7 @@ class TaskSeeder extends Seeder
                 'priority' => 'low',
             ],
             [
-                'title' => "Generating the alarm won\'t do anything, we need to generate the mobile IP capacitor!",
+                'title' => "Generating the alarm won't do anything, we need to generate the mobile IP capacitor!",
                 'status' => 'backlog',
                 'label' => 'documentation',
                 'priority' => 'low',
@@ -238,13 +238,13 @@ class TaskSeeder extends Seeder
                 'priority' => 'high',
             ],
             [
-                'title' => "You can\'t input the firewall without overriding the wireless TCP firewall!",
+                'title' => "You can't input the firewall without overriding the wireless TCP firewall!",
                 'status' => 'done',
                 'label' => 'bug',
                 'priority' => 'high',
             ],
             [
-                'title' => "Bypassing the hard drive won\'t do anything, we need to input the bluetooth JSON program!",
+                'title' => "Bypassing the hard drive won't do anything, we need to input the bluetooth JSON program!",
                 'status' => 'in progress',
                 'label' => 'bug',
                 'priority' => 'high',
