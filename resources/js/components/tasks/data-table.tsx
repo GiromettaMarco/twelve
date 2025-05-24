@@ -1,6 +1,7 @@
 'use client'
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import DataTableHeader from '@/components/tasks/data-table-header'
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -15,6 +16,7 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
+import { useLaravelReactI18n } from 'laravel-react-i18n'
 import * as React from 'react'
 import { DataTablePagination } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
@@ -25,6 +27,9 @@ interface DataTableProps<TData, TValue> {
 }
 
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+  // Setup translations
+  const { t } = useLaravelReactI18n()
+
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -56,23 +61,8 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     <div className="space-y-4">
       <DataTableToolbar table={table} />
       <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead
-                      key={header.id}
-                      colSpan={header.colSpan}
-                    >
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
-                  )
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
+        <Table className="min-w-md table-fixed">
+          <DataTableHeader table={table} />
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
@@ -91,7 +81,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  {t('No results.')}
                 </TableCell>
               </TableRow>
             )}
