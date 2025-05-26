@@ -24,6 +24,7 @@ class ProjectController extends Controller
                 $query->where('users.id', '=', Auth::user()->id);
             })
             ->where('archived', false)
+            ->orderBy('id')
             ->get();
 
         return Inertia::render('projects/index', [
@@ -78,8 +79,6 @@ class ProjectController extends Controller
         $project->save();
 
         $project->users()->attach(Auth::user()->id);
-
-        // $project->setRelation('tasks', collect());
 
         return to_route('projects.show', ['id' => $project->id]);
     }
