@@ -16,7 +16,7 @@ class ProjectSeeder extends Seeder
     {
         $project = Project::create([
             'title' => 'Work in Progress',
-            'text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis eu augue eget congue. Praesent blandit neque justo. Morbi scelerisque mollis metus, vel accumsan ex malesuada id.',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse convallis eu augue eget congue. Praesent blandit neque justo. Morbi scelerisque mollis metus, vel accumsan ex malesuada id.',
             'deadline' => Carbon::tomorrow(),
         ]);
 

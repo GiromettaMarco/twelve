@@ -25,7 +25,7 @@ class StoreProjectRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
 
-            'text' => ['nullable', 'string', 'max:5000'],
+            'description' => ['nullable', 'string', 'max:5000'],
 
             'deadline' => ['nullable', Rule::date()->format('Y-m-d')],
         ];

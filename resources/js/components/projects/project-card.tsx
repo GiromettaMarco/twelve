@@ -8,7 +8,7 @@ export default function ProjectCard({ project }: { project: Project }) {
     <CardStandard
       title={project.title}
       href={route('projects.show', { id: project.id })}
-      description={project.text}
+      description={project.description}
       content={ProjectStats({ project: project })}
       footer={ProjectDeadline({ rawDeadline: project.deadline })}
     />

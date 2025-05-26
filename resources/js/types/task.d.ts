@@ -16,6 +16,7 @@ export interface Priority {
 export interface Task {
   id: number
   title: string
+  description?: string
   label: Label
   status: Status
   priority: Priority

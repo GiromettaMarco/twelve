@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('text')->nullable();
+            $table->text('description')->nullable();
             $table->foreignId('project_id')
                 ->index()
                 ->constrained()

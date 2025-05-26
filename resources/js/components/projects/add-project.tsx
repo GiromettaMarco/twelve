@@ -23,7 +23,7 @@ import { useEffect, useState, type FormEventHandler } from 'react'
 
 type ProjectForm = {
   title: string
-  text: string
+  description: string
   deadline: string
 }
 
@@ -33,7 +33,7 @@ export default function AddProject() {
 
   const { data, setData, post, errors, processing } = useForm<Required<ProjectForm>>({
     title: '',
-    text: '',
+    description: '',
     deadline: ''
   })
 
@@ -97,13 +97,13 @@ export default function AddProject() {
 
           <div className="grid gap-2">
             <Textarea
-              id="project-text"
+              id="project-description"
               placeholder="Description"
-              value={data.text}
-              onChange={(e) => setData('text', e.target.value)}
+              value={data.description}
+              onChange={(e) => setData('description', e.target.value)}
             />
 
-            <InputError message={errors.text} />
+            <InputError message={errors.description} />
           </div>
 
           <div className="grid gap-2">

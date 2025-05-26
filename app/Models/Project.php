@@ -15,7 +15,7 @@ class Project extends Model
      */
     protected $fillable = [
         'title',
-        'text',
+        'description',
         'deadline',
         'archived',
     ];

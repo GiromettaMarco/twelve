@@ -3,7 +3,7 @@ import type { Task } from '@/types/task'
 export interface Project {
   id: number
   title: string
-  text?: string
+  description?: string
   archived: boolean
   deadline?: string
   created_at: string

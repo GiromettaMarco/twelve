@@ -19,7 +19,7 @@ class TaskSeeder extends Seeder
         $tasks = [
             [
                 'title' => "You can't compress the program without quantifying the open-source SSD pixel!",
-                'text' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ex felis, pharetra at metus vitae, rutrum vestibulum mi. Etiam id metus sed ligula semper sodales dapibus a sem. Donec sodales leo suscipit, blandit libero vitae, lacinia leo. Aliquam erat volutpat. Nunc tincidunt lectus eu feugiat hendrerit. Vivamus sed sollicitudin nisl. Donec ac ligula ac eros lobortis consequat.',
+                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ex felis, pharetra at metus vitae, rutrum vestibulum mi. Etiam id metus sed ligula semper sodales dapibus a sem. Donec sodales leo suscipit, blandit libero vitae, lacinia leo. Aliquam erat volutpat. Nunc tincidunt lectus eu feugiat hendrerit. Vivamus sed sollicitudin nisl. Donec ac ligula ac eros lobortis consequat.',
                 'label' => 'documentation',
                 'status' => 'in progress',
                 'priority' => 'medium',
@@ -289,7 +289,7 @@ class TaskSeeder extends Seeder
         collect($tasks)->each(function ($taskData) use ($project, $labels, $statuses, $priorities) {
             $task = new Task([
                 'title' => $taskData['title'],
-                'text' => $taskData['text'] ?? null,
+                'description' => $taskData['description'] ?? null,
             ]);
 
             $task->project()->associate($project);

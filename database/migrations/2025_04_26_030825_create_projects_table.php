@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('text')->nullable();
+            $table->string('description')->nullable();
             $table->boolean('archived')->default(false);
             $table->timestamp('deadline')->nullable();
             $table->timestamps();

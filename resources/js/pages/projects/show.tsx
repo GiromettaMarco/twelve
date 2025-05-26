@@ -46,7 +46,7 @@ export default function Projects({ project }: { project: Project }) {
 
         <div className="flex flex-wrap gap-8">
           <CardSlim content={ProjectStats({ project })} />
-          {project.text && <CardSlim content={<p>{project.text}</p>} />}
+          {project.description && <CardSlim content={<p>{project.description}</p>} />}
           {project.deadline && <CardSlim content={ProjectDeadline({ rawDeadline: project.deadline })} />}
         </div>
       </div>
