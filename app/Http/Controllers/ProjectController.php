@@ -78,7 +78,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        $project->users()->attach(Auth::user()->id);
+        $project->users()->attach(Auth::user()->id, ['role' => 'admin']);
 
         return to_route('projects.show', ['id' => $project->id]);
     }
