@@ -4,7 +4,7 @@ namespace Tests\Feature\Projects;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use Tests\Phpunit\TestCase;
 
 class ShowTest extends TestCase
 {

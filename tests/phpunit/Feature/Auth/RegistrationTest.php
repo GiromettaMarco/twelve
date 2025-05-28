@@ -3,7 +3,7 @@
 namespace Tests\Feature\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use Tests\Phpunit\TestCase;
 
 class RegistrationTest extends TestCase
 {

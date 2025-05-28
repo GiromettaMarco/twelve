@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import laravel from 'laravel-vite-plugin'
@@ -21,5 +22,13 @@ export default defineConfig({
     alias: {
       'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy')
     }
+  },
+  test: {
+    setupFiles: ['./tests/vitest/vitest-setup.ts'],
+    // coverage: {
+    //   provider: 'v8',
+    //   enabled: true,
+    //   include: ['src/**'],
+    // },
   }
 })

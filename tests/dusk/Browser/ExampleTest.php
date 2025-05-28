@@ -3,7 +3,7 @@
 namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;
-use Tests\DuskTestCase;
+use Tests\Dusk\DuskTestCase;
 
 class ExampleTest extends DuskTestCase
 {

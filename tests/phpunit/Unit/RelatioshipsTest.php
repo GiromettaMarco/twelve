@@ -9,7 +9,7 @@ use App\Models\Status;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use Tests\Phpunit\TestCase;
 
 class RelatioshipsTest extends TestCase
 {

@@ -1,16 +1,33 @@
 <?php
 
-namespace Tests;
+namespace Tests\Dusk;
 
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Illuminate\Support\Collection;
+use Laravel\Dusk\Browser;
 use Laravel\Dusk\TestCase as BaseTestCase;
 use PHPUnit\Framework\Attributes\BeforeClass;
 
 abstract class DuskTestCase extends BaseTestCase
 {
+    /**
+     * Register the base URL with Dusk.
+     *
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Browser::$storeScreenshotsAt = base_path('tests/dusk/Browser/screenshots');
+
+        Browser::$storeConsoleLogAt = base_path('tests/dusk/Browser/console');
+
+        Browser::$storeSourceAt = base_path('tests/dusk/Browser/source');
+    }
+
     /**
      * Prepare for Dusk test execution.
      */
@@ -41,7 +58,8 @@ abstract class DuskTestCase extends BaseTestCase
         return RemoteWebDriver::create(
             $_ENV['DUSK_DRIVER_URL'] ?? env('DUSK_DRIVER_URL') ?? 'http://localhost:9515',
             DesiredCapabilities::chrome()->setCapability(
-                ChromeOptions::CAPABILITY, $options
+                ChromeOptions::CAPABILITY,
+                $options
             )
         );
     }

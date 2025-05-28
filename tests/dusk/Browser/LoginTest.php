@@ -5,7 +5,7 @@ namespace Tests\Browser;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Laravel\Dusk\Browser;
-use Tests\DuskTestCase;
+use Tests\Dusk\DuskTestCase;
 
 class LoginTest extends DuskTestCase
 {
