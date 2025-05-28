@@ -14,8 +14,6 @@ abstract class DuskTestCase extends BaseTestCase
 {
     /**
      * Register the base URL with Dusk.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
