@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\PhpUnit\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Phpunit\TestCase;
+use Tests\PhpUnit\TestCase;
 
 class DashboardTest extends TestCase
 {

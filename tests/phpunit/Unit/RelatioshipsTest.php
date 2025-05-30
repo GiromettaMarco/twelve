@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\PhpUnit\Unit;
 
 use App\Models\Label;
 use App\Models\Priority;
@@ -9,7 +9,7 @@ use App\Models\Status;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Phpunit\TestCase;
+use Tests\PhpUnit\TestCase;
 
 class RelatioshipsTest extends TestCase
 {

@@ -36,7 +36,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\": "tests/"
+      "Tests\\Dusk\\": "tests/dusk/",
+      "Tests\\PhpUnit\\": "tests/phpunit/"
     }
   },
   "scripts": {

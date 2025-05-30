@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\PhpUnit\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
-use Tests\Phpunit\TestCase;
+use Tests\PhpUnit\TestCase;
 
 class EmailVerificationTest extends TestCase
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature\Settings;
+namespace Tests\PhpUnit\Feature\Settings;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
-use Tests\Phpunit\TestCase;
+use Tests\PhpUnit\TestCase;
 
 class PasswordUpdateTest extends TestCase
 {
