@@ -124,5 +124,6 @@
     "tests/vitest/**/*.ts",
     "tests/vitest/**/*.d.ts",
     "tests/vitest/**/*.tsx"
+    // "tests/vitest/vitest.setup.ts",
   ]
 }
