@@ -32,9 +32,9 @@
     </php>
     <coverage>
         <report>
-            <clover outputFile="reports/clover.xml"/>
-            <html outputDirectory="reports"/>
-            <xml outputDirectory="reports"/>
+            <clover outputFile="reports/phpunit/clover.xml"/>
+            <html outputDirectory="reports/phpunit"/>
+            <xml outputDirectory="reports/phpunit"/>
         </report>
     </coverage>
 </phpunit>
