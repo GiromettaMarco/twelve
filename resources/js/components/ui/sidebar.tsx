@@ -1,8 +1,3 @@
-import { Slot } from '@radix-ui/react-slot'
-import { VariantProps, cva } from 'class-variance-authority'
-import { PanelLeftIcon } from 'lucide-react'
-import * as React from 'react'
-
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
@@ -10,16 +5,23 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useIsMobile } from '@/hooks/use-mobile'
+import {
+  SIDEBAR_COOKIE_MAX_DAYS,
+  SIDEBAR_COOKIE_NAME,
+  SIDEBAR_KEYBOARD_SHORTCUT,
+  SIDEBAR_WIDTH,
+  SIDEBAR_WIDTH_ICON,
+  SIDEBAR_WIDTH_MOBILE
+} from '@/lib/constants'
+import { setCookie } from '@/lib/cookie'
 import { cn } from '@/lib/utils'
+import { Slot } from '@radix-ui/react-slot'
+import { cva, VariantProps } from 'class-variance-authority'
+import { useLaravelReactI18n } from 'laravel-react-i18n'
+import { PanelLeftIcon } from 'lucide-react'
+import * as React from 'react'
 
-const SIDEBAR_COOKIE_NAME = 'sidebar_state'
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
-const SIDEBAR_WIDTH = '16rem'
-const SIDEBAR_WIDTH_MOBILE = '18rem'
-const SIDEBAR_WIDTH_ICON = '3rem'
-const SIDEBAR_KEYBOARD_SHORTCUT = 'b'
-
-type SidebarContext = {
+type SidebarContextProps = {
   state: 'expanded' | 'collapsed'
   open: boolean
   setOpen: (open: boolean) => void
@@ -29,7 +31,7 @@ type SidebarContext = {
   toggleSidebar: () => void
 }
 
-const SidebarContext = React.createContext<SidebarContext | null>(null)
+const SidebarContext = React.createContext<SidebarContextProps | null>(null)
 
 function useSidebar() {
   const context = React.useContext(SidebarContext)
@@ -70,7 +72,7 @@ function SidebarProvider({
       }
 
       // This sets the cookie to keep the sidebar state.
-      document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
+      setCookie(SIDEBAR_COOKIE_NAME, openState, SIDEBAR_COOKIE_MAX_DAYS)
     },
     [setOpenProp, open]
   )
@@ -97,7 +99,7 @@ function SidebarProvider({
   // This makes it easier to style the sidebar with Tailwind classes.
   const state = open ? 'expanded' : 'collapsed'
 
-  const contextValue = React.useMemo<SidebarContext>(
+  const contextValue = React.useMemo<SidebarContextProps>(
     () => ({
       state,
       open,
@@ -144,6 +146,9 @@ function Sidebar({
   variant?: 'sidebar' | 'floating' | 'inset'
   collapsible?: 'offcanvas' | 'icon' | 'none'
 }) {
+  // Setup translations
+  const { t } = useLaravelReactI18n()
+
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
 
   if (collapsible === 'none') {
@@ -165,10 +170,6 @@ function Sidebar({
         onOpenChange={setOpenMobile}
         {...props}
       >
-        <SheetHeader className="sr-only">
-          <SheetTitle>Sidebar</SheetTitle>
-          <SheetDescription>Displays the mobile sidebar.</SheetDescription>
-        </SheetHeader>
         <SheetContent
           data-sidebar="sidebar"
           data-slot="sidebar"
@@ -181,6 +182,10 @@ function Sidebar({
           }
           side={side}
         >
+          <SheetHeader className="sr-only">
+            <SheetTitle>{t('Sidebar')}</SheetTitle>
+            <SheetDescription>{t('Displays the mobile sidebar.')}</SheetDescription>
+          </SheetHeader>
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
       </Sheet>
@@ -198,8 +203,9 @@ function Sidebar({
     >
       {/* This is what handles the sidebar gap on desktop */}
       <div
+        data-slot="sidebar-gap"
         className={cn(
-          'relative h-svh w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',
+          'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',
           'group-data-[collapsible=offcanvas]:w-0',
           'group-data-[side=right]:rotate-180',
           variant === 'floating' || variant === 'inset'
@@ -208,6 +214,7 @@ function Sidebar({
         )}
       />
       <div
+        data-slot="sidebar-container"
         className={cn(
           'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex',
           side === 'left'
@@ -223,6 +230,7 @@ function Sidebar({
       >
         <div
           data-sidebar="sidebar"
+          data-slot="sidebar-inner"
           className="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm"
         >
           {children}
@@ -233,6 +241,9 @@ function Sidebar({
 }
 
 function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<typeof Button>) {
+  // Setup translations
+  const { t } = useLaravelReactI18n()
+
   const { toggleSidebar } = useSidebar()
 
   return (
@@ -241,7 +252,7 @@ function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<t
       data-slot="sidebar-trigger"
       variant="ghost"
       size="icon"
-      className={cn('h-7 w-7', className)}
+      className={cn('size-7', className)}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
@@ -249,7 +260,7 @@ function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<t
       {...props}
     >
       <PanelLeftIcon />
-      <span className="sr-only">Toggle Sidebar</span>
+      <span className="sr-only">{t('Toggle Sidebar')}</span>
     </Button>
   )
 }
@@ -284,8 +295,8 @@ function SidebarInset({ className, ...props }: React.ComponentProps<'main'>) {
     <main
       data-slot="sidebar-inset"
       className={cn(
-        'bg-background relative flex min-h-svh max-w-full flex-1 flex-col',
-        'peer-data-[variant=inset]:min-h-[calc(100svh-(--spacing(4)))] md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-0',
+        'bg-background relative flex w-full flex-1 flex-col',
+        'md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-2',
         className
       )}
       {...props}
