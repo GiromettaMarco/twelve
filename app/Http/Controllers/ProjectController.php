@@ -82,4 +82,28 @@ class ProjectController extends Controller
 
         return to_route('projects.show', ['id' => $project->id]);
     }
+
+    // /**
+    //  * Update the specified resource in storage.
+    //  */
+    // public function update(Request $request, string $id)
+    // {
+    //     //
+    // }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(string $id)
+    {
+        // @TODO add gate (avoid deletion of unrelated projects)
+
+        $project = Project::findOrFail($id);
+
+        $project->delete();
+
+        return to_route('projects.index')->with('message', 'Project deleted.');
+    }
 }

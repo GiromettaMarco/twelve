@@ -24,6 +24,9 @@ Route::prefix('dashboard')
 
         Route::post('/projects', [ProjectController::class, 'store'])
             ->name('projects.store');
+
+        Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])
+            ->name('projects.destroy');
     });
 
 require __DIR__.'/settings.php';
