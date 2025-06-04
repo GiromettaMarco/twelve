@@ -1,3 +1,4 @@
+import AppFlash from '@/components/app-flash'
 import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout'
 import { type BreadcrumbItem } from '@/types'
 import { type ReactNode } from 'react'
@@ -15,5 +16,6 @@ export default ({ children, breadcrumbs, headerChildren, ...props }: AppLayoutPr
     {...props}
   >
     {children}
+    <AppFlash />
   </AppLayoutTemplate>
 )
