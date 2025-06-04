@@ -24,10 +24,14 @@ export interface NavItem {
 
 export interface SharedData {
   name: string
-  quote: { message: string; author: string }
   auth: Auth
   ziggy: Config & { location: string }
   sidebarOpen: boolean
+  flash: {
+    title: string | null
+    description: string | null
+    level: 'success' | 'info' | 'warning' | 'error' | null
+  }
   [key: string]: unknown
 }
 

@@ -33,6 +33,12 @@ declare module 'ziggy-js' {
       }
     ]
     'projects.store': []
+    'projects.destroy': [
+      {
+        name: 'id'
+        required: true
+      }
+    ]
     'profile.edit': []
     'profile.update': []
     'profile.destroy': []
