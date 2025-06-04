@@ -1,4 +1,5 @@
 import InputError from '@/components/input-error'
+import { Add } from '@/components/presets/add'
 import { Button } from '@/components/ui/button'
 import { CalendarWide } from '@/components/ui/calendar-wide'
 import {
@@ -15,7 +16,6 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useForm } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
-import { Plus } from 'lucide-react'
 import { useEffect, useState, type FormEventHandler } from 'react'
 
 // @TODO use library for timezones, etc.
@@ -43,13 +43,11 @@ export default function AddProject() {
     if (deadline) {
       setData(
         'deadline',
-        `${deadline.getFullYear()}-${(deadline.getMonth() + 1 + '').padStart(2, '0')}-${deadline.getDate()}`
+        `${deadline.getFullYear()}-${(deadline.getMonth() + 1 + '').padStart(2, '0')}-${(deadline.getDate() + '').padStart(2, '0')}`
       )
     } else {
       setData('deadline', '')
     }
-
-    // console.log(data.deadline)
   }, [deadline, setData])
 
   const submit: FormEventHandler = (e) => {
@@ -63,17 +61,11 @@ export default function AddProject() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          size="sm"
-          className="h-7"
-        >
-          <Plus />
-          <div className="sr-only lg:not-sr-only">{t('Add :name', { name: tChoice('Project', 1) })}</div>
-        </Button>
+        <Add label={t('Add :name', { name: tChoice('Project', 1) })} />
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create a new Project</DialogTitle>
+          <DialogTitle>{t('Create a new Project')}</DialogTitle>
           <DialogDescription>
             Integer sodales odio arcu. Pellentesque vestibulum nisl metus, sit amet egestas tellus maximus ac.
           </DialogDescription>
@@ -125,21 +117,17 @@ export default function AddProject() {
             />
           </div>
 
-          <DialogFooter className="sm:justify-start">
-            <Button
-              type="submit"
-              disabled={processing}
-            >
-              Create
-            </Button>
+          <DialogFooter>
             <DialogClose asChild>
-              <Button
-                type="button"
-                variant="secondary"
-              >
-                Cancel
-              </Button>
+              <Button variant="secondary">{t('Cancel')}</Button>
             </DialogClose>
+
+            <Button
+              disabled={processing}
+              asChild
+            >
+              <button type="submit">{t('Create')}</button>
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
