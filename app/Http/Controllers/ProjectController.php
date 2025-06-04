@@ -104,6 +104,9 @@ class ProjectController extends Controller
 
         $project->delete();
 
-        return to_route('projects.index')->with('message', 'Project deleted.');
+        return to_route('projects.index')->with([
+            'flash.title' => __('Project deleted'),
+            'flash.level' => 'success',
+        ]);
     }
 }
