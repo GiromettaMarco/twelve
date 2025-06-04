@@ -15,7 +15,7 @@ export function Add({ label, ...props }: AddProps) {
       {...props}
     >
       <Plus />
-      <div className="sr-only lg:not-sr-only">{label}</div>
+      {label && <div className="sr-only lg:not-sr-only">{label}</div>}
     </Button>
   )
 }
