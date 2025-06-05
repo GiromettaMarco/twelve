@@ -118,8 +118,8 @@
     "resources/js/**/*.ts",
     "resources/js/**/*.d.ts",
     "resources/js/**/*.tsx",
-    "stories/**/*.ts",
-    "stories/**/*.d.ts",
-    "stories/**/*.tsx"
+    "tests/stories/**/*.ts",
+    "tests/stories/**/*.d.ts",
+    "tests/stories/**/*.tsx"
   ]
 }
