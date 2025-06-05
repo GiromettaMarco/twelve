@@ -7,6 +7,7 @@ type DeleteProps = ComponentProps<'button'> & {
   label?: string
 }
 
+/** Small delete button preset */
 export function DeleteSmall({ label = 'Delete', ...props }: DeleteProps) {
   return (
     <Tooltip>

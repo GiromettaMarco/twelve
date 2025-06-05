@@ -4,11 +4,10 @@ import { Plus } from 'lucide-react'
 import type { ComponentProps } from 'react'
 
 type AddProps = ComponentProps<'button'> & {
-  /** Optional label of the button */
   label?: string
 }
 
-/** HTML button to create new resources */
+/** Add button preset */
 export function Add({ label, ...props }: AddProps) {
   // Setup translations
   const { t } = useLaravelReactI18n()
