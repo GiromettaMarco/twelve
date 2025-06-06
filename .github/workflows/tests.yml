@@ -63,7 +63,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Run PHP Tests
-        run: vendor/bin/phpunit
+        run: php artisan test --coverage
 
       - name: Run TS Tests
         run: pnpm run test
