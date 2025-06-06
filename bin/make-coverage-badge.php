@@ -90,9 +90,10 @@ function make_coverage_badge($coverage, $type, $filename = null, $directory = 'd
     // Close the output buffer
     ob_end_clean();
 
-    // echo getcwd();
-    // echo fileowner();
-    echo 'current user: ' . get_current_user() . "\n";
-    echo 'new file owner: ' . posix_getpwuid(fileowner($directory . DIRECTORY_SEPARATOR . $filename))['name'] . "\n";
-    echo 'another file owner: ' . posix_getpwuid(fileowner('README.md'))['name'] . "\n";
+    // echo 'current user: ' . get_current_user() . "\n";
+    // echo 'new file owner: ' . posix_getpwuid(fileowner($directory . DIRECTORY_SEPARATOR . $filename))['name'] . "\n";
+    // echo 'another file owner: ' . posix_getpwuid(fileowner('README.md'))['name'] . "\n";
+    echo shell_exec('ls -la');
+    echo shell_exec('ls bin -la');
+    echo shell_exec('ls docs -la');
 }
