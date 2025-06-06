@@ -85,8 +85,14 @@ function make_coverage_badge($coverage, $type, $filename = null, $directory = 'd
     }
 
     // Make the badge file
-    file_put_contents($directory.DIRECTORY_SEPARATOR.$filename, ob_get_contents());
+    file_put_contents($directory . DIRECTORY_SEPARATOR . $filename, ob_get_contents());
 
     // Close the output buffer
     ob_end_clean();
+
+    // echo getcwd();
+    // echo fileowner();
+    echo 'current user: ' . get_current_user() . "\n";
+    echo 'new file owner: ' . posix_getpwuid(fileowner($directory . DIRECTORY_SEPARATOR . $filename)) . "\n";
+    echo 'another file owner: ' . posix_getpwuid(fileowner('README.md')) . "\n";
 }
