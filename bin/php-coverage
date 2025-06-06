@@ -1,10 +1,61 @@
 #!/usr/bin/env php
 <?php
 
-$report = simplexml_load_file('reports/index.xml') or die('Error: Cannot read coverage report');
+// Coverage value
+$coverage = 0;
 
-$coverage = intval($report->project->directory->totals->lines['percent']);
+// Initialize the XML parser
+$parser = xml_parser_create();
 
+// Become true once coverage has been collected
+$collected = false;
+
+// Specify element handler
+xml_set_element_handler(
+    $parser,
+    function ($parser, $element_name, $element_attrs) use (&$collected, &$coverage) {
+        // Find the element
+        if (!$collected && $element_name === 'LINES') {
+            // Collect coverage
+            $coverage = intval($element_attrs['PERCENT']);
+
+            // Stop reading
+            $collected = true;
+        }
+    },
+    null
+);
+
+// Open XML file
+$fp = fopen("reports/phpunit/index.xml", "r");
+
+// Read data and exit when METRICS is found.
+// We expect to find it in the first kilobyte.
+while (!$collected && $data = fread($fp, 1024)) {
+    xml_parse($parser, $data, feof($fp)) or
+        die(sprintf(
+            "XML Error: %s at line %d",
+            xml_error_string(xml_get_error_code($parser)),
+            xml_get_current_line_number($parser)
+        ));
+}
+
+// Free the XML parser
+xml_parser_free($parser);
+
+// Set badge color
+if ($coverage < 60) {
+    $color_1 = '#e05d44';
+    $color_2 = '#8f250f';
+} elseif ($coverage < 90) {
+    $color_1 = '#ffd53d';
+    $color_2 = '#b99614';
+} else {
+    $color_1 = '#34d058';
+    $color_2 = '#28a745';
+}
+
+// Write the badge in output buffer
 ob_start();
 ?>
 <svg xmlns="http://www.w3.org/2000/svg" width="114" height="20">
@@ -15,8 +66,8 @@ ob_start();
             <stop stop-color="#24292E" offset="100%" />
         </linearGradient>
         <linearGradient id="state-fill" x1="50%" y1="0%" x2="50%" y2="100%">
-            <stop stop-color="#34D058" offset="0%" />
-            <stop stop-color="#28A745" offset="100%" />
+            <stop stop-color="<?php echo $color_1; ?>" offset="0%" />
+            <stop stop-color="<?php echo $color_2; ?>" offset="100%" />
         </linearGradient>
     </defs>
     <g>
@@ -36,10 +87,13 @@ ob_start();
 </svg>
 
 <?php
+// Make docs dir if missing
 if (!is_dir('docs')) {
     mkdir('docs');
 }
 
+// Make the badge file
 file_put_contents('docs/php-coverage.svg', ob_get_contents());
 
+// Close the output buffer
 ob_end_clean();

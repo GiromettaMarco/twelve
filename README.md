@@ -1,8 +1,8 @@
 # Eleven
 
-[![CodeQL](https://github.com/GiromettaMarco/twelve/actions/workflows/lint.yml/badge.svg)](https://github.com/GiromettaMarco/twelve/actions/workflows/lint.yml)
 [![Tests](https://github.com/GiromettaMarco/twelve/actions/workflows/tests.yml/badge.svg)](https://github.com/GiromettaMarco/twelve/actions/workflows/tests.yml)
 [![PHP Coverage](docs/php-coverage.svg)](https://github.com/GiromettaMarco/twelve/actions/workflows/tests.yml)
+[![TS Coverage](docs/ts-coverage.svg)](https://github.com/GiromettaMarco/twelve/actions/workflows/tests.yml)
 
 Example Laravel 12 application with React.
 

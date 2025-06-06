@@ -64,11 +64,17 @@ jobs:
       - name: Execute PHP Tests
         run: vendor/bin/phpunit
 
+      - name: Execute TS Tests
+        run: pnpm run test
+
       - name: Update PHP Coverage Badge
-        run: bin/coverage
+        run: bin/php-coverage
+
+      - name: Update TS Coverage Badge
+        run: bin/ts-coverage
 
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "docs: update php coverage badge"
+          commit_message: "docs: update coverage badges"
           commit_options: '--no-verify'
