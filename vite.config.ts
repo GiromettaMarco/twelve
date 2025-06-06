@@ -27,11 +27,8 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['resources/js/**'],
-      exclude: [
-        'resources/js/app.tsx',
-        'resources/js/ssr.tsx'
-      ],
+      exclude: ['resources/js/app.tsx', 'resources/js/ssr.tsx'],
       reportsDirectory: './reports/vitest'
-    },
+    }
   }
 })
