@@ -11,7 +11,7 @@
     "types": "tsc --noEmit",
     "prepare": "node .husky/install.mjs || true",
     "preinstall": "npx only-allow pnpm",
-    "test": "vitest run --project=storybook --coverage --typecheck",
+    "test": "vitest run --project=storybook --coverage",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build"
   },
