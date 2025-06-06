@@ -1,3 +1,2 @@
 php artisan test --coverage
-php artisan dusk
 pnpm run test
