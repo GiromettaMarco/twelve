@@ -2,7 +2,6 @@
 
 namespace Tests\PhpUnit\Feature\Projects;
 
-use App\Models\Project;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -19,10 +18,10 @@ class DeleteTest extends TestCase
         $this
             ->followingRedirects()
             ->delete('/dashboard/projects/1')->assertInertia(
-                fn(Assert $page) => $page
+                fn (Assert $page) => $page
                     ->has(
                         'flash',
-                        fn(Assert $page) => $page
+                        fn (Assert $page) => $page
                             ->where('title', 'Project deleted')
                             ->etc()
                     )

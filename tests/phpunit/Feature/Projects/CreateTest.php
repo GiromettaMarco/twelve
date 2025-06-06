@@ -20,7 +20,7 @@ class CreateTest extends TestCase
             ->post('/dashboard/projects', [
                 'title' => 'New project',
                 'description' => 'unique string 753951',
-                'deadline' => '2025-12-31'
+                'deadline' => '2025-12-31',
             ])
             ->assertOk();
 
