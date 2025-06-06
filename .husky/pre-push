@@ -1,2 +1,3 @@
 ./vendor/bin/phpunit
 php artisan dusk
+pnpm run test
