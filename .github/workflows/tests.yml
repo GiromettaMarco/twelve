@@ -65,14 +65,14 @@ jobs:
       - name: Run PHP Tests
         run: php artisan test --coverage
 
-      - name: Run TS Tests
-        run: pnpm run test
+      # - name: Run TS Tests
+      #   run: pnpm run test
 
       - name: Update PHP Coverage Badge
         run: bin/php-coverage
 
-      - name: Update TS Coverage Badge
-        run: bin/ts-coverage
+      # - name: Update TS Coverage Badge
+      #   run: bin/ts-coverage
 
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5

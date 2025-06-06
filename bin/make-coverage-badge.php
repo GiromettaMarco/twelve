@@ -93,6 +93,6 @@ function make_coverage_badge($coverage, $type, $filename = null, $directory = 'd
     // echo getcwd();
     // echo fileowner();
     echo 'current user: ' . get_current_user() . "\n";
-    echo 'new file owner: ' . posix_getpwuid(fileowner($directory . DIRECTORY_SEPARATOR . $filename)) . "\n";
-    echo 'another file owner: ' . posix_getpwuid(fileowner('README.md')) . "\n";
+    echo 'new file owner: ' . posix_getpwuid(fileowner($directory . DIRECTORY_SEPARATOR . $filename))['name'] . "\n";
+    echo 'another file owner: ' . posix_getpwuid(fileowner('README.md'))['name'] . "\n";
 }
