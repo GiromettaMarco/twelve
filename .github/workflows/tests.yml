@@ -62,7 +62,7 @@ jobs:
         run: vendor/bin/phpunit
 
       - name: Update PHP Coverage Badge
-        run: bin/coverage
+        run: bin/php-coverage
 
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
