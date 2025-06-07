@@ -1,54 +1,22 @@
 #!/usr/bin/env php
 <?php
 
-/**
- * Get the gradient colors of the badge from the coverage percent
- *
- * @param  int  $coverage
- * @return array
- */
-function get_badge_colors($coverage)
-{
-    if ($coverage < 60) {
-        return ['#D73A49', '#CB2431'];
-    } elseif ($coverage < 90) {
-        return ['#FFD53D', '#B99614'];
-    } else {
-        return ['#34D058', '#28A745'];
-    }
-}
+$report = simplexml_load_file('reports/index.xml') or die('Error: Cannot read coverage report');
 
-/**
- * Make a coverage badge
- *
- * @param  int  $coverage  Coverage percent
- * @param  string  $type  Type of coverage (supported values: "php", "ts")
- * @param  string|null (optional)  $filename  File where to write the badge
- * @param  string (optional)  $directory  Directory where to save the new file
- * @return void
- */
-function make_coverage_badge($coverage, $type, $filename = null, $directory = 'docs')
-{
-    if (! isset($filename)) {
-        $filename = "$type-coverage.svg";
-    }
+$coverage = intval($report->project->directory->totals->lines['percent']);
 
-    $colors = get_badge_colors($coverage);
-
-    // Write the badge in output buffer
-    ob_start();
-
-    ?>
+ob_start();
+?>
 <svg xmlns="http://www.w3.org/2000/svg" width="114" height="20">
-    <title><?php echo strtoupper($type); ?> coverage - <?php echo $coverage; ?>%</title>
+    <title>Coverage - <?php echo $coverage; ?>%</title>
     <defs>
         <linearGradient id="workflow-fill" x1="50%" y1="0%" x2="50%" y2="100%">
             <stop stop-color="#444D56" offset="0%" />
             <stop stop-color="#24292E" offset="100%" />
         </linearGradient>
         <linearGradient id="state-fill" x1="50%" y1="0%" x2="50%" y2="100%">
-            <stop stop-color="<?php echo $colors[0]; ?>" offset="0%" />
-            <stop stop-color="<?php echo $colors[1]; ?>" offset="100%" />
+            <stop stop-color="#34D058" offset="0%" />
+            <stop stop-color="#28A745" offset="100%" />
         </linearGradient>
     </defs>
     <g>
@@ -62,90 +30,12 @@ function make_coverage_badge($coverage, $type, $filename = null, $directory = 'd
             <text x="97" y="15" fill="#010101" fill-opacity=".3" aria-hidden="true"><?php echo $coverage; ?>%</text>
             <text x="97" y="14"><?php echo $coverage; ?>%</text>
         </g>
-<?php
-            switch ($type) {
-                case 'php':
-                    ?>
-        <svg x="5" y="3" width="14" height="14" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#4f5b93"
-                d="M7.01 10.207h-.944l-.515 2.648h.838c.556 0 .97-.105 1.242-.314.272-.21.455-.559.55-1.049.092-.47.05-.802-.124-.995-.175-.193-.523-.29-1.047-.29zM12 5.688C5.373 5.688 0 8.514 0 12s5.373 6.313 12 6.313S24 15.486 24 12c0-3.486-5.373-6.312-12-6.312zm-3.26 7.451c-.261.25-.575.438-.917.551-.336.108-.765.164-1.285.164H5.357l-.327 1.681H3.652l1.23-6.326h2.65c.797 0 1.378.209 1.744.628.366.418.476 1.002.33 1.752a2.836 2.836 0 0 1-.305.847c-.143.255-.33.49-.561.703zm4.024.715l.543-2.799c.063-.318.039-.536-.068-.651-.107-.116-.336-.174-.687-.174H11.46l-.704 3.625H9.388l1.23-6.327h1.367l-.327 1.682h1.218c.767 0 1.295.134 1.586.401s.378.7.263 1.299l-.572 2.944h-1.389zm7.597-2.265a2.782 2.782 0 0 1-.305.847c-.143.255-.33.49-.561.703a2.44 2.44 0 0 1-.917.551c-.336.108-.765.164-1.286.164h-1.18l-.327 1.682h-1.378l1.23-6.326h2.649c.797 0 1.378.209 1.744.628.366.417.477 1.001.331 1.751zM17.766 10.207h-.943l-.516 2.648h.838c.557 0 .971-.105 1.242-.314.272-.21.455-.559.551-1.049.092-.47.049-.802-.125-.995s-.524-.29-1.047-.29z" />
-        </svg>
-                    <?php
-                    break;
-
-                case 'ts':
-                    // include 'ts-icon.php';
-                    break;
-
-                default:
-                    break;
-            }
-    ?>
+        <image x="5" y="3" width="14" height="14"
+            href="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjNzc3QkI0IiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+UEhQPC90aXRsZT48cGF0aCBkPSJNNy4wMSAxMC4yMDdoLS45NDRsLS41MTUgMi42NDhoLjgzOGMuNTU2IDAgLjk3LS4xMDUgMS4yNDItLjMxNC4yNzItLjIxLjQ1NS0uNTU5LjU1LTEuMDQ5LjA5Mi0uNDcuMDUtLjgwMi0uMTI0LS45OTUtLjE3NS0uMTkzLS41MjMtLjI5LTEuMDQ3LS4yOXpNMTIgNS42ODhDNS4zNzMgNS42ODggMCA4LjUxNCAwIDEyczUuMzczIDYuMzEzIDEyIDYuMzEzUzI0IDE1LjQ4NiAyNCAxMmMwLTMuNDg2LTUuMzczLTYuMzEyLTEyLTYuMzEyem0tMy4yNiA3LjQ1MWMtLjI2MS4yNS0uNTc1LjQzOC0uOTE3LjU1MS0uMzM2LjEwOC0uNzY1LjE2NC0xLjI4NS4xNjRINS4zNTdsLS4zMjcgMS42ODFIMy42NTJsMS4yMy02LjMyNmgyLjY1Yy43OTcgMCAxLjM3OC4yMDkgMS43NDQuNjI4LjM2Ni40MTguNDc2IDEuMDAyLjMzIDEuNzUyYTIuODM2IDIuODM2IDAgMCAxLS4zMDUuODQ3Yy0uMTQzLjI1NS0uMzMuNDktLjU2MS43MDN6bTQuMDI0LjcxNWwuNTQzLTIuNzk5Yy4wNjMtLjMxOC4wMzktLjUzNi0uMDY4LS42NTEtLjEwNy0uMTE2LS4zMzYtLjE3NC0uNjg3LS4xNzRIMTEuNDZsLS43MDQgMy42MjVIOS4zODhsMS4yMy02LjMyN2gxLjM2N2wtLjMyNyAxLjY4MmgxLjIxOGMuNzY3IDAgMS4yOTUuMTM0IDEuNTg2LjQwMXMuMzc4LjcuMjYzIDEuMjk5bC0uNTcyIDIuOTQ0aC0xLjM4OXptNy41OTctMi4yNjVhMi43ODIgMi43ODIgMCAwIDEtLjMwNS44NDdjLS4xNDMuMjU1LS4zMy40OS0uNTYxLjcwM2EyLjQ0IDIuNDQgMCAwIDEtLjkxNy41NTFjLS4zMzYuMTA4LS43NjUuMTY0LTEuMjg2LjE2NGgtMS4xOGwtLjMyNyAxLjY4MmgtMS4zNzhsMS4yMy02LjMyNmgyLjY0OWMuNzk3IDAgMS4zNzguMjA5IDEuNzQ0LjYyOC4zNjYuNDE3LjQ3NyAxLjAwMS4zMzEgMS43NTF6TTE3Ljc2NiAxMC4yMDdoLS45NDNsLS41MTYgMi42NDhoLjgzOGMuNTU3IDAgLjk3MS0uMTA1IDEuMjQyLS4zMTQuMjcyLS4yMS40NTUtLjU1OS41NTEtMS4wNDkuMDkyLS40Ny4wNDktLjgwMi0uMTI1LS45OTVzLS41MjQtLjI5LTEuMDQ3LS4yOXoiLz48L3N2Zz4=" />
     </g>
 </svg>
+
 <?php
+file_put_contents('docs/php-coverage.svg', ob_get_contents());
 
-    // Make docs dir if missing
-    if (! is_dir($directory)) {
-        mkdir($directory);
-    }
-
-    // Make the badge file
-    file_put_contents($directory . DIRECTORY_SEPARATOR . $filename, ob_get_contents());
-
-    // Close the output buffer
-    ob_end_clean();
-
-    // echo 'current user: ' . get_current_user() . "\n";
-    // echo 'new file owner: ' . posix_getpwuid(fileowner($directory . DIRECTORY_SEPARATOR . $filename))['name'] . "\n";
-    // echo 'another file owner: ' . posix_getpwuid(fileowner('README.md'))['name'] . "\n";
-    echo shell_exec('ls -la');
-    echo shell_exec('ls bin -la');
-    echo shell_exec('ls docs -la');
-}
-
-
-// Coverage value
-$coverage = 0;
-
-// Initialize the XML parser
-$parser = xml_parser_create();
-
-// Become true once coverage has been collected
-$collected = false;
-
-// Specify element handler
-xml_set_element_handler(
-    $parser,
-    function ($parser, $element_name, $element_attrs) use (&$collected, &$coverage) {
-        // Find the element
-        if (!$collected && $element_name === 'LINES') {
-            // Collect coverage
-            $coverage = intval($element_attrs['PERCENT']);
-
-            // Stop reading
-            $collected = true;
-        }
-    },
-    null
-);
-
-// Open XML file
-$fp = fopen("reports/phpunit/index.xml", "r");
-
-// Read data and exit when METRICS is found.
-// We expect to find it in the first kilobyte.
-while (!$collected && $data = fread($fp, 1024)) {
-    xml_parse($parser, $data, feof($fp)) or
-        die(sprintf(
-            "XML Error: %s at line %d",
-            xml_error_string(xml_get_error_code($parser)),
-            xml_get_current_line_number($parser)
-        ));
-}
-
-// Free the XML parser
-xml_parser_free($parser);
-
-// Print badge
-make_coverage_badge($coverage, 'php');
+ob_end_clean();
