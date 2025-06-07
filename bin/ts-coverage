@@ -17,9 +17,11 @@ xml_set_element_handler(
     $parser,
     function ($parser, $element_name, $element_attrs) use (&$collected, &$coverage) {
         // Find the element
-        if (!$collected && $element_name === 'LINES') {
+        if (!$collected && $element_name === 'METRICS') {
             // Collect coverage
-            $coverage = intval($element_attrs['PERCENT']);
+            if ($element_attrs['STATEMENTS'] != 0) {
+                $coverage = intval($element_attrs['COVEREDSTATEMENTS'] / $element_attrs['STATEMENTS'] * 100);
+            }
 
             // Stop reading
             $collected = true;
@@ -29,7 +31,7 @@ xml_set_element_handler(
 );
 
 // Open XML file
-$fp = fopen("reports/phpunit/index.xml", "r");
+$fp = fopen("reports/vitest/clover.xml", "r");
 
 // Read data and exit when METRICS is found.
 // We expect to find it in the first kilobyte.
@@ -46,4 +48,4 @@ while (!$collected && $data = fread($fp, 1024)) {
 xml_parser_free($parser);
 
 // Print badge
-make_coverage_badge($coverage, 'php');
+make_coverage_badge($coverage, 'ts');

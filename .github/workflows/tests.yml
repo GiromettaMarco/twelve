@@ -9,15 +9,19 @@ on:
       - master
 
 permissions:
-  contents: read
+  contents: write
+
+env:
+  HUSKY: 0
 
 jobs:
   tests:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        php: [8.4]
+    # container:
+      # Make sure to grab the latest version of the Playwright image
+      # https://playwright.dev/docs/docker#pull-the-image
+      # image: mcr.microsoft.com/playwright:v1.52.0-noble
 
     name: Tests
 
@@ -28,7 +32,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: 8.4
           extensions: json, dom, curl, libxml, mbstring
           coverage: xdebug
 
@@ -58,14 +62,20 @@ jobs:
       - name: Generate Application Key
         run: php artisan key:generate
 
-      - name: Execute PHP Tests
-        run: vendor/bin/phpunit
+      - name: Run PHP Tests
+        run: php artisan test --coverage
+
+      # - name: Run TS Tests
+      #   run: pnpm run test
 
       - name: Update PHP Coverage Badge
         run: bin/php-coverage
 
+      # - name: Update TS Coverage Badge
+      #   run: bin/ts-coverage
+
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "docs: update php coverage badge"
+          commit_message: "docs: update coverage badges"
           commit_options: '--no-verify'
