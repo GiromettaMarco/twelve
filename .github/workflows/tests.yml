@@ -18,10 +18,10 @@ jobs:
   tests:
     runs-on: ubuntu-latest
 
-    container:
+    # container:
       # Make sure to grab the latest version of the Playwright image
       # https://playwright.dev/docs/docker#pull-the-image
-      image: mcr.microsoft.com/playwright:v1.52.0-noble
+      # image: mcr.microsoft.com/playwright:v1.52.0-noble
 
     name: Tests
 
