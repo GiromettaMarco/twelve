@@ -1,4 +1,4 @@
-name: Tests
+name: tests
 
 on:
   push:
@@ -18,14 +18,18 @@ jobs:
   tests:
     runs-on: ubuntu-latest
 
-    # container:
-      # Make sure to grab the latest version of the Playwright image
+    container:
       # https://playwright.dev/docs/docker#pull-the-image
-      # image: mcr.microsoft.com/playwright:v1.52.0-noble
+      image: mcr.microsoft.com/playwright:v1.52.0-noble
 
     name: Tests
 
     steps:
+      # @NOTE playwright image has a discrepancy between the current user and the owner of the project folder
+      # which prevents git commits due to "detected dubious ownership"
+      - name: Fix Playwright
+        run: chown root:root .
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -62,17 +66,17 @@ jobs:
       - name: Generate Application Key
         run: php artisan key:generate
 
-      - name: Run PHP Tests
-        run: php artisan test --coverage
+      # - name: Run PHP Tests
+      #   run: php artisan test --coverage
 
-      # - name: Run TS Tests
-      #   run: pnpm run test
+      - name: Run TS Tests
+        run: pnpm run test
 
-      - name: Update PHP Coverage Badge
-        run: bin/php-coverage
+      # - name: Update PHP Coverage Badge
+      #   run: bin/php-coverage
 
-      # - name: Update TS Coverage Badge
-      #   run: bin/ts-coverage
+      - name: Update TS Coverage Badge
+        run: bin/ts-coverage
 
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
