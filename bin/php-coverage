@@ -1,6 +1,10 @@
 #!/usr/bin/env php
 <?php
 
+echo shell_exec('ls -la');
+echo shell_exec('ls bin -la');
+echo shell_exec('ls docs -la');
+
 $report = simplexml_load_file('reports/index.xml') or die('Error: Cannot read coverage report');
 
 $coverage = intval($report->project->directory->totals->lines['percent']);
