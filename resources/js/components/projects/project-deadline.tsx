@@ -2,19 +2,24 @@ import format from '@/lib/format'
 import { differenceInCalendarDays } from 'date-fns'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 
-// @TODO check date compatibility between js and php
+// @TODO check date/time compatibility between js and php (timezones, etc)
 
 export default function ProjectDeadline({ rawDeadline }: { rawDeadline?: string }) {
   // Setup translations
   const { currentLocale, t, tChoice } = useLaravelReactI18n()
 
+  // Nothing to print
   if (!rawDeadline) {
     return null
   }
 
-  // const deadline = project.deadline ? new Date(project.deadline) : null
   const deadline = new Date(rawDeadline)
-  // const deadline = new Date(2025, 4, 26)
+
+  // The date format is invalid
+  if (isNaN(deadline.getTime())) {
+    return null
+  }
+
   const deadlineCountdown = deadline ? differenceInCalendarDays(deadline, new Date()) : 0
 
   return (
