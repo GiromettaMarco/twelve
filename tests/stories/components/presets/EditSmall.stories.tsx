@@ -1,9 +1,9 @@
-import { Add } from '@/components/presets/add'
+import { EditSmall } from '@/components/presets/edit-small'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 
 const meta = {
-  component: Add,
+  component: EditSmall,
   parameters: {
     layout: 'centered'
   },
@@ -11,16 +11,14 @@ const meta = {
     onClick: fn()
   },
   tags: ['autodocs']
-} satisfies Meta<typeof Add>
+} satisfies Meta<typeof EditSmall>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Empty: Story = {}
-
-export const WithLabel: Story = {
+export const Default: Story = {
   args: {
-    label: 'Add Project'
+    href: '#'
   }
 }

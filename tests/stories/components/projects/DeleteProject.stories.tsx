@@ -1,22 +1,20 @@
-import { DeleteSmall } from '@/components/presets/delete-small'
+import { DeleteProject } from '@/components/projects/delete-project'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { fn } from 'storybook/test'
 
 const meta = {
-  component: DeleteSmall,
+  component: DeleteProject,
   parameters: {
     layout: 'centered'
   },
-  args: {
-    onClick: fn()
-  },
   tags: ['autodocs']
-} satisfies Meta<typeof DeleteSmall>
+} satisfies Meta<typeof DeleteProject>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {}
+  args: {
+    id: 1
+  }
 }

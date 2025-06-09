@@ -1,17 +1,13 @@
-import { DeleteSmall } from '@/components/presets/delete-small'
+import AddProject from '@/components/projects/add-project'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { fn } from 'storybook/test'
 
 const meta = {
-  component: DeleteSmall,
+  component: AddProject,
   parameters: {
     layout: 'centered'
   },
-  args: {
-    onClick: fn()
-  },
   tags: ['autodocs']
-} satisfies Meta<typeof DeleteSmall>
+} satisfies Meta<typeof AddProject>
 
 export default meta
 
