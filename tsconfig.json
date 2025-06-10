@@ -120,6 +120,7 @@
     "resources/js/**/*.tsx",
     "tests/stories/**/*.ts",
     "tests/stories/**/*.d.ts",
-    "tests/stories/**/*.tsx"
+    "tests/stories/**/*.tsx",
+    "tests/stories/**/*.mdx"
   ]
 }
