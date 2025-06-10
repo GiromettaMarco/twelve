@@ -80,7 +80,7 @@ class ProjectController extends Controller
 
         $project->users()->attach(Auth::user()->id, ['role' => 'admin']);
 
-        return to_route('projects.show', ['id' => $project->id]);
+        return to_route('projects.index');
     }
 
     // /**
