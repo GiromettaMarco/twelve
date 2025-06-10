@@ -16,7 +16,7 @@ type LanguageForm = {
 
 export default function Language({ language = 'system' }: { language: string }) {
   // Setup translations
-  const { t } = useLaravelReactI18n()
+  const { setLocale, t } = useLaravelReactI18n()
 
   const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -33,11 +33,13 @@ export default function Language({ language = 'system' }: { language: string }) 
 
   useEffect(() => {
     if (wasSuccessful) {
-      window.location.reload()
+      setLocale(data.language)
+      // window.location.reload()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wasSuccessful])
 
-  const submit: FormEventHandler = (e) => {
+  const onSubmit: FormEventHandler = (e) => {
     e.preventDefault()
 
     patch(route('language.update'), {
@@ -57,7 +59,7 @@ export default function Language({ language = 'system' }: { language: string }) 
           />
 
           <form
-            onSubmit={submit}
+            onSubmit={onSubmit}
             className="space-y-6"
           >
             <div className="grid gap-2">
