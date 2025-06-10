@@ -31,6 +31,8 @@ export default function AddProject() {
   // Setup translations
   const { t, tChoice } = useLaravelReactI18n()
 
+  const [open, setOpen] = useState(false)
+
   const { data, setData, post, errors, processing } = useForm<Required<ProjectForm>>({
     title: '',
     description: '',
@@ -50,29 +52,35 @@ export default function AddProject() {
     }
   }, [deadline, setData])
 
-  const submit: FormEventHandler = (e) => {
+  const onSubmit: FormEventHandler = (e) => {
     e.preventDefault()
 
     post(route('projects.store'), {
-      preserveScroll: true
+      preserveScroll: true,
+      onSuccess: () => setOpen(false)
     })
   }
 
   return (
-    <Dialog>
+    <Dialog
+      open={open}
+      onOpenChange={setOpen}
+    >
       <DialogTrigger asChild>
         <Add label={t('Add :name', { name: tChoice('Project', 1) })} />
       </DialogTrigger>
+
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{t('Create a new Project')}</DialogTitle>
+
           <DialogDescription>
-            Integer sodales odio arcu. Pellentesque vestibulum nisl metus, sit amet egestas tellus maximus ac.
+            {t('Integer sodales odio arcu. Pellentesque vestibulum nisl metus, sit amet egestas tellus maximus ac.')}
           </DialogDescription>
         </DialogHeader>
 
         <form
-          onSubmit={submit}
+          onSubmit={onSubmit}
           className="grid gap-4"
         >
           <div className="grid gap-2">
