@@ -4,9 +4,29 @@ import '../resources/css/app.css'
 
 import { withThemeByClassName } from '@storybook/addon-themes'
 import type { Preview } from '@storybook/react-vite'
-import { LaravelReactI18nProvider } from 'laravel-react-i18n'
+import { LaravelReactI18nProvider, useLaravelReactI18n } from 'laravel-react-i18n'
+import { useEffect } from 'react'
 
 const preview: Preview = {
+  globalTypes: {
+    locale: {
+      description: 'Internationalization locale',
+      toolbar: {
+        // The label to show for this toolbar item
+        title: 'Locale',
+        icon: 'globe',
+        // Array of plain string values or MenuItem shape
+        items: [
+          { value: undefined, title: 'Default' },
+          { value: 'en', title: 'English', right: '🇬🇧' },
+          { value: 'it', title: 'Italiano', right: '🇮🇹' }
+        ],
+        // Change title based on selected value
+        dynamicTitle: true
+      }
+    }
+  },
+
   parameters: {
     controls: {
       matchers: {
@@ -31,15 +51,28 @@ const preview: Preview = {
       },
       defaultTheme: 'light'
     }),
-    (Story) => (
-      <LaravelReactI18nProvider
-        locale={'en'}
-        fallbackLocale={'en'}
-        files={import.meta.glob('../lang/*.json')}
-      >
-        <Story />
-      </LaravelReactI18nProvider>
-    )
+    (Story, context) => {
+      // Setup translations
+      const { setLocale } = useLaravelReactI18n()
+
+      const { locale } = context.globals
+
+      // When the locale global changes set the new locale in i18n
+      useEffect(() => {
+        setLocale(locale)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [locale])
+
+      return (
+        <LaravelReactI18nProvider
+          locale={locale}
+          fallbackLocale={'en'}
+          files={import.meta.glob('../lang/*.json')}
+        >
+          <Story />
+        </LaravelReactI18nProvider>
+      )
+    }
   ]
 }
 
