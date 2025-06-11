@@ -1,5 +1,6 @@
 import ProjectDeadline from '@/components/projects/project-deadline'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { addDays, format } from 'date-fns'
 
 const meta = {
   component: ProjectDeadline,
@@ -34,5 +35,41 @@ export const Empty: Story = {
 export const InvalidDate: Story = {
   args: {
     rawDeadline: '2013-13-32'
+  }
+}
+
+export const RemoteDeadline: Story = {
+  args: {
+    rawDeadline: format(addDays(new Date(), 10), 'yyyy-MM-dd')
+  }
+}
+
+export const NearDeadline: Story = {
+  args: {
+    rawDeadline: format(addDays(new Date(), 5), 'yyyy-MM-dd')
+  }
+}
+
+export const TomorrowDeadline: Story = {
+  args: {
+    rawDeadline: format(addDays(new Date(), 1), 'yyyy-MM-dd')
+  }
+}
+
+export const TodayDeadline: Story = {
+  args: {
+    rawDeadline: format(new Date(), 'yyyy-MM-dd')
+  }
+}
+
+export const YesterdayDeadline: Story = {
+  args: {
+    rawDeadline: format(addDays(new Date(), -1), 'yyyy-MM-dd')
+  }
+}
+
+export const PastDeadline: Story = {
+  args: {
+    rawDeadline: format(addDays(new Date(), -10), 'yyyy-MM-dd')
   }
 }

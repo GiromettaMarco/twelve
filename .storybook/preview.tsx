@@ -44,6 +44,7 @@ const preview: Preview = {
   },
 
   decorators: [
+    // Dark theme
     withThemeByClassName({
       themes: {
         light: 'light',
@@ -51,6 +52,8 @@ const preview: Preview = {
       },
       defaultTheme: 'light'
     }),
+
+    // I18n
     (Story, context) => {
       // Setup translations
       const { setLocale } = useLaravelReactI18n()
@@ -72,6 +75,12 @@ const preview: Preview = {
           <Story />
         </LaravelReactI18nProvider>
       )
+    },
+
+    // Ziggy route global function filler
+    (Story) => {
+      globalThis.route = () => '#'
+      return <Story />
     }
   ]
 }
