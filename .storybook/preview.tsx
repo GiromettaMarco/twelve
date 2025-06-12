@@ -5,7 +5,17 @@ import '../resources/css/app.css'
 import { withThemeByClassName } from '@storybook/addon-themes'
 import type { Preview } from '@storybook/react-vite'
 import { LaravelReactI18nProvider, useLaravelReactI18n } from 'laravel-react-i18n'
+import { initialize, mswLoader } from 'msw-storybook-addon'
 import { useEffect } from 'react'
+import { useRoute } from '../vendor/tightenco/ziggy'
+import { Ziggy } from './mocks/ziggy/ziggy.mock'
+
+/*
+ * Initializes MSW
+ * See https://github.com/mswjs/msw-storybook-addon#configuring-msw
+ * to learn how to customize it
+ */
+initialize()
 
 const preview: Preview = {
   globalTypes: {
@@ -77,12 +87,16 @@ const preview: Preview = {
       )
     },
 
-    // Ziggy route global function filler
+    // Ziggy route global
     (Story) => {
-      globalThis.route = () => '#'
+      // @ts-expect-error: using undeclared globalThis
+      globalThis.route = useRoute(Ziggy)
+
       return <Story />
     }
-  ]
+  ],
+
+  loaders: [mswLoader] // 👈 Add the MSW loader to all stories
 }
 
 export default preview

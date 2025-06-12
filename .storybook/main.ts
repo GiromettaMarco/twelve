@@ -19,14 +19,22 @@ const config: StorybookConfig = {
     disableTelemetry: true
   },
   staticDirs: ['../public'],
-  /**
-   * Fix for asset loading due to Laravel-Vite setup
-   * https://github.com/storybookjs/storybook/issues/22550#issuecomment-1661920350
-   */
-  async viteFinal(config) {
+  viteFinal: async (config) => {
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve?.alias,
+        '@inertiajs/react': require.resolve('./mocks/@inertiajs/react/index.mock.ts')
+      }
+    }
+
+    /**
+     * Fix for asset loading due to Laravel-Vite setup
+     * https://github.com/storybookjs/storybook/issues/22550#issuecomment-1661920350
+     */
     return mergeConfig(config, {
       server: {
-        origin: ''
+        origin: '',
+        port: '6006'
       }
     })
   }

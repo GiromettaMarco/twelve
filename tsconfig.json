@@ -110,7 +110,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./resources/js/*"],
-      "ziggy-js": ["./vendor/tightenco/ziggy"]
+      "ziggy-js": ["./vendor/tightenco/ziggy"],
+      "@mocks/*": ["./.storybook/mocks/*"]
     },
     "jsx": "react-jsx"
   },
@@ -121,6 +122,9 @@
     "tests/stories/**/*.ts",
     "tests/stories/**/*.d.ts",
     "tests/stories/**/*.tsx",
-    "tests/stories/**/*.mdx"
+    "tests/stories/**/*.mdx",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.d.ts",
+    ".storybook/**/*.tsx",
   ]
 }

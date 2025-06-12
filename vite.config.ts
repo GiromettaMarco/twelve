@@ -20,7 +20,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy')
+      'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
+      '@mocks': resolve(__dirname, '.storybook/mocks')
     }
   },
   test: {
