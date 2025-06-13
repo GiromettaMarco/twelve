@@ -25,6 +25,7 @@ export default defineConfig({
     }
   },
   test: {
+    reporters: ['default'],
     coverage: {
       provider: 'v8',
       include: ['resources/js/**'],
