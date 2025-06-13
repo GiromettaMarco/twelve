@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\HandleAppearance;
+use App\Http\Middleware\HandleExternalRedirects;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\HandleLocale;
 use Illuminate\Foundation\Application;
@@ -21,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleLocale::class,
             HandleAppearance::class,
             HandleInertiaRequests::class,
+            HandleExternalRedirects::class,
             AddLinkHeadersForPreloadedAssets::class,
         ]);
     })
