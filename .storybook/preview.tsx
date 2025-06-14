@@ -16,7 +16,8 @@ import { Ziggy } from './mocks/ziggy/ziggy.mock'
  * to learn how to customize it
  */
 initialize({
-  onUnhandledRequest: 'bypass'
+  quiet: import.meta.env.MSW_QUIET,
+  onUnhandledRequest: import.meta.env.MSW_ON_UNHANDLED_REQUEST
 })
 
 const preview: Preview = {
