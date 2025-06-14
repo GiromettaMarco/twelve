@@ -13,21 +13,8 @@ import {
 import { type NavItem } from '@/types'
 import { Link } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
-import { BookOpen, ChartColumn, Folder, LayoutGrid } from 'lucide-react'
+import { ChartColumn, LayoutGrid, Stars } from 'lucide-react'
 import AppLogo from './app-logo'
-
-const footerNavItems: NavItem[] = [
-  {
-    title: 'Repository',
-    href: 'https://github.com/laravel/react-starter-kit',
-    icon: Folder
-  },
-  {
-    title: 'Documentation',
-    href: 'https://laravel.com/docs/starter-kits',
-    icon: BookOpen
-  }
-]
 
 export function AppSidebar() {
   // Setup translations
@@ -37,12 +24,22 @@ export function AppSidebar() {
     {
       title: t('Dashboard'),
       href: route('dashboard'),
-      icon: LayoutGrid
+      icon: LayoutGrid,
+      selected: route().current('dashboard')
     },
     {
       title: tChoice('Project', 2),
       href: route('projects.index'),
-      icon: ChartColumn
+      icon: ChartColumn,
+      selected: route().current('projects.*')
+    }
+  ]
+
+  const footerNavItems: NavItem[] = [
+    {
+      title: t('Telescope'),
+      href: route('telescope'),
+      icon: Stars
     }
   ]
 

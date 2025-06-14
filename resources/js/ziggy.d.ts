@@ -23,6 +23,12 @@ declare module 'ziggy-js' {
         required: false
       }
     ]
+    telescope: [
+      {
+        name: 'view'
+        required: false
+      }
+    ]
     home: []
     dashboard: []
     'projects.index': []

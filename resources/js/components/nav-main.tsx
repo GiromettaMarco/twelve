@@ -25,6 +25,7 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
               asChild
               isActive={item.href === page.url}
               tooltip={{ children: item.title }}
+              selected={item.selected}
             >
               <Link
                 href={item.href}
