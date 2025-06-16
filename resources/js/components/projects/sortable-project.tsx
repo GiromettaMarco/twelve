@@ -20,17 +20,14 @@ export default function SortableProject({ project, index }: { project: Project; 
   return (
     <Card
       ref={ref}
-      className={
-        'w-full flex-none gap-4 transition-opacity md:w-[28rem] 2xl:w-[31.25rem]' +
-        (isDragging ? ' pointer-events-none opacity-0' : '')
-      }
+      className={'gap-2 transition-opacity' + (isDragging ? ' pointer-events-none opacity-0' : '')}
     >
-      <CardHeader>
+      <CardHeader className="flex-none">
         <Link href={href}>
           <CardTitle className="md:truncate md:leading-[1.5rem]">{project.title}</CardTitle>
         </Link>
 
-        <CardDescription className="mt-2 md:h-5 md:truncate">{project.description}</CardDescription>
+        <CardDescription className="md:truncate">{project.description}</CardDescription>
 
         <CardAction>
           <Move
@@ -40,21 +37,19 @@ export default function SortableProject({ project, index }: { project: Project; 
         </CardAction>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="flex-1">
         <ProjectStats project={project} />
       </CardContent>
 
-      <CardFooter>
-        <div className="flex w-full justify-between">
-          <ProjectDeadline rawDeadline={project.deadline} />
+      <CardFooter className="flex-none">
+        <ProjectDeadline rawDeadline={project.deadline} />
 
-          <div className="flex flex-auto justify-end gap-0.5">
-            <EditSmall
-              href={href}
-              label={t('Edit')}
-            />
-            <DeleteProject id={project.id} />
-          </div>
+        <div className="flex flex-auto justify-end gap-0.5">
+          <EditSmall
+            href={href}
+            label={t('Edit')}
+          />
+          <DeleteProject id={project.id} />
         </div>
       </CardFooter>
     </Card>

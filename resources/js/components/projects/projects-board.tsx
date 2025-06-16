@@ -9,15 +9,17 @@ export default function ProjectsBoard({ projects = [] }: { projects: Project[] }
   }
 
   return (
-    <div className="flex w-full flex-wrap gap-4">
+    <div>
       <DragDropProvider>
-        {projects.map((project, index) => (
-          <SortableProject
-            index={index}
-            key={project.id}
-            project={project}
-          />
-        ))}
+        <div className="grid flex-1 gap-4 lg:grid-cols-2 2xl:grid-cols-3">
+          {projects.map((project, index) => (
+            <SortableProject
+              index={index}
+              key={project.id}
+              project={project}
+            />
+          ))}
+        </div>
 
         <DragOverlay>
           {(source) => (

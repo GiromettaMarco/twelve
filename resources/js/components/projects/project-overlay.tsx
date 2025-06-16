@@ -7,7 +7,7 @@ export default function ProjectOverlay({ project, isDragging = true }: { project
     <Card className={'transition-shadow dark:shadow-gray-700' + (isDragging ? ' shadow-2xl' : '')}>
       <CardHeader>
         <CardTitle className="md:truncate md:leading-[1.5rem]">{project?.title}</CardTitle>
-        <CardDescription className="mt-2 truncate md:h-5">{project?.description}</CardDescription>
+        <CardDescription className="mt-1 truncate">{project?.description}</CardDescription>
         <CardAction>
           <Move />
         </CardAction>
