@@ -166,6 +166,26 @@
   }
 }
 
+/* Container with sidebar */
+.container-with-sidebar {
+  width: 100%;
+  @media (width >= 40rem /* 640px */) {
+    max-width: 40rem /* 640px */;
+  }
+  @media (width >= 48rem /* 768px */) {
+    max-width: calc(48rem - var(--sidebar-width));
+  }
+  @media (width >= 64rem /* 1024px */) {
+    max-width: calc(64rem - var(--sidebar-width));
+  }
+  @media (width >= 80rem /* 1280px */) {
+    max-width: calc(80rem - var(--sidebar-width));
+  }
+  @media (width >= 96rem /* 1536px */) {
+    max-width: calc(96rem - var(--sidebar-width));
+  }
+}
+
 /* Extra */
 [role='button'],
 button {

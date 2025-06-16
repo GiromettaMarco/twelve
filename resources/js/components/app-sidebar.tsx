@@ -46,7 +46,7 @@ export function AppSidebar() {
   return (
     <Sidebar
       collapsible="icon"
-      variant="inset"
+      variant="floating"
     >
       <SidebarHeader>
         <SidebarMenu>
