@@ -1,8 +1,7 @@
 import ProjectDeadline from '@/components/projects/project-deadline'
 import ProjectStats from '@/components/projects/project-stats'
-import { DataTable } from '@/components/tasks/data-table'
+import { TasksDataTable } from '@/components/tasks/tasks-data-table'
 import { useTaskColumns } from '@/components/tasks/use-task-columns'
-import CardSlim from '@/components/ui/card-slim'
 import AppLayout from '@/layouts/app-layout'
 import { type BreadcrumbItem } from '@/types'
 import type { Project } from '@/types/project'
@@ -36,7 +35,7 @@ export default function Projects({ project }: { project: Project }) {
       <Head title="Projects" />
       <div className="rounded-xl p-4">
         <div className="relative flex-1 overflow-hidden rounded-xl md:min-h-min">
-          <DataTable
+          <TasksDataTable
             data={project.tasks}
             columns={columns.columnDef}
           />
@@ -44,10 +43,10 @@ export default function Projects({ project }: { project: Project }) {
 
         <Separator className="bg-border my-4 h-px" />
 
-        <div className="flex flex-wrap gap-8">
-          <CardSlim content={ProjectStats({ project })} />
-          {project.description && <CardSlim content={<p>{project.description}</p>} />}
-          {project.deadline && <CardSlim content={ProjectDeadline({ rawDeadline: project.deadline })} />}
+        <div className="grid flex-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3">
+          <ProjectStats project={project} />
+          {project.description && <div>{<p>{project.description}</p>}</div>}
+          {project.deadline && <div>{ProjectDeadline({ rawDeadline: project.deadline })}</div>}
         </div>
       </div>
     </AppLayout>
