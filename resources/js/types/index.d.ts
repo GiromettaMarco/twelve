@@ -1,3 +1,4 @@
+import type { Project } from '@/types/project'
 import { LucideIcon } from 'lucide-react'
 import type { Config } from 'ziggy-js'
 
@@ -44,5 +45,6 @@ export interface User {
   email_verified_at: string | null
   created_at: string
   updated_at: string
+  projects?: Project[]
   [key: string]: unknown // This allows for additional properties...
 }

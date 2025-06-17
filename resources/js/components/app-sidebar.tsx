@@ -13,7 +13,7 @@ import {
 import { type NavItem } from '@/types'
 import { Link } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
-import { ChartColumn, LayoutGrid, Stars } from 'lucide-react'
+import { ChartColumn, LayoutGrid, Stars, Users } from 'lucide-react'
 import AppLogo from './app-logo'
 
 export function AppSidebar() {
@@ -26,6 +26,12 @@ export function AppSidebar() {
       href: route('dashboard'),
       icon: LayoutGrid,
       selected: route().current('dashboard')
+    },
+    {
+      title: tChoice('User', 2),
+      href: route('users.index'),
+      icon: Users,
+      selected: route().current('users.index')
     },
     {
       title: tChoice('Project', 2),

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -27,6 +28,9 @@ Route::prefix('dashboard')
 
         Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])
             ->name('projects.destroy');
+
+        Route::get('users', [UserController::class, 'index'])
+            ->name('users.index');
     });
 
 require __DIR__.'/settings.php';
