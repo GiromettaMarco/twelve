@@ -2,13 +2,13 @@
 
 import '../resources/css/app.css'
 
+import { Ziggy } from '@mocks/ziggy/ziggy.mock'
 import { withThemeByClassName } from '@storybook/addon-themes'
 import type { Preview } from '@storybook/react-vite'
 import { LaravelReactI18nProvider, useLaravelReactI18n } from 'laravel-react-i18n'
 import { initialize, mswLoader } from 'msw-storybook-addon'
 import { useEffect } from 'react'
 import { useRoute } from '../vendor/tightenco/ziggy'
-import { Ziggy } from './mocks/ziggy/ziggy.mock'
 
 /*
  * Initializes MSW
