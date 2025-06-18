@@ -36,6 +36,7 @@ export const Ziggy: Config = {
     },
     'dusk.logout': { uri: '_dusk/logout/{guard?}', methods: ['GET', 'HEAD'], parameters: ['guard'] },
     'dusk.user': { uri: '_dusk/user/{guard?}', methods: ['GET', 'HEAD'], parameters: ['guard'] },
+    telescope: { uri: 'telescope/{view?}', methods: ['GET', 'HEAD'], wheres: { view: '(.*)' }, parameters: ['view'] },
     home: { uri: '/', methods: ['GET', 'HEAD'], wheres: { id: '[0-9]+' } },
     dashboard: { uri: 'dashboard', methods: ['GET', 'HEAD'], wheres: { id: '[0-9]+' } },
     'projects.index': { uri: 'dashboard/projects', methods: ['GET', 'HEAD'], wheres: { id: '[0-9]+' } },
@@ -52,6 +53,7 @@ export const Ziggy: Config = {
       wheres: { id: '[0-9]+' },
       parameters: ['id']
     },
+    'users.index': { uri: 'dashboard/users', methods: ['GET', 'HEAD'], wheres: { id: '[0-9]+' } },
     'profile.edit': { uri: 'settings/profile', methods: ['GET', 'HEAD'], wheres: { id: '[0-9]+' } },
     'profile.update': { uri: 'settings/profile', methods: ['PATCH'], wheres: { id: '[0-9]+' } },
     'profile.destroy': { uri: 'settings/profile', methods: ['DELETE'], wheres: { id: '[0-9]+' } },
