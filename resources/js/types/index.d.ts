@@ -1,6 +1,19 @@
 import type { Project } from '@/types/project'
 import { LucideIcon } from 'lucide-react'
-import type { Config } from 'ziggy-js'
+
+interface Ziggy {
+  url: string
+  port: number | null
+  defaults: Record<string, RawParameterValue>
+  routes: Record<string, Route>
+  location: string
+}
+
+export interface Flash {
+  title: string | null
+  description: string | null
+  level: 'success' | 'info' | 'warning' | 'error' | null
+}
 
 export interface Auth {
   user: User
@@ -27,13 +40,9 @@ export interface NavItem {
 export interface SharedData {
   name: string
   auth: Auth
-  ziggy: Config & { location: string }
+  ziggy: Ziggy
   sidebarOpen: boolean
-  flash: {
-    title: string | null
-    description: string | null
-    level: 'success' | 'info' | 'warning' | 'error' | null
-  }
+  flash: Flash
   [key: string]: unknown
 }
 

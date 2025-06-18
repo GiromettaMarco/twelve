@@ -1,6 +1,6 @@
 import ProjectStats from '@/components/projects/project-stats'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { projectDummy } from './ProjectDummy'
+import { projectDummy1 } from './ProjectDummies'
 
 const meta = {
   component: ProjectStats,
@@ -16,6 +16,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    project: projectDummy
+    project: projectDummy1
   }
 }

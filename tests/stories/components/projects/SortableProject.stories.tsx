@@ -2,7 +2,7 @@ import SortableProject from '@/components/projects/sortable-project'
 import { getUrl } from '@mocks/url'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { http, HttpResponse } from 'msw'
-import { projectDummy } from './ProjectDummy'
+import { projectDummy1 } from './ProjectDummies'
 
 const meta = {
   component: SortableProject,
@@ -24,25 +24,28 @@ export const Default: Story = {
           return new HttpResponse(null, { status: 200 })
         }),
         http.delete(getUrl('/dashboard/projects/1'), () => {
-          return HttpResponse.json({
-            component: 'projects/index',
-            props: {
-              errors: {},
-              name: 'Twelve',
-              sidebarOpen: false,
-              flash: { title: 'Project deleted', description: null, level: 'success' }
+          return HttpResponse.json(
+            {
+              component: 'projects/index',
+              props: {
+                errors: {},
+                name: 'Twelve',
+                sidebarOpen: false,
+                flash: { title: 'Project deleted', description: null, level: 'success' }
+              },
+              url: '/dashboard/projects',
+              version: '0056060350000172388ec83252a5a1b9',
+              clearHistory: false,
+              encryptHistory: false
             },
-            url: '/dashboard/projects',
-            version: '0056060350000172388ec83252a5a1b9',
-            clearHistory: false,
-            encryptHistory: false
-          }, { status: 200 })
+            { status: 200 }
+          )
         })
       ]
     }
   },
   args: {
-    project: projectDummy,
+    project: projectDummy1,
     index: 1
   }
 }
