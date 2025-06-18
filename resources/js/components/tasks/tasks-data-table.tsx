@@ -2,6 +2,7 @@
 
 import DataTableHeader from '@/components/tasks/data-table-header'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
+import type { Task } from '@/types/task'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -21,12 +22,12 @@ import * as React from 'react'
 import { DataTablePagination } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+interface TasksDataTableProps {
+  columns: ColumnDef<Task>[]
+  data: Task[]
 }
 
-export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+export function TasksDataTable({ columns, data }: TasksDataTableProps) {
   // Setup translations
   const { t } = useLaravelReactI18n()
 
