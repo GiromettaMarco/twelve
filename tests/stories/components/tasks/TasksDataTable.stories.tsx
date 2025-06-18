@@ -1,8 +1,8 @@
 import { TasksDataTable } from '@/components/tasks/tasks-data-table'
 import { useTaskColumns } from '@/components/tasks/use-task-columns'
 import type { Task } from '@/types/task'
+import { taskDummy1, taskDummy2, taskDummy3, taskDummy4, taskDummy5 } from '@stories/components/tasks/TaskDummies'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { taskDummy1, taskDummy2, taskDummy3, taskDummy4, taskDummy5 } from './TaskDummies'
 
 function TasksDataTableWithHooks({ data }: { data: Task[] }) {
   const columns = useTaskColumns()

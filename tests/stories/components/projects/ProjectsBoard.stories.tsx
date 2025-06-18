@@ -1,7 +1,7 @@
 import ProjectsBoard from '@/components/projects/projects-board'
 import { deleteProject, showProject } from '@mocks/msw/http/project'
+import { projectDummy1, projectDummy2, projectDummy3, projectDummy4 } from '@stories/components/projects/ProjectDummies'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { projectDummy1, projectDummy2, projectDummy3, projectDummy4 } from './ProjectDummies'
 
 const meta = {
   component: ProjectsBoard,

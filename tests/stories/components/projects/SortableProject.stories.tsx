@@ -1,8 +1,8 @@
 import SortableProject from '@/components/projects/sortable-project'
 import { getUrl } from '@mocks/url'
+import { projectDummy1 } from '@stories/components/projects/ProjectDummies'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { http, HttpResponse } from 'msw'
-import { projectDummy1 } from './ProjectDummies'
 
 const meta = {
   component: SortableProject,

@@ -111,7 +111,8 @@
     "paths": {
       "@/*": ["./resources/js/*"],
       "ziggy-js": ["./vendor/tightenco/ziggy"],
-      "@mocks/*": ["./.storybook/mocks/*"]
+      "@mocks/*": ["./.storybook/mocks/*"],
+      "@stories/*": ["./tests/stories/*"]
     },
     "jsx": "react-jsx"
   },
