@@ -56,6 +56,8 @@ const preview: Preview = {
     }
   },
 
+  // @NOTE decorators are resolved in stack order, 
+  // so we have to apply providers first and to use them later in a separate decorator.
   decorators: [
     // Dark theme
     withThemeByClassName({
@@ -66,7 +68,7 @@ const preview: Preview = {
       defaultTheme: 'light'
     }),
 
-    // I18n
+    // I18n runtime
     (Story, context) => {
       // Setup translations
       const { setLocale } = useLaravelReactI18n()
@@ -75,15 +77,22 @@ const preview: Preview = {
 
       // When the locale global changes set the new locale in i18n
       useEffect(() => {
-        setLocale(locale)
+        setLocale(locale || 'en')
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [locale])
 
+      return <Story />
+    },
+
+    // I18n first render
+    (Story, context) => {
+      const { locale } = context.globals
+
       return (
         <LaravelReactI18nProvider
-          locale={locale}
+          locale={locale || 'en'}
           fallbackLocale={'en'}
-          files={import.meta.glob('../lang/*.json')}
+          files={import.meta.glob('../lang/*.json', { eager: true })}
         >
           <Story />
         </LaravelReactI18nProvider>
