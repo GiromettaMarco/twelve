@@ -33,7 +33,7 @@ export default function AddProject() {
 
   const [open, setOpen] = useState(false)
 
-  const { data, setData, post, errors, processing } = useForm<Required<ProjectForm>>({
+  const { data, setData, post, errors, processing, reset } = useForm<Required<ProjectForm>>({
     title: '',
     description: '',
     deadline: ''
@@ -57,7 +57,11 @@ export default function AddProject() {
 
     post(route('projects.store'), {
       preserveScroll: true,
-      onSuccess: () => setOpen(false)
+      onSuccess: () => {
+        setOpen(false)
+        reset()
+        setDeadline(undefined)
+      }
     })
   }
 
