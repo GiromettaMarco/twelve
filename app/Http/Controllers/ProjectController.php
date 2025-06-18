@@ -80,7 +80,10 @@ class ProjectController extends Controller
 
         $project->users()->attach(Auth::user()->id, ['role' => 'admin']);
 
-        return to_route('projects.index');
+        return to_route('projects.index')->with([
+            'flash.title' => __('Project created'),
+            'flash.level' => 'success',
+        ]);
     }
 
     // /**
