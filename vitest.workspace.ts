@@ -25,7 +25,11 @@ export default defineWorkspace([
         provider: 'playwright',
         instances: [{ browser: 'chromium' }]
       },
-      setupFiles: ['.storybook/vitest.setup.ts']
+      setupFiles: ['.storybook/vitest.setup.ts'],
+      // This alias works only when running tests with the "vitest" command (ci), but not when running the "storybook" command (ui)
+      alias: {
+        '@inertiajs/react': require.resolve('./.storybook/mocks/@inertiajs/react/index.mock.ts')
+      }
     }
   }
 ])

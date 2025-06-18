@@ -20,6 +20,7 @@ const config: StorybookConfig = {
   },
   staticDirs: ['../public'],
   viteFinal: async (config) => {
+    // This alias works only when running tests with the "storybook" command (ui), but not when running the "vitest" command (ci)
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve?.alias,
