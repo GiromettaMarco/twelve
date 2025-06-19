@@ -35,3 +35,9 @@ Route::prefix('dashboard')
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
+
+Route::fallback(function () {
+    return Inertia::render('errors/404')
+        ->toResponse(request())
+        ->setStatusCode(404);
+});
