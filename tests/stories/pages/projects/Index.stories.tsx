@@ -1,6 +1,7 @@
 import Projects from '@/pages/projects'
 import { usePage } from '@mocks/@inertiajs/react/index.mock'
 import { defaultData } from '@mocks/@inertiajs/react/usePage.mock'
+import { dashboard, telescope } from '@mocks/msw/http/dashboard'
 import { createProject, deleteProject, showProject } from '@mocks/msw/http/project'
 import { getUrl } from '@mocks/url'
 import { projectDummy1, projectDummy2, projectDummy3, projectDummy4 } from '@stories/components/projects/ProjectDummies'
@@ -29,7 +30,7 @@ export const Default: Story = {
   },
   parameters: {
     msw: {
-      handlers: [showProject(), deleteProject(), createProject()]
+      handlers: [showProject(), deleteProject(), createProject(), dashboard(), telescope()]
     }
   },
   args: {
