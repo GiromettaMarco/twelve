@@ -16,7 +16,7 @@ export interface Flash {
 }
 
 export interface Auth {
-  user: User
+  user: User | null
 }
 
 export interface BreadcrumbItem {
