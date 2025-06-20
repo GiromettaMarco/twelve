@@ -14,7 +14,7 @@ type LanguageForm = {
   language: string
 }
 
-export default function Language({ language = 'system' }: { language: string }) {
+export default function Language({ language = 'system' }: { language?: string }) {
   // Setup translations
   const { setLocale, t } = useLaravelReactI18n()
 

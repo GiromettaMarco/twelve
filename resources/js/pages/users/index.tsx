@@ -5,7 +5,7 @@ import type { BreadcrumbItem, User } from '@/types'
 import { Head } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 
-export default function Users({ users = [] }: { users: User[] }) {
+export default function Users({ users = [] }: { users?: User[] }) {
   // Setup translations
   const { currentLocale, t, tChoice } = useLaravelReactI18n()
 
