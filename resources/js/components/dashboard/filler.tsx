@@ -26,7 +26,7 @@ export function Filler1() {
       <CardFooter className="flex flex-none flex-row-reverse">
         <Button asChild>
           <a
-            href={route('telescope')}
+            href="#"
             target="_blank"
           >
             {t('Open')}
@@ -62,7 +62,7 @@ export function Filler2() {
       <CardFooter className="flex flex-none flex-row-reverse">
         <Button asChild>
           <a
-            href={route('telescope')}
+            href="#"
             target="_blank"
           >
             {t('Open')}
