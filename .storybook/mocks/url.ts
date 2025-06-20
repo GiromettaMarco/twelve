@@ -10,5 +10,5 @@ export const url = 'http://localhost:6006'
  * @returns 
  */
 export function getUrl(path?: string) {
-  return url + path
+  return url + (path || '')
 }
