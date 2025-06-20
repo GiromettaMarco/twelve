@@ -40,7 +40,7 @@ export default function Users({ users = [] }: { users?: User[] }) {
           </TableHeader>
           <TableBody>
             {users.map((user) => (
-              <TableRow>
+              <TableRow key={user.id}>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{format(user.created_at, currentLocale())}</TableCell>
