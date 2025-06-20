@@ -6,9 +6,3 @@ export function dashboard() {
     return new HttpResponse(null, { status: 200 })
   })
 }
-
-export function telescope() {
-  return http.get(getUrl('/telescope'), () => {
-    return new HttpResponse(null, { status: 200 })
-  })
-}

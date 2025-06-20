@@ -1,18 +1,23 @@
 import Projects from '@/pages/projects'
 import { usePage } from '@mocks/@inertiajs/react/index.mock'
-import { defaultData } from '@mocks/@inertiajs/react/usePage.mock'
-import { dashboard, telescope } from '@mocks/msw/http/dashboard'
+import { newPageData } from '@mocks/@inertiajs/react/usePage.mock'
+import { logout } from '@mocks/msw/http/auth'
+import { dashboard } from '@mocks/msw/http/dashboard'
 import { createProject, deleteProject, showProject } from '@mocks/msw/http/project'
-import { getUrl } from '@mocks/url'
-import { projectDummy1, projectDummy2, projectDummy3, projectDummy4 } from '@stories/components/projects/ProjectDummies'
+import { settings } from '@mocks/msw/http/settings'
+import { projectDummy1, projectDummy2, projectDummy3, projectDummy4 } from '@stories/dummies/ProjectDummies'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
+  async beforeEach() {
+    usePage.mockReturnValue(newPageData('projects/index', '/dashboard/projects'))
+  },
   component: Projects,
   parameters: {
-    layout: 'centered'
-  },
-  tags: ['autodocs']
+    msw: {
+      handlers: [showProject(), deleteProject(), createProject(), dashboard(), settings(), logout()]
+    }
+  }
 } satisfies Meta<typeof Projects>
 
 export default meta
@@ -20,19 +25,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  async beforeEach() {
-    const pageData = defaultData
-    pageData.component = 'projects/index'
-    pageData.url = '/dashboard/projects'
-    pageData.props.ziggy.location = getUrl('/dashboard/projects')
-
-    usePage.mockReturnValue(pageData)
-  },
-  parameters: {
-    msw: {
-      handlers: [showProject(), deleteProject(), createProject(), dashboard(), telescope()]
-    }
-  },
   args: {
     projects: [projectDummy1, projectDummy2, projectDummy3, projectDummy4]
   }

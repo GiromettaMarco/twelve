@@ -1,5 +1,5 @@
 import ProjectStats from '@/components/projects/project-stats'
-import { projectDummy1 } from '@stories/components/projects/ProjectDummies'
+import { projectDummy1 } from '@stories/dummies/ProjectDummies'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {

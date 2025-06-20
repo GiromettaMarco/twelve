@@ -1,5 +1,5 @@
 import type { Project } from '@/types/project'
-import { taskDummy1, taskDummy2, taskDummy3, taskDummy4, taskDummy5 } from '@stories/components/tasks/TaskDummies'
+import { taskDummy1, taskDummy2, taskDummy3, taskDummy4, taskDummy5 } from './TaskDummies'
 
 export const projectDummy1: Project = {
   title: 'Laravel boilerplate',
