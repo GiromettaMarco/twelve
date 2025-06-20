@@ -9,7 +9,7 @@ import { Head } from '@inertiajs/react'
 import { Separator } from '@radix-ui/react-separator'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 
-export default function Projects({ project }: { project: Project }) {
+export default function Project({ project }: { project: Project }) {
   // Setup translations
   const { t, tChoice } = useLaravelReactI18n()
 
