@@ -1,5 +1,8 @@
+import { AppContent } from '@/components/app-content'
+import { AppDashboardHeader } from '@/components/app-dashboard-header'
 import AppFlash from '@/components/app-flash'
-import AppSidebarLayout from '@/layouts/app/app-sidebar-layout'
+import { AppShell } from '@/components/app-shell'
+import { AppSidebar } from '@/components/app-sidebar'
 import { type BreadcrumbItem } from '@/types'
 import { type ReactNode } from 'react'
 
@@ -9,13 +12,18 @@ interface AppLayoutProps {
   headerChildren?: ReactNode
 }
 
-export default ({ children, breadcrumbs, headerChildren, ...props }: AppLayoutProps) => (
-  <AppSidebarLayout
-    breadcrumbs={breadcrumbs}
-    headerChildren={headerChildren}
-    {...props}
-  >
-    {children}
-    <AppFlash />
-  </AppSidebarLayout>
-)
+export default function ({ children, breadcrumbs, headerChildren }: AppLayoutProps) {
+  return (
+    <AppShell variant="sidebar">
+      <AppSidebar />
+      <AppContent>
+        <AppDashboardHeader
+          breadcrumbs={breadcrumbs}
+          children={headerChildren}
+        />
+        {children}
+        <AppFlash />
+      </AppContent>
+    </AppShell>
+  )
+}

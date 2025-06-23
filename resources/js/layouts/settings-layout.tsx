@@ -1,14 +1,14 @@
 import Heading from '@/components/heading'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { cn } from '@/lib/utils'
+import { cn, isWindow } from '@/lib/utils'
 import { type NavItem } from '@/types'
 import { Link } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 import { KeyRound, Languages, SunMoon, User } from 'lucide-react'
 import { type PropsWithChildren } from 'react'
 
-export default function SettingsLayout({ children }: PropsWithChildren) {
+export default function ({ children }: PropsWithChildren) {
   // Setup translations
   const { t } = useLaravelReactI18n()
 
@@ -35,12 +35,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
     }
   ]
 
-  // When server-side rendering, we only render the layout on the client...
-  if (typeof window === 'undefined') {
-    return null
-  }
-
-  const currentPath = window.location.pathname
+  const currentPath = isWindow() ? window.location.pathname : ''
 
   return (
     <div className="px-4 py-6">
