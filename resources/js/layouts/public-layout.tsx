@@ -1,4 +1,5 @@
 import { Login } from '@/components/presets/login'
+import App from '@/providers/app'
 import type { SharedData } from '@/types'
 import { Head, usePage } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
@@ -16,7 +17,7 @@ export default function ({ children, title }: AppLayoutProps) {
   const { auth } = usePage<SharedData>().props
 
   return (
-    <>
+    <App>
       <Head title={title}>
         <link
           rel="preconnect"
@@ -53,6 +54,6 @@ export default function ({ children, title }: AppLayoutProps) {
 
         <div className="hidden h-14.5 lg:block"></div>
       </div>
-    </>
+    </App>
   )
 }

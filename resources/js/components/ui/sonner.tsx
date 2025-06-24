@@ -1,12 +1,13 @@
-import { useTheme } from 'next-themes'
+import { AppearanceContext } from '@/providers/appearance-context'
+import { useContext } from 'react'
 import { Toaster as Sonner, ToasterProps } from 'sonner'
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme = 'system' } = useTheme()
+  const { theme } = useContext(AppearanceContext)
 
   return (
     <Sonner
-      theme={theme as ToasterProps['theme']}
+      theme={theme}
       className="toaster group"
       style={
         {

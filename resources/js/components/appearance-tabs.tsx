@@ -1,14 +1,15 @@
-import { Appearance, useAppearance } from '@/hooks/use-appearance'
+import { Appearance } from '@/lib/appearance'
 import { cn } from '@/lib/utils'
+import { AppearanceContext } from '@/providers/appearance-context'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 import { LucideIcon, Monitor, Moon, Sun } from 'lucide-react'
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, useContext } from 'react'
 
 export default function AppearanceToggleTab({ className = '', ...props }: HTMLAttributes<HTMLDivElement>) {
   // Setup translations
   const { t } = useLaravelReactI18n()
 
-  const { appearance, updateAppearance } = useAppearance()
+  const { appearance, updateAppearance } = useContext(AppearanceContext)
 
   const tabs: { value: Appearance; icon: LucideIcon; label: string }[] = [
     { value: 'light', icon: Sun, label: 'Light' },
