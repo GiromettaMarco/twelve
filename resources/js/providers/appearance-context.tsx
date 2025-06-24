@@ -13,5 +13,7 @@ type AppearanceContextType = {
 export const AppearanceContext = createContext<AppearanceContextType>({
   appearance: 'system',
   theme: 'light',
-  updateAppearance: () => {}
+  updateAppearance: () => {
+    console.error('updateAppearance must be used within an AppearanceContext provider')
+  }
 })
