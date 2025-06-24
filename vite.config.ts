@@ -21,6 +21,7 @@ export default defineConfig({
   resolve: {
     alias: {
       'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
+      '@decorators': resolve(__dirname, '.storybook/decorators'),
       '@mocks': resolve(__dirname, '.storybook/mocks'),
       '@stories': resolve(__dirname, 'tests/stories')
     }
@@ -30,7 +31,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['resources/js/**'],
-      exclude: ['resources/js/app.tsx', 'resources/js/ssr.tsx'],
+      exclude: ['resources/js/app.tsx', 'resources/js/ssr.tsx', 'resources/js/providers/*'],
       reportsDirectory: './reports/vitest'
     }
   }

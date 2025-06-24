@@ -2,13 +2,12 @@
 
 import '../resources/css/app.css'
 
-import { Ziggy } from '@mocks/ziggy/ziggy.mock'
-import { withThemeByClassName } from '@storybook/addon-themes'
+import withI18n from '@decorators/with-i18n'
+import withLocaleSelector from '@decorators/with-locale-selector'
+import withTheme from '@decorators/with-theme'
+import withZiggy from '@decorators/with-ziggy'
 import type { Preview } from '@storybook/react-vite'
-import { LaravelReactI18nProvider, useLaravelReactI18n } from 'laravel-react-i18n'
 import { initialize, mswLoader } from 'msw-storybook-addon'
-import { useEffect } from 'react'
-import { useRoute } from '../vendor/tightenco/ziggy'
 
 /*
  * Initializes MSW
@@ -56,59 +55,10 @@ const preview: Preview = {
     }
   },
 
-  // @NOTE decorators are resolved in stack order, 
-  // so we have to apply providers first and to use them later in a separate decorator.
-  decorators: [
-    // Dark theme
-    withThemeByClassName({
-      themes: {
-        light: 'light',
-        dark: 'dark'
-      },
-      defaultTheme: 'light'
-    }),
+  // @NOTE decorators are resolved in stack order
+  decorators: [withTheme(), withLocaleSelector(), withI18n(), withZiggy()],
 
-    // I18n runtime
-    (Story, context) => {
-      // Setup translations
-      const { setLocale } = useLaravelReactI18n()
-
-      const { locale } = context.globals
-
-      // When the locale global changes set the new locale in i18n
-      useEffect(() => {
-        setLocale(locale || 'en')
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [locale])
-
-      return <Story />
-    },
-
-    // I18n first render
-    (Story, context) => {
-      const { locale } = context.globals
-
-      return (
-        <LaravelReactI18nProvider
-          locale={locale || 'en'}
-          fallbackLocale={'en'}
-          files={import.meta.glob('../lang/*.json', { eager: true })}
-        >
-          <Story />
-        </LaravelReactI18nProvider>
-      )
-    },
-
-    // Ziggy route global
-    (Story) => {
-      // @ts-expect-error: using undeclared globalThis
-      globalThis.route = useRoute(Ziggy)
-
-      return <Story />
-    }
-  ],
-
-  loaders: [mswLoader] // 👈 Add the MSW loader to all stories
+  loaders: [mswLoader] // Add the MSW loader to all stories
 }
 
 export default preview

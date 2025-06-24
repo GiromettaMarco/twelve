@@ -111,6 +111,7 @@
     "paths": {
       "@/*": ["./resources/js/*"],
       "ziggy-js": ["./vendor/tightenco/ziggy"],
+      "@decorators/*": ["./.storybook/decorators/*"],
       "@mocks/*": ["./.storybook/mocks/*"],
       "@stories/*": ["./tests/stories/*"]
     },

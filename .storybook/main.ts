@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite'
+import path from 'path'
 import { mergeConfig } from 'vite'
 
 const config: StorybookConfig = {
@@ -24,7 +25,8 @@ const config: StorybookConfig = {
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve?.alias,
-        '@inertiajs/react': require.resolve('./mocks/@inertiajs/react/index.mock.ts')
+        '@inertiajs/react': require.resolve('./mocks/@inertiajs/react/index.mock.ts'),
+        '@/providers/app': path.resolve(__dirname, './mocks/app.mock.tsx')
       }
     }
 
