@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Telescope\IncomingEntry;
@@ -19,6 +20,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
         // $this->hideSensitiveRequestDetails();
 
+        // Filter entries
         // $isLocal = $this->app->environment('local');
 
         // Telescope::filter(function (IncomingEntry $entry) use ($isLocal) {
@@ -74,7 +76,9 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     protected function gate(): void
     {
         Gate::define('viewTelescope', function (User $user) {
-            return isset($user);
+            return $user?->permissions->contains(function (Permission $permission) {
+                return $permission->name === 'view-telescope';
+            });
         });
     }
 }
