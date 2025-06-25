@@ -1,3 +1,4 @@
+import type { Permission } from '@/types/permission'
 import type { Project } from '@/types/project'
 import { LucideIcon } from 'lucide-react'
 
@@ -24,11 +25,15 @@ export interface User {
   created_at: string
   updated_at: string
   projects?: Project[]
+  permissions?: Permission[]
   [key: string]: unknown
 }
 
 export interface Permissions {
   telescope: boolean
+  users: {
+    view: boolean
+  }
   [key: string]: unknown
 }
 

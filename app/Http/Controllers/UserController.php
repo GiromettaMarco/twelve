@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -13,7 +14,11 @@ class UserController extends Controller
      */
     public function index(): Response
     {
-        $users = User::with(['projects'])
+        if (! Gate::allows('view-users')) {
+            abort(403);
+        }
+
+        $users = User::with(['projects', 'permissions'])
             ->orderBy('name')
             ->get();
 

@@ -39,11 +39,17 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'name' => config('app.name'),
-            'auth' => [
+            'auth' => $request->user() ? [
                 'user' => $request->user(),
                 'permissions' => [
-                    'telescope' => $request->user()->can('viewTelescope'),
+                    'telescope' => $request->user()->can('view-telescope'),
+                    'users' => [
+                        'view' => $request->user()->can('view-users'),
+                    ],
                 ],
+            ] : [
+                'user' => null,
+                'permissions' => [],
             ],
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),

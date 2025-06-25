@@ -31,12 +31,16 @@ export function AppSidebar() {
       icon: LayoutGrid,
       selected: route().current('dashboard')
     },
-    {
-      title: tChoice('User', 2),
-      href: route('users.index'),
-      icon: Users,
-      selected: route().current('users.index')
-    },
+    ...(permissions.users.view
+      ? [
+          {
+            title: tChoice('User', 2),
+            href: route('users.index'),
+            icon: Users,
+            selected: route().current('users.index')
+          }
+        ]
+      : []),
     {
       title: tChoice('Project', 2),
       href: route('projects.index'),
