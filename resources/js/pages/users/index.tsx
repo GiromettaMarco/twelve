@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import AppLayout from '@/layouts/app-layout'
 import format from '@/lib/format'
@@ -35,7 +36,8 @@ export default function Users({ users = [] }: { users?: User[] }) {
               <TableHead>{t('Registration date')}</TableHead>
               <TableHead>{t('Verification date')}</TableHead>
               <TableHead>{t('Last update')}</TableHead>
-              <TableHead>{t('Projects #')}</TableHead>
+              <TableHead>{t('Proj. #')}</TableHead>
+              <TableHead>{t('Permissions')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -49,6 +51,16 @@ export default function Users({ users = [] }: { users?: User[] }) {
                 </TableCell>
                 <TableCell>{format(user.updated_at, currentLocale())}</TableCell>
                 <TableCell>{user.projects?.length || 0}</TableCell>
+                <TableCell>
+                  {user.permissions?.map((permission) => (
+                    <Badge
+                      variant="outline"
+                      className="mr-1 px-1 font-normal last:mr-0"
+                    >
+                      {permission.label}
+                    </Badge>
+                  ))}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
