@@ -10,7 +10,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem
 } from '@/components/ui/sidebar'
-import { type NavItem } from '@/types'
+import { usePermissions } from '@/hooks/use-permissions'
+import type { NavItem } from '@/types'
 import { Link } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 import { ChartColumn, LayoutGrid, Stars, Users } from 'lucide-react'
@@ -19,6 +20,9 @@ import AppLogo from './app-logo'
 export function AppSidebar() {
   // Setup translations
   const { t, tChoice } = useLaravelReactI18n()
+
+  // Collect permissions
+  const permissions = usePermissions()
 
   const mainNavItems: NavItem[] = [
     {
@@ -41,13 +45,15 @@ export function AppSidebar() {
     }
   ]
 
-  const footerNavItems: NavItem[] = [
-    {
-      title: t('Telescope'),
-      href: route('telescope'),
-      icon: Stars
-    }
-  ]
+  const footerNavItems: NavItem[] = permissions.telescope
+    ? [
+        {
+          title: t('Telescope'),
+          href: route('telescope'),
+          icon: Stars
+        }
+      ]
+    : []
 
   return (
     <Sidebar

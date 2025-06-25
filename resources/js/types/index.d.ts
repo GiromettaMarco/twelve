@@ -15,8 +15,26 @@ export interface Flash {
   level: 'success' | 'info' | 'warning' | 'error' | null
 }
 
+export interface User {
+  id: number
+  name: string
+  email: string
+  avatar?: string
+  email_verified_at: string | null
+  created_at: string
+  updated_at: string
+  projects?: Project[]
+  [key: string]: unknown
+}
+
+export interface Permissions {
+  telescope: boolean
+  [key: string]: unknown
+}
+
 export interface Auth {
   user: User | null
+  permissions: Permissions
 }
 
 export interface BreadcrumbItem {
@@ -44,16 +62,4 @@ export interface SharedData {
   sidebarOpen: boolean
   flash: Flash
   [key: string]: unknown
-}
-
-export interface User {
-  id: number
-  name: string
-  email: string
-  avatar?: string
-  email_verified_at: string | null
-  created_at: string
-  updated_at: string
-  projects?: Project[]
-  [key: string]: unknown // This allows for additional properties...
 }
