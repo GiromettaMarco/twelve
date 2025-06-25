@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('labels', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->timestamps();
         });
     }
 

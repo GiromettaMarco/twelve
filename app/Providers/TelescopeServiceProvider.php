@@ -64,7 +64,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
         Telescope::auth(function ($request) {
             // app()->environment('local') ||
-            return Gate::check('viewTelescope', [$request->user()]);
+            return Gate::check('view-telescope', [$request->user()]);
         });
     }
 
@@ -75,9 +75,9 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     protected function gate(): void
     {
-        Gate::define('viewTelescope', function (User $user) {
+        Gate::define('view-telescope', function (User $user) {
             return $user?->permissions->contains(function (Permission $permission) {
-                return $permission->name === 'view-telescope';
+                return $permission->tag === 'view-telescope';
             });
         });
     }

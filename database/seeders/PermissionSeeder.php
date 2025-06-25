@@ -13,14 +13,24 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        $permission = Permission::create([
-            'name' => 'view-telescope',
-            'description' => 'Access Telescope control panel.',
-        ]);
+        $permissions = [
+            [
+                'tag' => 'view-telescope',
+                'label' => 'View Telescope',
+                'description' => 'Access Telescope control panel.',
+            ],
+            [
+                'tag' => 'view-users',
+                'label' => 'View Users',
+                'description' => 'View all registered userd.',
+            ],
+        ];
 
         $user = User::find(1);
         if ($user) {
-            $permission->users()->attach($user);
+            collect($permissions)->each(function ($permission) use ($user) {
+                $user->permissions()->attach(Permission::create($permission));
+            });
         }
     }
 }
