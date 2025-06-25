@@ -15,6 +15,9 @@ pageDataWithFlashInfo.props.flash = {
   level: 'info'
 }
 
+const pageDataWithoutTelescopePermission = newPageData('dashboard', '/dashboard')
+pageDataWithoutTelescopePermission.props.auth.permissions.telescope = false
+
 const meta = {
   component: Dashboard,
   parameters: {
@@ -44,4 +47,14 @@ export const FlashMessage: Story = {
   async beforeEach() {
     usePage.mockReturnValue(pageDataWithFlashInfo)
   }
+}
+
+export const WithoutTelescopePermission: Story = {
+  async beforeEach() {
+    usePage.mockReturnValue(pageDataWithoutTelescopePermission)
+  },
+
+  // play: async ({ canvas }) => {
+  //   await expect(canvas.getByText('Telescope')).toBeNull()
+  // }
 }

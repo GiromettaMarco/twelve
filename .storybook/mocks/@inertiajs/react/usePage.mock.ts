@@ -11,7 +11,10 @@ export function newPageData(component?: string, location?: string): Page<SharedD
       errors: {},
       name: 'Twelve',
       auth: {
-        user: userDummy1
+        user: userDummy1,
+        permissions: {
+          telescope: true
+        }
       },
       ziggy: {
         url: Ziggy.url,
