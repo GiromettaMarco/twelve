@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
@@ -15,20 +17,22 @@ class ProjectController extends Controller
     /**
      * Show all resources
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         // Gate::authorize('viewProjects', [Team::class, $team_id]);
 
-        $projects = Project::with(['tasks', 'tasks.label', 'tasks.status', 'tasks.priority'])
-            ->whereHas('users', function (Builder $query) {
-                $query->where('users.id', '=', Auth::user()->id);
-            })
-            ->where('archived', false)
-            ->orderBy('id')
-            ->get();
+        // Make sure user exists
+        $user = $request->user();
+        if (! is_a($user, User::class)) {
+            abort(403);
+        }
 
+        // Render the page
         return Inertia::render('projects/index', [
-            'projects' => $projects,
+            'projects' => $user->projects()
+                ->where('archived', false)
+                ->with(['tasks', 'tasks.label', 'tasks.status', 'tasks.priority'])
+                ->get(),
         ]);
     }
 
@@ -52,34 +56,36 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the resource
-     *
-     * Without Route Model Binding.
-     */
-    // public function show(string $id): Response
-    // {
-    //     $project = Project::with(['tasks', 'tasks.label', 'tasks.status', 'tasks.priority'])->findOrFail($id);
-
-    //     // Gate::authorize('view', $project);
-
-    //     return Inertia::render('projects/show', [
-    //         'project' => $project,
-    //     ]);
-    // }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreProjectRequest $request)
     {
-        $project = new Project($request->validated());
+        // Make sure user exists
+        $user = $request->user();
+        if (! is_a($user, User::class)) {
+            abort(403);
+        }
 
+        // Create and save
+        $project = new Project($request->validated());
         $project->save();
 
-        $project->users()->attach(Auth::user()->id, ['role' => 'admin']);
+        // Shift related projects
+        $user->projects->each(function (Project $project, int $key) use ($user) {
+            $project->users()->updateExistingPivot($user->id, [
+                'position' => $key + 1,
+            ]);
+        });
 
+        // Attach the new project
+        $user->projects()->attach($project->id, [
+            'position' => 0,
+            'role' => 'admin',
+        ]);
+
+        // Render the page
         return to_route('projects.index')->with([
             'flash.title' => __('Project created'),
             'flash.level' => 'success',

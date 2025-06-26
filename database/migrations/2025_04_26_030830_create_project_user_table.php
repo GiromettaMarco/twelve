@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('project_id');
             $table->foreignId('user_id');
+            $table->unsignedInteger('position');
             $table->string('role')->nullable();
             $table->timestamps();
         });

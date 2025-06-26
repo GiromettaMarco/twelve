@@ -22,7 +22,13 @@ class ProjectSeeder extends Seeder
 
         $user = User::find(1);
         if ($user) {
-            $project->users()->attach($user, ['role' => 'admin']);
+            $project->users()->attach(
+                $user,
+                [
+                    'position' => 0,
+                    'role' => 'admin',
+                ]
+            );
         }
     }
 }
