@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\FlashMessage;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -25,6 +26,32 @@ class HandleInertiaRequests extends Middleware
     public function version(Request $request): ?string
     {
         return parent::version($request);
+    }
+
+    /**
+     * Collect flash messages from session.
+     */
+    private function getFlashMessages(Request $request): array
+    {
+        $flash = $request->session()->get('flash');
+
+        if ($flash instanceof FlashMessage) {
+            return [$flash];
+        }
+
+        if (is_array($flash)) {
+            $messages = [];
+
+            foreach ($flash as $message) {
+                if ($message instanceof FlashMessage) {
+                    $messages[] = $message;
+                }
+            }
+
+            return $messages;
+        }
+
+        return [];
     }
 
     /**
@@ -56,11 +83,7 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'sidebarOpen' => $request->cookie('sidebar_state') === 'true',
-            'flash' => fn (): array => [
-                'title' => $request->session()->get('flash.title'),
-                'description' => $request->session()->get('flash.description'),
-                'level' => $request->session()->get('flash.level'),
-            ],
+            'flash' => $this->getFlashMessages($request),
         ];
     }
 }

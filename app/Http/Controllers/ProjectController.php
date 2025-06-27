@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\FlashMessage;
 use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
 use App\Models\User;
@@ -23,7 +24,7 @@ class ProjectController extends Controller
 
         // Make sure user exists
         $user = $request->user();
-        if (! is_a($user, User::class)) {
+        if (! $user instanceof User) {
             abort(403);
         }
 
@@ -64,7 +65,7 @@ class ProjectController extends Controller
     {
         // Make sure user exists
         $user = $request->user();
-        if (! is_a($user, User::class)) {
+        if (! $user instanceof User) {
             abort(403);
         }
 
@@ -86,10 +87,8 @@ class ProjectController extends Controller
         ]);
 
         // Render the page
-        return to_route('projects.index')->with([
-            'flash.title' => __('Project created'),
-            'flash.level' => 'success',
-        ]);
+        return to_route('projects.index')
+            ->with('flash', new FlashMessage(__('Project created'), 'success'));
     }
 
     // /**
@@ -113,9 +112,7 @@ class ProjectController extends Controller
 
         $project->delete();
 
-        return to_route('projects.index')->with([
-            'flash.title' => __('Project deleted'),
-            'flash.level' => 'success',
-        ]);
+        return to_route('projects.index')
+            ->with('flash', new FlashMessage(__('Project deleted'), 'success'));
     }
 }
