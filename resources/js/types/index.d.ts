@@ -11,7 +11,7 @@ interface Ziggy {
 }
 
 export interface Flash {
-  title: string | null
+  title: string
   description: string | null
   level: 'success' | 'info' | 'warning' | 'error' | null
 }
@@ -65,6 +65,6 @@ export interface SharedData {
   auth: Auth
   ziggy: Ziggy
   sidebarOpen: boolean
-  flash: Flash
+  flash: Flash[]
   [key: string]: unknown
 }

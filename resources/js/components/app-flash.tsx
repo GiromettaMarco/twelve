@@ -12,29 +12,31 @@ export default function AppFlash() {
   const { flash } = usePage<SharedData>().props
 
   useEffect(() => {
-    if (flash.title) {
-      switch (flash.level) {
-        case 'success':
-          toast.success(flash.title, { description: flash.description ?? undefined })
-          break
+    flash.forEach((message) => {
+      if (message.title) {
+        switch (message.level) {
+          case 'success':
+            toast.success(message.title, { description: message.description ?? undefined })
+            break
 
-        case 'info':
-          toast.info(flash.title, { description: flash.description ?? undefined })
-          break
+          case 'info':
+            toast.info(message.title, { description: message.description ?? undefined })
+            break
 
-        case 'warning':
-          toast.warning(flash.title, { description: flash.description ?? undefined })
-          break
+          case 'warning':
+            toast.warning(message.title, { description: message.description ?? undefined })
+            break
 
-        case 'error':
-          toast.error(flash.title, { description: flash.description ?? undefined })
-          break
+          case 'error':
+            toast.error(message.title, { description: message.description ?? undefined })
+            break
 
-        default:
-          toast(flash.title, { description: flash.description ?? undefined })
-          break
+          default:
+            toast(message.title, { description: message.description ?? undefined })
+            break
+        }
       }
-    }
+    })
   }, [flash])
 
   const toastOptions = {
