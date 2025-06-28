@@ -114,6 +114,7 @@ export default function AddProject() {
             <CalendarWide
               mode="single"
               fixedWeeks
+              showYearSwitcher={false}
               selected={deadline}
               onSelect={setDeadline}
               className="w-full rounded-md border"
