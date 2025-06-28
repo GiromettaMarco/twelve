@@ -17,10 +17,11 @@ class DeleteTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->delete('/dashboard/projects/1')->assertInertia(
+            ->delete('/dashboard/projects/1')
+            ->assertInertia(
                 fn (Assert $page) => $page
                     ->has(
-                        'flash',
+                        'flash.0',
                         fn (Assert $page) => $page
                             ->where('title', 'Project deleted')
                             ->etc()

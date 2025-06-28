@@ -15,9 +15,9 @@ class TelescopeTest extends TestCase
         $this->get('/telescope')->assertRedirect('/login');
     }
 
-    public function test_authenticated_users_can_visit_telescope()
+    public function test_authorized_user_can_visit_telescope()
     {
-        $this->actingAs(User::factory()->create());
+        $this->actingAs(User::first());
 
         $this->get('/telescope')->assertOk();
     }
