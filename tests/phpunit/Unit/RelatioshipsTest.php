@@ -3,6 +3,7 @@
 namespace Tests\PhpUnit\Unit;
 
 use App\Models\Label;
+use App\Models\Permission;
 use App\Models\Priority;
 use App\Models\Project;
 use App\Models\Status;
@@ -41,6 +42,7 @@ class RelatioshipsTest extends TestCase
         $user = User::findOrFail(1);
 
         $this->assertInstanceOf(Project::class, $user->projects[0]);
+        $this->assertInstanceOf(Permission::class, $user->permissions[0]);
     }
 
     public function test_project_relatioships()
@@ -59,5 +61,12 @@ class RelatioshipsTest extends TestCase
         $this->assertInstanceOf(Label::class, $task->label);
         $this->assertInstanceOf(Status::class, $task->status);
         $this->assertInstanceOf(Priority::class, $task->priority);
+    }
+
+    public function test_permission_relatioships()
+    {
+        $permission = Permission::findOrFail(1);
+
+        $this->assertInstanceOf(User::class, $permission->users[0]);
     }
 }
