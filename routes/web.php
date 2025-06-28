@@ -29,6 +29,9 @@ Route::prefix('dashboard')
         Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])
             ->name('projects.destroy');
 
+        Route::patch('/projects', [ProjectController::class, 'reorder'])
+            ->name('projects.reorder');
+
         Route::get('users', [UserController::class, 'index'])
             ->name('users.index');
     });

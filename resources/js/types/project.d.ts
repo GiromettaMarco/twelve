@@ -9,4 +9,8 @@ export interface Project {
   created_at: string
   updated_at: string
   tasks: Task[]
+  pivot: {
+    position: number
+    role: string
+  }
 }

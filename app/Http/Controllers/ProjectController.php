@@ -115,4 +115,74 @@ class ProjectController extends Controller
         return to_route('projects.index')
             ->with('flash', new FlashMessage(__('Project deleted'), 'success'));
     }
+
+    /**
+     * Return to the projects index and print a flash error message.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function failReorder()
+    {
+        return to_route('projects.index')
+            ->with('flash', new FlashMessage(__('Reorder operation failed'), 'error'));
+    }
+
+    public function reorder(Request $request)
+    {
+        // Make sure user exists
+        $user = $request->user();
+        if (! $user instanceof User) {
+            abort(403);
+        }
+
+        // Recover data
+        $data = $request->input('data');
+
+        // Validate data type
+        if (! isset($data) || ! is_array($data)) {
+            return $this->failReorder();
+        }
+
+        // Collect project ids
+        $project_ids = [];
+
+        // Validate individual entries
+        foreach ($data as $value) {
+            if (
+                ! array_key_exists('id', $value) ||
+                ! array_key_exists('position', $value) ||
+                (! is_int($value['id']) && ! is_string($value['id'])) ||
+                ! is_int($value['position']) ||
+                ! ($value['position'] >= 0 && $value['position'] <= 4294967295)
+            ) {
+                return $this->failReorder();
+            }
+
+            $project_ids[] = $value['id'];
+        }
+
+        // Query projects
+        $projects = $user->projects()->findMany($project_ids);
+
+        // Find all or fail
+        if (! count($project_ids) == $projects->count()) {
+            return $this->failReorder();
+        }
+
+        // Update positions
+        $projects->each(function (Project $project) use ($data, $user) {
+            foreach ($data as $value) {
+                if ($value['id'] == $project->id) {
+                    $project->users()->updateExistingPivot($user->id, [
+                        'position' => $value['position'],
+                    ]);
+
+                    continue;
+                }
+            }
+        });
+
+        return to_route('projects.index')
+            ->with('flash', new FlashMessage(__('Projects reordered'), 'success'));
+    }
 }

@@ -45,6 +45,7 @@ declare module 'ziggy-js' {
         required: true
       }
     ]
+    'projects.reorder': []
     'users.index': []
     'profile.edit': []
     'profile.update': []
