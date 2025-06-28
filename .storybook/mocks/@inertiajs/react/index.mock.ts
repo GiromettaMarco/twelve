@@ -4,6 +4,7 @@ import { fn } from 'storybook/test'
 
 export const usePage = fn(originalUsePage).mockName('usePage')
 
+export { router } from '../core/router.mock'
 export { default as Head } from './Head.mock'
 export { default as Link } from './link.mock'
 export { default as useForm } from './useForm.mock'

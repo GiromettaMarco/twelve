@@ -53,6 +53,7 @@ export const Ziggy: Config = {
       wheres: { id: '[0-9]+' },
       parameters: ['id']
     },
+    'projects.reorder': { uri: 'dashboard/projects', methods: ['PATCH'], wheres: { id: '[0-9]+' } },
     'users.index': { uri: 'dashboard/users', methods: ['GET', 'HEAD'], wheres: { id: '[0-9]+' } },
     'profile.edit': { uri: 'settings/profile', methods: ['GET', 'HEAD'], wheres: { id: '[0-9]+' } },
     'profile.update': { uri: 'settings/profile', methods: ['PATCH'], wheres: { id: '[0-9]+' } },

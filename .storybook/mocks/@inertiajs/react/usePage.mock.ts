@@ -13,7 +13,10 @@ export function newPageData(component?: string, location?: string): Page<SharedD
       auth: {
         user: userDummy1,
         permissions: {
-          telescope: true
+          telescope: true,
+          users: {
+            view: true
+          }
         }
       },
       ziggy: {
@@ -24,11 +27,7 @@ export function newPageData(component?: string, location?: string): Page<SharedD
         location: getUrl(location)
       },
       sidebarOpen: true,
-      flash: {
-        title: null,
-        description: null,
-        level: null
-      }
+      flash: []
     },
     url: location || '',
     version: null,

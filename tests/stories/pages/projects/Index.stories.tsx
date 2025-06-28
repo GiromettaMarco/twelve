@@ -3,7 +3,7 @@ import { usePage } from '@mocks/@inertiajs/react/index.mock'
 import { newPageData } from '@mocks/@inertiajs/react/usePage.mock'
 import { logout } from '@mocks/msw/http/auth'
 import { dashboard } from '@mocks/msw/http/dashboard'
-import { createProject, deleteProject, showProject } from '@mocks/msw/http/project'
+import { createProject, deleteProject, reorderProjects, showProject } from '@mocks/msw/http/project'
 import { settings } from '@mocks/msw/http/settings'
 import { projectDummy1, projectDummy2, projectDummy3, projectDummy4 } from '@stories/dummies/ProjectDummies'
 import type { Meta, StoryObj } from '@storybook/react-vite'
@@ -15,7 +15,7 @@ const meta = {
   component: Projects,
   parameters: {
     msw: {
-      handlers: [showProject(), deleteProject(), createProject(), dashboard(), settings(), logout()]
+      handlers: [showProject(), createProject(), deleteProject(), reorderProjects(), dashboard(), settings(), logout()]
     }
   }
 } satisfies Meta<typeof Projects>

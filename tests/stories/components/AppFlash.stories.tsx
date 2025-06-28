@@ -4,39 +4,39 @@ import { newPageData } from '@mocks/@inertiajs/react/usePage.mock'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const pageDataWithFlashInfo = newPageData('dashboard', '/dashboard')
-pageDataWithFlashInfo.props.flash = {
+pageDataWithFlashInfo.props.flash.push({
   title: 'Something happened',
   description: null,
   level: 'info'
-}
+})
 
 const pageDataWithFlashDesc = newPageData('dashboard', '/dashboard')
-pageDataWithFlashDesc.props.flash = {
+pageDataWithFlashDesc.props.flash.push({
   title: 'Flash Message with Description',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   level: null
-}
+})
 
 const pageDataWithFlashSuccess = newPageData('dashboard', '/dashboard')
-pageDataWithFlashSuccess.props.flash = {
+pageDataWithFlashSuccess.props.flash.push({
   title: 'Project created',
   description: null,
   level: 'success'
-}
+})
 
 const pageDataWithFlashWarn = newPageData('dashboard', '/dashboard')
-pageDataWithFlashWarn.props.flash = {
+pageDataWithFlashWarn.props.flash.push({
   title: 'Deadline expired',
   description: null,
   level: 'warning'
-}
+})
 
 const pageDataWithFlashError = newPageData('dashboard', '/dashboard')
-pageDataWithFlashError.props.flash = {
+pageDataWithFlashError.props.flash.push({
   title: 'Connection failed',
   description: null,
   level: 'error'
-}
+})
 
 const meta = {
   component: AppFlash,

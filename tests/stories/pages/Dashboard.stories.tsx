@@ -9,14 +9,15 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, screen } from 'storybook/test'
 
 const pageDataWithFlashInfo = newPageData('dashboard', '/dashboard')
-pageDataWithFlashInfo.props.flash = {
+pageDataWithFlashInfo.props.flash.push({
   title: 'Something happened',
   description: null,
   level: 'info'
-}
+})
 
-const pageDataWithoutTelescopePermission = newPageData('dashboard', '/dashboard')
-pageDataWithoutTelescopePermission.props.auth.permissions.telescope = false
+const pageDataWithoutPermissions = newPageData('dashboard', '/dashboard')
+pageDataWithoutPermissions.props.auth.permissions.telescope = false
+pageDataWithoutPermissions.props.auth.permissions.users.view = false
 
 const meta = {
   component: Dashboard,
@@ -49,12 +50,8 @@ export const FlashMessage: Story = {
   }
 }
 
-export const WithoutTelescopePermission: Story = {
+export const WithoutPermissions: Story = {
   async beforeEach() {
-    usePage.mockReturnValue(pageDataWithoutTelescopePermission)
-  },
-
-  // play: async ({ canvas }) => {
-  //   await expect(canvas.getByText('Telescope')).toBeNull()
-  // }
+    usePage.mockReturnValue(pageDataWithoutPermissions)
+  }
 }
