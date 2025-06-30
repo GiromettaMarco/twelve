@@ -2,8 +2,8 @@
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import laravel from 'laravel-vite-plugin'
-import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
+import tsConfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
   plugins: [
@@ -13,18 +13,11 @@ export default defineConfig({
       refresh: true
     }),
     react(),
-    tailwindcss()
+    tailwindcss(),
+    tsConfigPaths()
   ],
   esbuild: {
     jsx: 'automatic'
-  },
-  resolve: {
-    alias: {
-      'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
-      '@decorators': resolve(__dirname, '.storybook/decorators'),
-      '@mocks': resolve(__dirname, '.storybook/mocks'),
-      '@stories': resolve(__dirname, 'tests/stories')
-    }
   },
   test: {
     reporters: ['default'],
