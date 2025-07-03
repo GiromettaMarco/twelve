@@ -60,6 +60,7 @@ function CalendarWide({
   showYearSwitcher = true,
   yearRange = 12,
   numberOfMonths,
+  broadcastCalendar = true,
   ...props
 }: CalendarWideProps) {
   const [navView, setNavView] = React.useState<NavView>('days')
@@ -124,6 +125,7 @@ function CalendarWide({
 
   return (
     <DayPicker
+      broadcastCalendar={broadcastCalendar}
       showOutsideDays={showOutsideDays}
       className={cn('p-3', className)}
       classNames={{
