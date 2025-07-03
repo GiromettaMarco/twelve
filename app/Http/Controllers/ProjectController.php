@@ -9,7 +9,6 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -20,10 +19,10 @@ class ProjectController extends Controller
      */
     public function index(Request $request): Response
     {
-        // Gate::authorize('viewProjects', [Team::class, $team_id]);
+        // Get user
+        $user = $request->user();
 
         // Make sure user exists
-        $user = $request->user();
         if (! $user instanceof User) {
             abort(403);
         }
@@ -45,12 +44,14 @@ class ProjectController extends Controller
      */
     public function show(string $id): Response
     {
+        // Get the project with related tasks and fail with 404 if not found or not authorized
         $project = Project::with(['tasks', 'tasks.label', 'tasks.status', 'tasks.priority'])
             ->whereHas('users', function (Builder $query) {
                 $query->where('users.id', Auth::user()->id);
             })
             ->findOrFail($id);
 
+        // Render the page
         return Inertia::render('projects/show', [
             'project' => $project,
         ]);
@@ -63,8 +64,10 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        // Make sure user exists
+        // Get user
         $user = $request->user();
+
+        // Make sure user exists
         if (! $user instanceof User) {
             abort(403);
         }
@@ -104,14 +107,56 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        // @TODO add gate (avoid deletion of unrelated projects)
+        // Get user
+        $user = $request->user();
 
-        $project = Project::findOrFail($id);
+        // Make sure user exists
+        if (! $user instanceof User) {
+            abort(403);
+        }
 
+        // Collect related projects
+        $user_projects = $user->projects;
+
+        // Prepare to collect the requested resource
+        /** @var Project|null $project */
+        $project = null;
+        /** @var int|null $project_key */
+        $project_key = null;
+
+        // Search for the resource in the collection
+        $user_projects->each(function (Project $user_project, int $key) use ($id, &$project, &$project_key) {
+            if (strval($user_project->id) === $id) {
+                // Save value and key
+                $project = $user_project;
+                $project_key = $key;
+
+                // Stop iterating
+                return false;
+            }
+        });
+
+        // Fail if not found
+        if (! isset($project)) {
+            abort(404);
+        }
+
+        // Delete the resource
         $project->delete();
 
+        // Remove the resource from its collection
+        $user_projects->forget($project_key);
+
+        // Reorder related projects
+        $user_projects->each(function (Project $user_project, int $key) use ($user) {
+            $user_project->users()->updateExistingPivot($user->id, [
+                'position' => $key - 1,
+            ]);
+        });
+
+        // Redirect with flash message
         return to_route('projects.index')
             ->with('flash', new FlashMessage(__('Project deleted'), 'success'));
     }
