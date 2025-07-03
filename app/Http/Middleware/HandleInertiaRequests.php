@@ -55,6 +55,20 @@ class HandleInertiaRequests extends Middleware
     }
 
     /**
+     * Collect sidebar state from cookie.
+     */
+    private function getSidebarOpen(Request $request)
+    {
+        $sidebar_state = $request->cookie('sidebar_state');
+
+        if ($sidebar_state === null) {
+            return true;
+        }
+
+        return $sidebar_state === 'true';
+    }
+
+    /**
      * Define the props that are shared by default.
      *
      * @see https://inertiajs.com/shared-data
@@ -82,7 +96,7 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'sidebarOpen' => $request->cookie('sidebar_state') === 'true',
+            'sidebarOpen' => $this->getSidebarOpen($request),
             'flash' => $this->getFlashMessages($request),
         ];
     }
