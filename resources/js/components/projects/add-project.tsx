@@ -18,9 +18,6 @@ import { useForm } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 import { useEffect, useState, type FormEventHandler } from 'react'
 
-// @TODO use library for timezones, etc.
-// @TODO update text and localization
-
 type ProjectForm = {
   title: string
   description: string
@@ -79,7 +76,9 @@ export default function AddProject() {
           <DialogTitle>{t('Create a new Project')}</DialogTitle>
 
           <DialogDescription>
-            {t('Integer sodales odio arcu. Pellentesque vestibulum nisl metus, sit amet egestas tellus maximus ac.')}
+            {t(
+              'Insert the project title and an optional short description. You may also choose a deadline from the calendar.'
+            )}
           </DialogDescription>
         </DialogHeader>
 

@@ -2,8 +2,6 @@ import format from '@/lib/format'
 import { differenceInCalendarDays } from 'date-fns'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 
-// @TODO check date/time compatibility between js and php (timezones, etc)
-
 export default function ProjectDeadline({ rawDeadline }: { rawDeadline?: string }) {
   // Setup translations
   const { currentLocale, t, tChoice } = useLaravelReactI18n()
