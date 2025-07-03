@@ -89,7 +89,7 @@ class ProjectController extends Controller
             'role' => 'admin',
         ]);
 
-        // Render the page
+        // Redirect with flash message
         return to_route('projects.index')
             ->with('flash', new FlashMessage(__('Project created'), 'success'));
     }
@@ -172,10 +172,17 @@ class ProjectController extends Controller
             ->with('flash', new FlashMessage(__('Reorder operation failed'), 'error'));
     }
 
+    /**
+     * Change the position attribute of multiple projects at once.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function reorder(Request $request)
     {
-        // Make sure user exists
+        // Get user
         $user = $request->user();
+
+        // Make sure user exists
         if (! $user instanceof User) {
             abort(403);
         }
@@ -227,6 +234,7 @@ class ProjectController extends Controller
             }
         });
 
+        // Redirect with flash message
         return to_route('projects.index')
             ->with('flash', new FlashMessage(__('Projects reordered'), 'success'));
     }
