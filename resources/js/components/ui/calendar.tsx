@@ -1,13 +1,13 @@
 'use client'
 
 import { Button, buttonVariants } from '@/components/ui/button'
+import { locales } from '@/lib/date-locales'
 import { cn } from '@/lib/utils'
 import { differenceInCalendarDays } from 'date-fns'
+import { useLaravelReactI18n } from 'laravel-react-i18n'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import * as React from 'react'
 import { DayPicker, labelNext, labelPrevious, useDayPicker, type DayPickerProps } from 'react-day-picker'
-
-// @TODO localize calendar
 
 export type CalendarProps = DayPickerProps & {
   /**
@@ -63,6 +63,9 @@ function Calendar({
   broadcastCalendar = true,
   ...props
 }: CalendarProps) {
+  // Setup translations
+  const { currentLocale } = useLaravelReactI18n()
+
   const [navView, setNavView] = React.useState<NavView>('days')
   const [displayYears, setDisplayYears] = React.useState<{
     from: number
@@ -126,6 +129,7 @@ function Calendar({
   return (
     <DayPicker
       broadcastCalendar={broadcastCalendar}
+      locale={locales[currentLocale()]}
       showOutsideDays={showOutsideDays}
       className={cn('p-3', className)}
       style={{
