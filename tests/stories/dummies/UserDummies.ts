@@ -9,5 +9,19 @@ export const userDummy1: User = {
   created_at: '2025-06-14T13:58:11.000000Z',
   updated_at: '2025-06-14T13:58:11.000000Z',
   language: 'system',
-  projects: [projectDummy2, projectDummy3]
+  projects: [projectDummy2, projectDummy3],
+  permissions: [
+    {
+      id: 1,
+      tag: 'view-telescope',
+      label: 'View Telescope',
+      description: 'Access Telescope control panel.'
+    },
+    {
+      id: 2,
+      tag: 'view-users',
+      label: 'View Users',
+      description: 'View all registered userd.'
+    }
+  ]
 }
