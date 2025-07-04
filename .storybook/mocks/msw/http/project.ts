@@ -24,3 +24,15 @@ export function reorderProjects() {
     return new HttpResponse(null, { status: 200 })
   })
 }
+
+export function updateProjectInfo() {
+  return http.patch(getUrl('/dashboard/projects/:id/info'), async () => {
+    return new HttpResponse(null, { status: 200 })
+  })
+}
+
+export function updateProjectDeadline() {
+  return http.patch(getUrl('/dashboard/projects/:id/deadline'), async () => {
+    return new HttpResponse(null, { status: 200 })
+  })
+}
