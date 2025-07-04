@@ -46,6 +46,18 @@ declare module 'ziggy-js' {
       }
     ]
     'projects.reorder': []
+    'projects.updateInfo': [
+      {
+        name: 'id'
+        required: true
+      }
+    ]
+    'projects.updateDeadline': [
+      {
+        name: 'id'
+        required: true
+      }
+    ]
     'users.index': []
     'profile.edit': []
     'profile.update': []

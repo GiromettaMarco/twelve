@@ -34,7 +34,11 @@ export const Ziggy: Config = {
       methods: ['GET', 'HEAD'],
       parameters: ['userId', 'guard']
     },
-    'dusk.logout': { uri: '_dusk/logout/{guard?}', methods: ['GET', 'HEAD'], parameters: ['guard'] },
+    'dusk.logout': {
+      uri: '_dusk/logout/{guard?}',
+      methods: ['GET', 'HEAD'],
+      parameters: ['guard']
+    },
     'dusk.user': { uri: '_dusk/user/{guard?}', methods: ['GET', 'HEAD'], parameters: ['guard'] },
     telescope: { uri: 'telescope/{view?}', methods: ['GET', 'HEAD'], wheres: { view: '(.*)' }, parameters: ['view'] },
     home: { uri: '/', methods: ['GET', 'HEAD'], wheres: { id: '[0-9]+' } },
@@ -54,6 +58,18 @@ export const Ziggy: Config = {
       parameters: ['id']
     },
     'projects.reorder': { uri: 'dashboard/projects', methods: ['PATCH'], wheres: { id: '[0-9]+' } },
+    'projects.updateInfo': {
+      uri: 'dashboard/projects/{id}/info',
+      methods: ['PATCH'],
+      wheres: { id: '[0-9]+' },
+      parameters: ['id']
+    },
+    'projects.updateDeadline': {
+      uri: 'dashboard/projects/{id}/deadline',
+      methods: ['PATCH'],
+      wheres: { id: '[0-9]+' },
+      parameters: ['id']
+    },
     'users.index': { uri: 'dashboard/users', methods: ['GET', 'HEAD'], wheres: { id: '[0-9]+' } },
     'profile.edit': { uri: 'settings/profile', methods: ['GET', 'HEAD'], wheres: { id: '[0-9]+' } },
     'profile.update': { uri: 'settings/profile', methods: ['PATCH'], wheres: { id: '[0-9]+' } },
