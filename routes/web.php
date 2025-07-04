@@ -32,6 +32,12 @@ Route::prefix('dashboard')
         Route::patch('/projects', [ProjectController::class, 'reorder'])
             ->name('projects.reorder');
 
+        Route::patch('/projects/{id}/info', [ProjectController::class, 'updateInfo'])
+            ->name('projects.updateInfo');
+
+        Route::patch('/projects/{id}/deadline', [ProjectController::class, 'updateDeadline'])
+            ->name('projects.updateDeadline');
+
         Route::get('users', [UserController::class, 'index'])
             ->name('users.index');
     });

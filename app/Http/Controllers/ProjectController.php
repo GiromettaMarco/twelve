@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\FlashMessage;
-use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\Project\StoreProjectRequest;
+use App\Http\Requests\Project\UpdateDeadlineRequest;
+use App\Http\Requests\Project\UpdateInfoRequest;
 use App\Models\Project;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,17 +18,9 @@ class ProjectController extends Controller
      */
     public function index(Request $request): Response
     {
-        // Get user
-        $user = $request->user();
-
-        // Make sure user exists
-        if (! $user instanceof User) {
-            abort(403);
-        }
-
         // Render the page
         return Inertia::render('projects/index', [
-            'projects' => $user->projects()
+            'projects' => $request->user()->projects()
                 ->where('archived', false)
                 ->with(['tasks', 'tasks.label', 'tasks.status', 'tasks.priority'])
                 ->get(),
@@ -39,21 +30,15 @@ class ProjectController extends Controller
     /**
      * Show the resource
      *
-     * Without Route Model Binding.
-     * With 404 if not authorized.
+     * Get the project with related tasks and fail with 404 if not found or not realted to user.
      */
-    public function show(string $id): Response
+    public function show(Request $request, string $id): Response
     {
-        // Get the project with related tasks and fail with 404 if not found or not authorized
-        $project = Project::with(['tasks', 'tasks.label', 'tasks.status', 'tasks.priority'])
-            ->whereHas('users', function (Builder $query) {
-                $query->where('users.id', Auth::user()->id);
-            })
-            ->findOrFail($id);
-
         // Render the page
         return Inertia::render('projects/show', [
-            'project' => $project,
+            'project' => $request->user()->projects()
+                ->with(['tasks', 'tasks.label', 'tasks.status', 'tasks.priority'])
+                ->findOrFail($id),
         ]);
     }
 
@@ -66,11 +51,6 @@ class ProjectController extends Controller
     {
         // Get user
         $user = $request->user();
-
-        // Make sure user exists
-        if (! $user instanceof User) {
-            abort(403);
-        }
 
         // Create and save
         $project = new Project($request->validated());
@@ -94,13 +74,42 @@ class ProjectController extends Controller
             ->with('flash', new FlashMessage(__('Project created'), 'success'));
     }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, string $id)
-    // {
-    //     //
-    // }
+    /**
+     * Update the project title and description.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateInfo(UpdateInfoRequest $request, string $id)
+    {
+        // Get the project and save changes
+        $request->user()->projects()->findOrFail($id)
+            ->update([
+                'title' => $request->validated('title'),
+                'description' => $request->validated('description', null),
+            ]);
+
+        // Redirect with flash message
+        return to_route('projects.show', ['id' => $id])
+            ->with('flash', new FlashMessage(__('Project updated'), 'success'));
+    }
+
+    /**
+     * Update the project deadline.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateDeadline(UpdateDeadlineRequest $request, string $id)
+    {
+        // Get the project and save changes
+        $request->user()->projects()->findOrFail($id)
+            ->update([
+                'deadline' => $request->validated('deadline', null),
+            ]);
+
+        // Redirect with flash message
+        return to_route('projects.show', ['id' => $id])
+            ->with('flash', new FlashMessage(__('Deadline updated'), 'success'));
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -111,11 +120,6 @@ class ProjectController extends Controller
     {
         // Get user
         $user = $request->user();
-
-        // Make sure user exists
-        if (! $user instanceof User) {
-            abort(403);
-        }
 
         // Collect related projects
         $user_projects = $user->projects;
@@ -181,11 +185,6 @@ class ProjectController extends Controller
     {
         // Get user
         $user = $request->user();
-
-        // Make sure user exists
-        if (! $user instanceof User) {
-            abort(403);
-        }
 
         // Recover data
         $data = $request->input('data');
