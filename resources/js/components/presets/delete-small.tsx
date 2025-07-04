@@ -16,7 +16,7 @@ export function DeleteSmall({ label = 'Delete', ...props }: DeleteProps) {
           size="sm"
           variant="ghost"
           aria-label={label}
-          className="transition-colors hover:text-red-600"
+          className="transition-colors hover:text-red-600 focus-visible:text-red-600"
           {...props}
         >
           <Trash2 className="size-5" />
