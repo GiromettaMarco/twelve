@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import AppLayout from '@/layouts/app-layout'
-import format from '@/lib/format'
+import { format } from '@/lib/date-utils'
 import type { BreadcrumbItem, User } from '@/types'
 import { Head } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'

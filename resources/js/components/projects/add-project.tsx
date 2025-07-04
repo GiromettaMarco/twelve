@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { formatDateForDB } from '@/lib/date-utils'
 import { useForm } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 import { useEffect, useState, type FormEventHandler } from 'react'
@@ -39,14 +40,7 @@ export default function AddProject() {
   const [deadline, setDeadline] = useState<Date | undefined>(undefined)
 
   useEffect(() => {
-    if (deadline) {
-      setData(
-        'deadline',
-        `${deadline.getFullYear()}-${(deadline.getMonth() + 1 + '').padStart(2, '0')}-${(deadline.getDate() + '').padStart(2, '0')}`
-      )
-    } else {
-      setData('deadline', '')
-    }
+    setData('deadline', deadline ? formatDateForDB(deadline) : '')
   }, [deadline, setData])
 
   const onSubmit: FormEventHandler = (e) => {
@@ -101,7 +95,7 @@ export default function AddProject() {
           <div className="grid gap-2">
             <Textarea
               id="project-description"
-              placeholder="Description"
+              placeholder={t('Project description')}
               value={data.description}
               onChange={(e) => setData('description', e.target.value)}
             />

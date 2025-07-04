@@ -1,8 +1,14 @@
-import format from '@/lib/format'
+import { format } from '@/lib/date-utils'
+import { cn } from '@/lib/utils'
 import { differenceInCalendarDays } from 'date-fns'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 
-export default function ProjectDeadline({ rawDeadline }: { rawDeadline?: string }) {
+interface ProjectDeadlineProps {
+  rawDeadline?: Date | string
+  className?: string
+}
+
+export default function ProjectDeadline({ rawDeadline, className }: ProjectDeadlineProps) {
   // Setup translations
   const { currentLocale, t, tChoice } = useLaravelReactI18n()
 
@@ -11,7 +17,8 @@ export default function ProjectDeadline({ rawDeadline }: { rawDeadline?: string 
     return null
   }
 
-  const deadline = new Date(rawDeadline)
+  // Parse date
+  const deadline = rawDeadline instanceof Date ? rawDeadline : new Date(rawDeadline)
 
   // The date format is invalid
   if (isNaN(deadline.getTime())) {
@@ -23,15 +30,17 @@ export default function ProjectDeadline({ rawDeadline }: { rawDeadline?: string 
   return (
     <>
       {deadlineCountdown > 7 ? (
-        <p>
+        <p className={className}>
           {t('Deadline')}: {format(deadline, currentLocale())}
         </p>
       ) : deadlineCountdown > 1 ? (
-        <p className="text-yellow-500">{tChoice('Deadline in :n days', deadlineCountdown, { n: deadlineCountdown })}</p>
+        <p className={cn('text-yellow-500', className)}>
+          {tChoice('Deadline in :n days', deadlineCountdown, { n: deadlineCountdown })}
+        </p>
       ) : deadlineCountdown >= 0 ? (
-        <p className="text-red-600">{tChoice('Deadline in :n days', deadlineCountdown)}</p>
+        <p className={cn('text-red-600', className)}>{tChoice('Deadline in :n days', deadlineCountdown)}</p>
       ) : (
-        <p className="text-destructive">
+        <p className={cn('text-destructive', className)}>
           {tChoice('Deadline expired by :n days', deadlineCountdown * -1, { n: deadlineCountdown * -1 })}
         </p>
       )}
