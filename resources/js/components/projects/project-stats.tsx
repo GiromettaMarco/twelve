@@ -3,6 +3,11 @@ import type { Project } from '@/types/project'
 import type { Task } from '@/types/task'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 
+export interface ProjectStatsProps {
+  project: Project
+  className?: string
+}
+
 const countTasksWithStatus = function (tasks: Task[], status: string) {
   return tasks.filter(function (task) {
     return task.status.title === status
@@ -13,7 +18,7 @@ const calcPercent = function (part: number, total: number) {
   return total > 0 ? ((part / total) * 100).toFixed(2) : 0
 }
 
-export default function ProjectStats({ project, className }: { project: Project; className?: string }) {
+export default function ProjectStats({ project, className }: ProjectStatsProps) {
   // Setup translations
   const { t, tChoice } = useLaravelReactI18n()
 

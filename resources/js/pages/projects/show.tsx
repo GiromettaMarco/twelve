@@ -1,5 +1,6 @@
-import ProjectDeadline from '@/components/projects/project-deadline'
-import ProjectStats from '@/components/projects/project-stats'
+import EditProjectDeadline from '@/components/projects/edit-deadline'
+import EditProjectInfo from '@/components/projects/edit-info'
+import ShowProjectStats from '@/components/projects/show-stats'
 import { TasksDataTable } from '@/components/tasks/tasks-data-table'
 import { useTaskColumns } from '@/components/tasks/use-task-columns'
 import AppLayout from '@/layouts/app-layout'
@@ -43,11 +44,20 @@ export default function Project({ project }: { project: Project }) {
 
         <Separator className="bg-border my-4 h-px" />
 
-        <div className="grid flex-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3">
-          <ProjectStats project={project} />
-          {project.description && <div>{<p>{project.description}</p>}</div>}
-          {project.deadline && <div>{ProjectDeadline({ rawDeadline: project.deadline })}</div>}
-        </div>
+        <section className="grid flex-1 gap-4 lg:grid-cols-2 2xl:grid-cols-3">
+          <EditProjectInfo
+            id={project.id}
+            title={project.title}
+            description={project.description}
+          />
+
+          <EditProjectDeadline
+            id={project.id}
+            rawDeadline={project.deadline}
+          />
+
+          <ShowProjectStats project={project} />
+        </section>
       </div>
     </AppLayout>
   )
