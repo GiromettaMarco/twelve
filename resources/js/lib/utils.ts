@@ -1,6 +1,12 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
+/**
+ * Merge class names.
+ *
+ * @param inputs Any number of class names
+ * @returns A string with all the input
+ */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
