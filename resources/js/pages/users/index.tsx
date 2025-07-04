@@ -54,6 +54,7 @@ export default function Users({ users = [] }: { users?: User[] }) {
                 <TableCell>
                   {user.permissions?.map((permission) => (
                     <Badge
+                      key={permission.id}
                       variant="outline"
                       className="mr-1 px-1 font-normal last:mr-0"
                     >
