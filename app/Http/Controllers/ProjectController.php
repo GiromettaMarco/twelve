@@ -160,9 +160,10 @@ class ProjectController extends Controller
         $user_projects->forget($project_key);
 
         // Reorder related projects
-        $user_projects->each(function (Project $user_project, int $key) use ($user) {
+        // Use values() to have the collection keys without gap
+        $user_projects->values()->each(function (Project $user_project, int $key) use ($user) {
             $user_project->users()->updateExistingPivot($user->id, [
-                'position' => $key - 1,
+                'position' => $key,
             ]);
         });
 
