@@ -49,8 +49,8 @@ export default function AddProject() {
     post(route('projects.store'), {
       preserveScroll: true,
       onSuccess: () => {
-        setOpen(false)
         reset()
+        setOpen(false)
         setDeadline(undefined)
       }
     })
