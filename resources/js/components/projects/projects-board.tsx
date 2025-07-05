@@ -5,7 +5,7 @@ import { arrayMove } from '@dnd-kit/helpers'
 import { DragDropProvider, DragOverlay, type DragDropEvents } from '@dnd-kit/react'
 import { isSortable } from '@dnd-kit/react/sortable'
 import { router } from '@inertiajs/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // @NOTE Can't use an interface due to poor type definition
 // @see https://github.com/inertiajs/inertia/issues/2188
@@ -17,6 +17,11 @@ type PositionChange = {
 export default function ProjectsBoard({ projects = [] }: { projects: Project[] }) {
   // Keep track of items order
   const [items, setItems] = useState(projects.map((project) => project.id))
+
+  // Watch for changes
+  useEffect(() => {
+    setItems(projects.map((project) => project.id))
+  }, [projects])
 
   /**
    * Get an array with position changes to be send to the server.
