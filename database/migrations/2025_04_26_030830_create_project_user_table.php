@@ -13,8 +13,16 @@ return new class extends Migration
     {
         Schema::create('project_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id');
-            $table->foreignId('user_id');
+            $table->foreignId('project_id')
+                ->index()
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreignId('user_id')
+                ->index()
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->unsignedInteger('position');
             $table->string('role')->nullable();
             $table->timestamps();
