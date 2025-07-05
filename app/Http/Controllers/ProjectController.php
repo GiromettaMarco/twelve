@@ -6,7 +6,10 @@ use App\Helpers\FlashMessage;
 use App\Http\Requests\Project\StoreProjectRequest;
 use App\Http\Requests\Project\UpdateDeadlineRequest;
 use App\Http\Requests\Project\UpdateInfoRequest;
+use App\Models\Label;
+use App\Models\Priority;
 use App\Models\Project;
+use App\Models\Status;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -39,6 +42,9 @@ class ProjectController extends Controller
             'project' => $request->user()->projects()
                 ->with(['tasks', 'tasks.label', 'tasks.status', 'tasks.priority'])
                 ->findOrFail($id),
+            'labels' => Label::all(),
+            'statuses' => Status::all(),
+            'priorities' => Priority::all(),
         ]);
     }
 
