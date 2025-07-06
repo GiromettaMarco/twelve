@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -40,6 +41,25 @@ class AppServiceProvider extends ServiceProvider
             return $user?->permissions->contains(function (Permission $permission) {
                 return $permission->tag === 'view-users';
             });
+        });
+
+        // Extend Collection
+        Collection::macro('firstWithKey', function ($key, $value) {
+            /** @var null|array $found */
+            $found = null;
+
+            /** @disregard P1013 Undefined method */
+            $this->each(function ($item, int $item_key) use ($key, $value, &$found) {
+                if (data_get($item, $key) === $value) {
+                    // Save key and value
+                    $found = [$item_key, $item];
+
+                    // Stop iterating
+                    return false;
+                }
+            });
+
+            return $found;
         });
     }
 }

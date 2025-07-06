@@ -10,7 +10,9 @@ use App\Models\Label;
 use App\Models\Priority;
 use App\Models\Project;
 use App\Models\Status;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -58,22 +60,26 @@ class ProjectController extends Controller
         // Get user
         $user = $request->user();
 
-        // Create and save
+        // Create new model
         $project = new Project($request->validated());
-        $project->save();
 
-        // Shift related projects
-        $user->projects->each(function (Project $project, int $key) use ($user) {
-            $project->users()->updateExistingPivot($user->id, [
-                'position' => $key + 1,
+        // Prepare to reset positions
+        [$query, $bindings] = $this->getResetPositionsQuery($user->projects, $user->id, 1);
+
+        // Use transaction for optimization and safety
+        DB::transaction(function () use ($project, $query, $bindings, $user) {
+            // Save the resource
+            $project->save();
+
+            // Reorder resources
+            DB::update($query, $bindings);
+
+            // Attach the new project
+            $user->projects()->attach($project->id, [
+                'position' => 0,
+                'role' => 'admin',
             ]);
         });
-
-        // Attach the new project
-        $user->projects()->attach($project->id, [
-            'position' => 0,
-            'role' => 'admin',
-        ]);
 
         // Redirect with flash message
         return to_route('projects.index')
@@ -130,41 +136,27 @@ class ProjectController extends Controller
         // Collect related projects
         $user_projects = $user->projects;
 
-        // Prepare to collect the requested resource
-        /** @var Project|null $project */
-        $project = null;
-        /** @var int|null $project_key */
-        $project_key = null;
-
-        // Search for the resource in the collection
-        $user_projects->each(function (Project $user_project, int $key) use ($id, &$project, &$project_key) {
-            if (strval($user_project->id) === $id) {
-                // Save value and key
-                $project = $user_project;
-                $project_key = $key;
-
-                // Stop iterating
-                return false;
-            }
-        });
+        // Find the requested resource with Collection key
+        [$project_key, $project] = $user_projects->firstWithKey('id', intval($id));
 
         // Fail if not found
         if (! isset($project)) {
             abort(404);
         }
 
-        // Delete the resource
-        $project->delete();
-
         // Remove the resource from its collection
         $user_projects->forget($project_key);
 
-        // Reorder related projects
-        // Use values() to have the collection keys without gap
-        $user_projects->values()->each(function (Project $user_project, int $key) use ($user) {
-            $user_project->users()->updateExistingPivot($user->id, [
-                'position' => $key,
-            ]);
+        // Prepare to reset positions
+        [$query, $bindings] = $this->getResetPositionsQuery($user_projects, $user->id);
+
+        // Use transaction for optimization and safety
+        DB::transaction(function () use ($project, $query, $bindings) {
+            // Delete the resource
+            $project->delete();
+
+            // Reorder resources
+            DB::update($query, $bindings);
         });
 
         // Redirect with flash message
@@ -227,21 +219,62 @@ class ProjectController extends Controller
             return $this->failReorder();
         }
 
-        // Update positions
-        $projects->each(function (Project $project) use ($data, $user) {
-            foreach ($data as $value) {
-                if ($value['id'] == $project->id) {
-                    $project->users()->updateExistingPivot($user->id, [
-                        'position' => $value['position'],
-                    ]);
+        // Use transaction for optimization and safety
+        DB::transaction(function () use ($projects, $data, $user) {
+            // Update positions
+            $projects->each(function (Project $project) use ($data, $user) {
+                foreach ($data as $value) {
+                    if ($value['id'] == $project->id) {
+                        $project->users()->updateExistingPivot($user->id, [
+                            'position' => $value['position'],
+                        ]);
 
-                    continue;
+                        continue;
+                    }
                 }
-            }
+            });
         });
 
         // Redirect with flash message
         return to_route('projects.index')
             ->with('flash', new FlashMessage(__('Projects reordered'), 'success'));
+    }
+
+    /**
+     * Get query and bindings for resetting the position of a collection of projects.
+     *
+     * @param  \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project>  $projects
+     * @param  int  $user_id
+     * @param  int  $delta  (optional)
+     * @return array
+     */
+    private function getResetPositionsQuery($projects, $user_id, int $delta = 0)
+    {
+        $table = Project::getModel()->users()->getTable();
+
+        $cases = [];
+        $ids = [];
+        $bindings = [];
+
+        // Use values() to have the collection keys without gap
+        $projects->values()->each(function (Project $project, int $key) use (&$cases, &$bindings, &$ids, $delta) {
+            $cases[] = "WHEN {$project->id} THEN ?";
+            $bindings[] = $key + $delta;
+            $ids[] = $project->id;
+        });
+
+        $ids = implode(',', $ids);
+        $cases = implode(' ', $cases);
+        $bindings[] = Carbon::now();
+
+        $case = "(CASE \"project_id\" $cases END)::int";
+
+        $update = "UPDATE \"$table\"";
+        $set = "SET \"position\" = $case, \"updated_at\" = ?";
+        $where = "WHERE \"user_id\" = $user_id AND \"project_id\" in ($ids)";
+
+        $query = "$update $set $where";
+
+        return [$query, $bindings];
     }
 }
