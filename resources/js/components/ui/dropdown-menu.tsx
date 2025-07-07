@@ -36,9 +36,28 @@ function DropdownMenuContent({
   sideOffset = 4,
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Content>) {
+  const [preventAutoFocus, setPreventAutoFocus] = React.useState(false)
+
+  function onPointerDownOutside() {
+    setPreventAutoFocus(true)
+  }
+
+  function onEscapeKeyDown() {
+    setPreventAutoFocus(false)
+  }
+
+  function onCloseAutoFocus(event: Event) {
+    if (preventAutoFocus) {
+      event.preventDefault()
+    }
+  }
+
   return (
     <DropdownMenuPrimitive.Portal>
       <DropdownMenuPrimitive.Content
+        onPointerDownOutside={onPointerDownOutside}
+        onEscapeKeyDown={onEscapeKeyDown}
+        onCloseAutoFocus={onCloseAutoFocus}
         data-slot="dropdown-menu-content"
         sideOffset={sideOffset}
         className={cn(
