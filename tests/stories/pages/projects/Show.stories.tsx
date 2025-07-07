@@ -5,7 +5,9 @@ import { logout } from '@mocks/msw/http/auth'
 import { dashboard } from '@mocks/msw/http/dashboard'
 import { updateProjectDeadline, updateProjectInfo } from '@mocks/msw/http/project'
 import { settings } from '@mocks/msw/http/settings'
+import { taskAll } from '@mocks/msw/http/task'
 import { projectDummy1 } from '@stories/dummies/ProjectDummies'
+import { labels, priorities, statuses } from '@stories/dummies/TaskDummies'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
@@ -15,7 +17,7 @@ const meta = {
   component: Project,
   parameters: {
     msw: {
-      handlers: [updateProjectInfo(), updateProjectDeadline(), dashboard(), settings(), logout()]
+      handlers: [updateProjectInfo(), updateProjectDeadline(), dashboard(), settings(), logout(), taskAll()]
     }
   }
 } satisfies Meta<typeof Project>
@@ -26,6 +28,9 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    project: projectDummy1
+    project: projectDummy1,
+    labels: labels,
+    statuses: statuses,
+    priorities: priorities
   }
 }

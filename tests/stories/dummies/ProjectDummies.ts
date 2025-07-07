@@ -10,7 +10,11 @@ export const projectDummy1: Project = {
   deadline: '2025-05-27 00:00:00.000',
   created_at: '2025-05-26 03:48:41.000',
   updated_at: '2025-05-26 03:48:41.000',
-  tasks: [taskDummy1, taskDummy2, taskDummy3, taskDummy4, taskDummy5]
+  tasks: [taskDummy1, taskDummy2, taskDummy3, taskDummy4, taskDummy5],
+  pivot: {
+    position: 0,
+    role: 'admin'
+  }
 }
 
 export const projectDummy2: Project = {
@@ -21,7 +25,11 @@ export const projectDummy2: Project = {
   deadline: '2025-06-18 00:00:00.000',
   created_at: '2025-05-28 03:48:41.000',
   updated_at: '2025-05-28 03:48:41.000',
-  tasks: []
+  tasks: [],
+  pivot: {
+    position: 1,
+    role: 'admin'
+  }
 }
 
 export const projectDummy3: Project = {
@@ -30,7 +38,11 @@ export const projectDummy3: Project = {
   archived: false,
   created_at: '2025-04-16 03:48:41.000',
   updated_at: '2025-04-16 03:48:41.000',
-  tasks: []
+  tasks: [],
+  pivot: {
+    position: 2,
+    role: 'admin'
+  }
 }
 
 export const projectDummy4: Project = {
@@ -39,5 +51,9 @@ export const projectDummy4: Project = {
   archived: false,
   created_at: '2025-05-10 03:48:41.000',
   updated_at: '2025-05-10 03:48:41.000',
-  tasks: []
+  tasks: [],
+  pivot: {
+    position: 3,
+    role: 'admin'
+  }
 }
