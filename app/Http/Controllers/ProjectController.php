@@ -63,23 +63,39 @@ class ProjectController extends Controller
         // Create new model
         $project = new Project($request->validated());
 
-        // Prepare to reset positions
-        [$query, $bindings] = $this->getResetPositionsQuery($user->projects, $user->id, 1);
+        $user_projects = $user->projects;
 
-        // Use transaction for optimization and safety
-        DB::transaction(function () use ($project, $query, $bindings, $user) {
-            // Save the resource
-            $project->save();
+        if ($user_projects->count() > 0) {
+            // Prepare to reset positions
+            [$query, $bindings] = $this->getResetPositionsQuery($user->projects, $user->id, 0);
 
-            // Reorder resources
-            DB::update($query, $bindings);
+            // Use transaction for optimization and safety
+            DB::transaction(function () use ($project, $query, $bindings, $user) {
+                // Save the resource
+                $project->save();
 
-            // Attach the new project
-            $user->projects()->attach($project->id, [
-                'position' => 0,
-                'role' => 'admin',
-            ]);
-        });
+                // Reorder resources
+                DB::update($query, $bindings);
+
+                // Attach the new project
+                $user->projects()->attach($project->id, [
+                    'position' => 0,
+                    'role' => 'admin',
+                ]);
+            });
+        } else {
+            // Use transaction for optimization and safety
+            DB::transaction(function () use ($project, $user) {
+                // Save the resource
+                $project->save();
+
+                // Attach the new project
+                $user->projects()->attach($project->id, [
+                    'position' => 0,
+                    'role' => 'admin',
+                ]);
+            });
+        }
 
         // Redirect with flash message
         return to_route('projects.index')
@@ -147,17 +163,22 @@ class ProjectController extends Controller
         // Remove the resource from its collection
         $user_projects->forget($project_key);
 
-        // Prepare to reset positions
-        [$query, $bindings] = $this->getResetPositionsQuery($user_projects, $user->id);
+        if ($user_projects->count() > 0) {
+            // Prepare to reset positions
+            [$query, $bindings] = $this->getResetPositionsQuery($user_projects, $user->id);
 
-        // Use transaction for optimization and safety
-        DB::transaction(function () use ($project, $query, $bindings) {
+            // Use transaction for optimization and safety
+            DB::transaction(function () use ($project, $query, $bindings) {
+                // Delete the resource
+                $project->delete();
+
+                // Reorder resources
+                DB::update($query, $bindings);
+            });
+        } else {
             // Delete the resource
             $project->delete();
-
-            // Reorder resources
-            DB::update($query, $bindings);
-        });
+        }
 
         // Redirect with flash message
         return to_route('projects.index')
@@ -245,10 +266,10 @@ class ProjectController extends Controller
      *
      * @param  \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project>  $projects
      * @param  int  $user_id
-     * @param  int  $delta  (optional)
+     * @param  int|null  $insert  (optional) Start shifting from this position if set
      * @return array
      */
-    private function getResetPositionsQuery($projects, $user_id, int $delta = 0)
+    private function getResetPositionsQuery($projects, $user_id, ?int $insert = null)
     {
         $table = Project::getModel()->users()->getTable();
 
@@ -257,9 +278,9 @@ class ProjectController extends Controller
         $bindings = [];
 
         // Use values() to have the collection keys without gap
-        $projects->values()->each(function (Project $project, int $key) use (&$cases, &$bindings, &$ids, $delta) {
+        $projects->values()->each(function (Project $project, int $key) use (&$cases, &$bindings, &$ids, $insert) {
             $cases[] = "WHEN {$project->id} THEN ?";
-            $bindings[] = $key + $delta;
+            $bindings[] = (isset($insert) && $key >= $insert) ? $key + 1 : $key;
             $ids[] = $project->id;
         });
 
