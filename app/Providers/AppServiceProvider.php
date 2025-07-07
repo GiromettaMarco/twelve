@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
         // @NOTE Postgres model binding fix
         // https://github.com/laravel/framework/issues/26239
         Route::pattern('id', '[0-9]+');
-        // Route::pattern('project', '[0-9]+');
+        Route::pattern('project', '[0-9]+');
         // Route::pattern('task', '[0-9]+');
 
         // Define permission gates

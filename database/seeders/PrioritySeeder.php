@@ -13,9 +13,9 @@ class PrioritySeeder extends Seeder
     public function run(): void
     {
         $priorities = [
-            ['title' => 'low'],
-            ['title' => 'medium'],
-            ['title' => 'high'],
+            ['value' => 'low', 'label' => 'Low'],
+            ['value' => 'medium', 'label' => 'Medium'],
+            ['value' => 'high', 'label' => 'High'],
         ];
 
         collect($priorities)->each(function ($priority) {

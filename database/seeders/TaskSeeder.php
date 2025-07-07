@@ -22,7 +22,7 @@ class TaskSeeder extends Seeder
                 'position' => 0,
                 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ex felis, pharetra at metus vitae, rutrum vestibulum mi. Etiam id metus sed ligula semper sodales dapibus a sem. Donec sodales leo suscipit, blandit libero vitae, lacinia leo. Aliquam erat volutpat. Nunc tincidunt lectus eu feugiat hendrerit. Vivamus sed sollicitudin nisl. Donec ac ligula ac eros lobortis consequat.',
                 'label' => 'documentation',
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'priority' => 'medium',
 
             ],
@@ -73,7 +73,7 @@ class TaskSeeder extends Seeder
             [
                 'title' => "Generating the driver won't do anything, we need to quantify the 1080p SMTP bandwidth!",
                 'position' => 7,
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'label' => 'feature',
                 'priority' => 'medium',
             ],
@@ -87,7 +87,7 @@ class TaskSeeder extends Seeder
             [
                 'title' => "Calculating the bus won't do anything, we need to navigate the back-end JSON protocol!",
                 'position' => 9,
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'label' => 'documentation',
                 'priority' => 'high',
             ],
@@ -115,14 +115,14 @@ class TaskSeeder extends Seeder
             [
                 'title' => 'We need to generate the virtual HEX alarm!',
                 'position' => 13,
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'label' => 'bug',
                 'priority' => 'low',
             ],
             [
                 'title' => "Backing up the pixel won't do anything, we need to transmit the primary IB array!",
                 'position' => 14,
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'label' => 'documentation',
                 'priority' => 'low',
             ],
@@ -164,7 +164,7 @@ class TaskSeeder extends Seeder
             [
                 'title' => "Overriding the microchip won't do anything, we need to transmit the digital OCR transmitter!",
                 'position' => 20,
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'label' => 'documentation',
                 'priority' => 'low',
             ],
@@ -199,7 +199,7 @@ class TaskSeeder extends Seeder
             [
                 'title' => "I'll input the neural DRAM circuit, that should protocol the SMTP interface!",
                 'position' => 25,
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'label' => 'feature',
                 'priority' => 'medium',
             ],
@@ -227,7 +227,7 @@ class TaskSeeder extends Seeder
             [
                 'title' => 'We need to parse the solid state UDP firewall!',
                 'position' => 29,
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'label' => 'bug',
                 'priority' => 'low',
             ],
@@ -241,7 +241,7 @@ class TaskSeeder extends Seeder
             [
                 'title' => 'We need to synthesize the cross-platform ASCII pixel!',
                 'position' => 31,
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'label' => 'feature',
                 'priority' => 'medium',
             ],
@@ -283,14 +283,14 @@ class TaskSeeder extends Seeder
             [
                 'title' => "Bypassing the hard drive won't do anything, we need to input the bluetooth JSON program!",
                 'position' => 37,
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'label' => 'bug',
                 'priority' => 'high',
             ],
             [
                 'title' => 'If we synthesize the bus, we can get to the IP panel through the virtual TLS array!',
                 'position' => 38,
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'label' => 'feature',
                 'priority' => 'low',
             ],
@@ -304,7 +304,7 @@ class TaskSeeder extends Seeder
             [
                 'title' => 'If we compress the program, we can get to the XML alarm through the multi-byte COM matrix!',
                 'position' => 40,
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'label' => 'bug',
                 'priority' => 'high',
             ],
@@ -318,7 +318,7 @@ class TaskSeeder extends Seeder
             [
                 'title' => 'Try to calculate the DNS interface, maybe it will input the bluetooth capacitor!',
                 'position' => 42,
-                'status' => 'in progress',
+                'status' => 'in_progress',
                 'label' => 'feature',
                 'priority' => 'low',
             ],
@@ -339,15 +339,15 @@ class TaskSeeder extends Seeder
             $task->project()->associate($project);
 
             $task->label()->associate($labels->first(function (Label $label) use ($taskData) {
-                return $label->title === $taskData['label'];
+                return $label->value === $taskData['label'];
             }));
 
             $task->status()->associate($statuses->first(function (Status $status) use ($taskData) {
-                return $status->title === $taskData['status'];
+                return $status->value === $taskData['status'];
             }));
 
             $task->priority()->associate($priorities->first(function (Priority $priority) use ($taskData) {
-                return $priority->title === $taskData['priority'];
+                return $priority->value === $taskData['priority'];
             }));
 
             $task->save();

@@ -13,11 +13,11 @@ class StatusSeeder extends Seeder
     public function run(): void
     {
         $statuses = [
-            ['title' => 'backlog'],
-            ['title' => 'todo'],
-            ['title' => 'in progress'],
-            ['title' => 'done'],
-            ['title' => 'canceled'],
+            ['value' => 'backlog', 'label' => 'backlog'],
+            ['value' => 'todo', 'label' => 'todo'],
+            ['value' => 'in_progress', 'label' => 'in progress'],
+            ['value' => 'done', 'label' => 'done'],
+            ['value' => 'canceled', 'label' => 'canceled'],
         ];
 
         collect($statuses)->each(function ($status) {

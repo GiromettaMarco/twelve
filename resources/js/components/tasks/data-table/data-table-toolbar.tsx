@@ -1,18 +1,24 @@
 'use client'
 
-import { priorities, statuses } from '@/components/tasks/data'
-import { DataTableFacetedFilter } from '@/components/tasks/data-table-faceted-filter'
-import { DataTableViewOptions } from '@/components/tasks/data-table-view-options'
+import { DataTableFacetedFilter } from '@/components/tasks/data-table/data-table-faceted-filter'
+import { DataTableViewOptions } from '@/components/tasks/data-table/data-table-view-options'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import type { Priority, Status } from '@/types/task'
 import { Table } from '@tanstack/react-table'
+import { useLaravelReactI18n } from 'laravel-react-i18n'
 import { X } from 'lucide-react'
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
+  statuses: Status[]
+  priorities: Priority[]
 }
 
-export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
+export function DataTableToolbar<TData>({ table, statuses, priorities }: DataTableToolbarProps<TData>) {
+  // Setup translations
+  const { t } = useLaravelReactI18n()
+
   const isFiltered = table.getState().columnFilters.length > 0
 
   return (
@@ -34,7 +40,7 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
         {table.getColumn('priority') && (
           <DataTableFacetedFilter
             column={table.getColumn('priority')}
-            title="Priority"
+            title={t('Priority')}
             options={priorities}
           />
         )}

@@ -1,16 +1,25 @@
 import EditProjectDeadline from '@/components/projects/edit-deadline'
 import EditProjectInfo from '@/components/projects/edit-info'
 import ShowProjectStats from '@/components/projects/show-stats'
+import AddTask from '@/components/tasks/add-task'
+import { useTaskColumns } from '@/components/tasks/data-table/use-task-columns'
 import { TasksDataTable } from '@/components/tasks/tasks-data-table'
-import { useTaskColumns } from '@/components/tasks/use-task-columns'
 import AppLayout from '@/layouts/app-layout'
 import { type BreadcrumbItem } from '@/types'
 import type { Project } from '@/types/project'
+import type { Label, Priority, Status } from '@/types/task'
 import { Head } from '@inertiajs/react'
 import { Separator } from '@radix-ui/react-separator'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 
-export default function Project({ project }: { project: Project }) {
+interface ProjectPageProps {
+  project: Project
+  labels: Label[]
+  statuses: Status[]
+  priorities: Priority[]
+}
+
+export default function Project({ project, labels, statuses, priorities }: ProjectPageProps) {
   // Setup translations
   const { t, tChoice } = useLaravelReactI18n()
 
@@ -29,16 +38,22 @@ export default function Project({ project }: { project: Project }) {
     }
   ]
 
-  const columns = useTaskColumns()
+  const columns = useTaskColumns({ labels, statuses, priorities })
 
   return (
-    <AppLayout breadcrumbs={breadcrumbs}>
+    <AppLayout
+      breadcrumbs={breadcrumbs}
+      headerChildren={AddTask({ projectId: project.id, labels, statuses, priorities, count: project.tasks.length })}
+    >
       <Head title="Projects" />
+
       <div className="rounded-xl p-4">
-        <div className="relative flex-1 overflow-hidden rounded-xl md:min-h-min">
+        <div className="relative flex-1 rounded-xl md:min-h-min">
           <TasksDataTable
             data={project.tasks}
             columns={columns.columnDef}
+            statuses={statuses}
+            priorities={priorities}
           />
         </div>
 

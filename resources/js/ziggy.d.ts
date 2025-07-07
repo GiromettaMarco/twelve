@@ -58,6 +58,52 @@ declare module 'ziggy-js' {
         required: true
       }
     ]
+    'tasks.store': [
+      {
+        name: 'project'
+        required: true
+      }
+    ]
+    'tasks.destroy': [
+      {
+        name: 'project'
+        required: true
+      },
+      {
+        name: 'id'
+        required: true
+      }
+    ]
+    'tasks.updateLabel': [
+      {
+        name: 'project'
+        required: true
+      },
+      {
+        name: 'id'
+        required: true
+      }
+    ]
+    'tasks.updateStatus': [
+      {
+        name: 'project'
+        required: true
+      },
+      {
+        name: 'id'
+        required: true
+      }
+    ]
+    'tasks.updatePriority': [
+      {
+        name: 'project'
+        required: true
+      },
+      {
+        name: 'id'
+        required: true
+      }
+    ]
     'users.index': []
     'profile.edit': []
     'profile.update': []

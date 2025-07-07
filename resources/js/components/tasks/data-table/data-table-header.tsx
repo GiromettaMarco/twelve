@@ -18,8 +18,7 @@ export default function DataTableHeader<TData>({ table }: DataTableHeader<TData>
                 className = 'w-10'
                 break
 
-              // replace with position
-              case 'id':
+              case 'position':
                 className = 'w-14'
                 break
 

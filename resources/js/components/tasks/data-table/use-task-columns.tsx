@@ -1,18 +1,24 @@
-import { labels, priorities, statuses } from '@/components/tasks/data'
-import { Badge } from '@/components/ui/badge'
+import { DataTableColumnHeader } from '@/components/tasks/data-table/data-table-column-header'
+import { DataTableRowActions } from '@/components/tasks/data-table/data-table-row-actions'
+import TitleCell from '@/components/tasks/data-table/title-cell'
+import PriorityLabel from '@/components/tasks/priority-label'
+import StatusLabel from '@/components/tasks/status-label'
 import { Checkbox } from '@/components/ui/checkbox'
-import type { Task } from '@/types/task'
+import type { Label, Priority, Status, Task } from '@/types/task'
 import { ColumnDef } from '@tanstack/react-table'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 import { useState } from 'react'
-import { DataTableColumnHeader } from './data-table-column-header'
-import { DataTableRowActions } from './data-table-row-actions'
 
-export function useTaskColumns() {
+interface UseTaskscolumnsProps {
+  labels: Label[]
+  statuses: Status[]
+  priorities: Priority[]
+}
+
+export function useTaskColumns({ labels, statuses, priorities }: UseTaskscolumnsProps) {
   // Setup translations
   const { t } = useLaravelReactI18n()
 
-  // const [columns, setColumns] = useState(...)
   const [columnDef] = useState<ColumnDef<Task>[]>([
     {
       id: 'select',
@@ -36,15 +42,14 @@ export function useTaskColumns() {
       enableHiding: false
     },
     {
-      // @TODO replace with position
-      accessorKey: 'id',
+      accessorKey: 'position',
       header: ({ column }) => (
         <DataTableColumnHeader
           column={column}
           title={t('#')}
         />
       ),
-      cell: ({ row }) => <div>{row.getValue('id')}</div>,
+      cell: ({ row }) => <div>{row.getValue('position')}</div>,
       enableSorting: true,
       enableHiding: true
     },
@@ -57,19 +62,18 @@ export function useTaskColumns() {
         />
       ),
       cell: ({ row }) => {
-        const label = labels.find((label) => label.value === row.original.label.title)
-
+        const label = labels.find((label) => label.value === row.original.label?.value)
         return (
-          <div className="flex space-x-2">
-            {label && <Badge variant="outline">{label.label}</Badge>}
-            <span className="truncate font-medium">{row.getValue('title')}</span>
-          </div>
+          <TitleCell
+            title={row.getValue('title')}
+            label={label}
+          />
         )
       }
     },
     {
       accessorKey: 'status',
-      accessorFn: (row) => row.status.title,
+      accessorFn: (row) => row.status.value,
       header: ({ column }) => (
         <DataTableColumnHeader
           column={column}
@@ -78,17 +82,7 @@ export function useTaskColumns() {
       ),
       cell: ({ row }) => {
         const status = statuses.find((status) => status.value === row.getValue('status'))
-
-        if (!status) {
-          return null
-        }
-
-        return (
-          <div className="flex items-center">
-            {status.icon && <status.icon className="text-muted-foreground mr-2 h-4 w-4" />}
-            <span>{status.label}</span>
-          </div>
-        )
+        return status && <StatusLabel status={status} />
       },
       filterFn: (row, id, value) => {
         return value.includes(row.getValue(id))
@@ -96,7 +90,7 @@ export function useTaskColumns() {
     },
     {
       accessorKey: 'priority',
-      accessorFn: (row) => row.priority.title,
+      accessorFn: (row) => t(row.priority.value),
       header: ({ column }) => (
         <DataTableColumnHeader
           column={column}
@@ -105,17 +99,7 @@ export function useTaskColumns() {
       ),
       cell: ({ row }) => {
         const priority = priorities.find((priority) => priority.value === row.getValue('priority'))
-
-        if (!priority) {
-          return null
-        }
-
-        return (
-          <div className="flex items-center">
-            {priority.icon && <priority.icon className="text-muted-foreground mr-2 h-4 w-4" />}
-            <span>{priority.label}</span>
-          </div>
-        )
+        return priority && <PriorityLabel priority={priority} />
       },
       filterFn: (row, id, value) => {
         return value.includes(row.getValue(id))
@@ -123,7 +107,14 @@ export function useTaskColumns() {
     },
     {
       id: 'actions',
-      cell: ({ row }) => <DataTableRowActions row={row} />
+      cell: ({ row }) => (
+        <DataTableRowActions
+          row={row}
+          labels={labels}
+          statuses={statuses}
+          priorities={priorities}
+        />
+      )
     }
   ])
 

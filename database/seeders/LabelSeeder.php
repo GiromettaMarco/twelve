@@ -13,9 +13,9 @@ class LabelSeeder extends Seeder
     public function run(): void
     {
         $labels = [
-            ['title' => 'bug'],
-            ['title' => 'documentation'],
-            ['title' => 'feature'],
+            ['value' => 'bug', 'label' => 'bug'],
+            ['value' => 'documentation', 'label' => 'documentation'],
+            ['value' => 'feature', 'label' => 'feature'],
         ];
 
         collect($labels)->each(function ($label) {

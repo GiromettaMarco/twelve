@@ -22,6 +22,7 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->foreignId('label_id')
+                ->nullable()
                 ->index()
                 ->constrained()
                 ->onDelete('cascade')

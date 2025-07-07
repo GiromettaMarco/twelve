@@ -20,7 +20,8 @@ class Priority extends Model
      * @var array
      */
     protected $fillable = [
-        'title',
+        'value',
+        'label',
     ];
 
     /**

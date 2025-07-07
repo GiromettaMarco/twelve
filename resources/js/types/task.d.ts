@@ -1,23 +1,27 @@
 export interface Label {
   id: number
-  title: string
+  value: string
+  label: string
 }
 
 export interface Status {
   id: number
-  title: string
+  value: string
+  label: string
 }
 
 export interface Priority {
   id: number
-  title: string
+  value: string
+  label: string
 }
 
 export interface Task {
   id: number
   title: string
   description?: string
-  label: Label
+  project_id: number
+  label?: Label
   status: Status
   priority: Priority
 }

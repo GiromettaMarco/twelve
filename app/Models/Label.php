@@ -20,7 +20,8 @@ class Label extends Model
      * @var array
      */
     protected $fillable = [
-        'title',
+        'value',
+        'label',
     ];
 
     /**

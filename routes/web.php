@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,6 +38,21 @@ Route::prefix('dashboard')
 
         Route::patch('/projects/{id}/deadline', [ProjectController::class, 'updateDeadline'])
             ->name('projects.updateDeadline');
+
+        Route::post('/projects/{project}/tasks', [TaskController::class, 'store'])
+            ->name('tasks.store');
+
+        Route::delete('/projects/{project}/tasks/{id}', [TaskController::class, 'destroy'])
+            ->name('tasks.destroy');
+
+        Route::patch('/projects/{project}/tasks/{id}/label', [TaskController::class, 'updateLabel'])
+            ->name('tasks.updateLabel');
+
+        Route::patch('/projects/{project}/tasks/{id}/status', [TaskController::class, 'updateStatus'])
+            ->name('tasks.updateStatus');
+
+        Route::patch('/projects/{project}/tasks/{id}/priority', [TaskController::class, 'updatePriority'])
+            ->name('tasks.updatePriority');
 
         Route::get('users', [UserController::class, 'index'])
             ->name('users.index');

@@ -1,8 +1,8 @@
 'use client'
 
-import DataTableHeader from '@/components/tasks/data-table-header'
+import DataTableHeader from '@/components/tasks/data-table/data-table-header'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
-import type { Task } from '@/types/task'
+import type { Priority, Status, Task } from '@/types/task'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -19,15 +19,17 @@ import {
 } from '@tanstack/react-table'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 import * as React from 'react'
-import { DataTablePagination } from './data-table-pagination'
-import { DataTableToolbar } from './data-table-toolbar'
+import { DataTablePagination } from './data-table/data-table-pagination'
+import { DataTableToolbar } from './data-table/data-table-toolbar'
 
 interface TasksDataTableProps {
   columns: ColumnDef<Task>[]
   data: Task[]
+  statuses: Status[]
+  priorities: Priority[]
 }
 
-export function TasksDataTable({ columns, data }: TasksDataTableProps) {
+export function TasksDataTable({ columns, data, statuses, priorities }: TasksDataTableProps) {
   // Setup translations
   const { t } = useLaravelReactI18n()
 
@@ -60,7 +62,11 @@ export function TasksDataTable({ columns, data }: TasksDataTableProps) {
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar
+        table={table}
+        statuses={statuses}
+        priorities={priorities}
+      />
       <div className="rounded-md border">
         <Table className="min-w-md table-fixed">
           <DataTableHeader table={table} />
