@@ -38,7 +38,12 @@ export default function Project({ project, labels, statuses, priorities }: Proje
     }
   ]
 
-  const columns = useTaskColumns({ labels, statuses, priorities })
+  const columns = useTaskColumns({
+    labels,
+    statuses,
+    priorities,
+    totalTasks: project.tasks.length
+  })
 
   return (
     <AppLayout
@@ -71,7 +76,7 @@ export default function Project({ project, labels, statuses, priorities }: Proje
             rawDeadline={project.deadline}
           />
 
-          <ShowProjectStats project={project} />
+          <ShowProjectStats tasks={project.tasks} />
         </section>
       </div>
     </AppLayout>

@@ -2,7 +2,7 @@ import { EditSmall } from '@/components/presets/edit-small'
 import { Move } from '@/components/presets/move'
 import { DeleteProject } from '@/components/projects/delete-project'
 import ProjectDeadline from '@/components/projects/project-deadline'
-import ProjectStats from '@/components/projects/project-stats'
+import TasksStats from '@/components/tasks/tasks-stats'
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import type { Project } from '@/types/project'
 import { useSortable } from '@dnd-kit/react/sortable'
@@ -38,7 +38,7 @@ export default function SortableProject({ project, index }: { project: Project; 
       </CardHeader>
 
       <CardContent className="flex-1">
-        <ProjectStats project={project} />
+        <TasksStats tasks={project.tasks} />
       </CardContent>
 
       <CardFooter className="flex-none">

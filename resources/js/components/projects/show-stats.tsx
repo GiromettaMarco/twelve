@@ -1,9 +1,14 @@
-import type { ProjectStatsProps } from '@/components/projects/project-stats'
-import ProjectStats from '@/components/projects/project-stats'
+import TasksStats from '@/components/tasks/tasks-stats'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import type { Task } from '@/types/task'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 
-export default function ShowProjectStats({ project, className }: ProjectStatsProps) {
+interface ProjectStatsProps {
+  tasks: Task[]
+  className?: string
+}
+
+export default function ShowProjectStats({ tasks, className }: ProjectStatsProps) {
   // Setup translations
   const { t } = useLaravelReactI18n()
 
@@ -15,8 +20,8 @@ export default function ShowProjectStats({ project, className }: ProjectStatsPro
       </CardHeader>
 
       <CardContent>
-        <ProjectStats
-          project={project}
+        <TasksStats
+          tasks={tasks}
           className={className}
         />
       </CardContent>

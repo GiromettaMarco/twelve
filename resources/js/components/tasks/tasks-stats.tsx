@@ -1,16 +1,15 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import type { Project } from '@/types/project'
 import type { Task } from '@/types/task'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 
-export interface ProjectStatsProps {
-  project: Project
+interface ProjectStatsProps {
+  tasks: Task[]
   className?: string
 }
 
 const countTasksWithStatus = function (tasks: Task[], status: string) {
   return tasks.filter(function (task) {
-    return task.status.title === status
+    return task.status.value === status
   }).length
 }
 
@@ -18,25 +17,25 @@ const calcPercent = function (part: number, total: number) {
   return total > 0 ? ((part / total) * 100).toFixed(2) : 0
 }
 
-export default function ProjectStats({ project, className }: ProjectStatsProps) {
+export default function TasksStats({ tasks, className }: ProjectStatsProps) {
   // Setup translations
   const { t, tChoice } = useLaravelReactI18n()
 
-  const totalTasks = project.tasks.length
+  const totalTasks = tasks.length
 
-  const doneTasks = countTasksWithStatus(project.tasks, 'done')
+  const doneTasks = countTasksWithStatus(tasks, 'done')
   const doneTasksPercent = calcPercent(doneTasks, totalTasks)
 
-  const inProgressTasks = countTasksWithStatus(project.tasks, 'in progress')
+  const inProgressTasks = countTasksWithStatus(tasks, 'in_progress')
   const inProgressTasksPercent = calcPercent(inProgressTasks, totalTasks)
 
-  const todoTasks = countTasksWithStatus(project.tasks, 'todo')
+  const todoTasks = countTasksWithStatus(tasks, 'todo')
   const todoTasksPercent = calcPercent(todoTasks, totalTasks)
 
-  const backlogTasks = countTasksWithStatus(project.tasks, 'backlog')
+  const backlogTasks = countTasksWithStatus(tasks, 'backlog')
   const backlogTasksPercent = calcPercent(backlogTasks, totalTasks)
 
-  const cancelledTasks = countTasksWithStatus(project.tasks, 'cancelled')
+  const cancelledTasks = countTasksWithStatus(tasks, 'cancelled')
   const cancelledTasksPercent = calcPercent(cancelledTasks, totalTasks)
 
   return (

@@ -1,14 +1,14 @@
-import ProjectStats from '@/components/projects/project-stats'
+import TasksStats from '@/components/tasks/tasks-stats'
 import { projectDummy1 } from '@stories/dummies/ProjectDummies'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta = {
-  component: ProjectStats,
+  component: TasksStats,
   parameters: {
     layout: 'centered'
   },
   tags: ['autodocs']
-} satisfies Meta<typeof ProjectStats>
+} satisfies Meta<typeof TasksStats>
 
 export default meta
 
@@ -16,6 +16,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    project: projectDummy1
+    tasks: projectDummy1.tasks
   }
 }
