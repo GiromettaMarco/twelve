@@ -54,6 +54,9 @@ Route::prefix('dashboard')
         Route::patch('/projects/{project}/tasks/{id}/priority', [TaskController::class, 'updatePriority'])
             ->name('tasks.updatePriority');
 
+        Route::patch('/projects/{project}/tasks/{id}/position', [TaskController::class, 'updatePosition'])
+            ->name('tasks.updatePosition');
+
         Route::get('users', [UserController::class, 'index'])
             ->name('users.index');
     });

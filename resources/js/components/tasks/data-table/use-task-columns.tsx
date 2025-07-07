@@ -13,9 +13,10 @@ interface UseTaskscolumnsProps {
   labels: Label[]
   statuses: Status[]
   priorities: Priority[]
+  totalTasks: number
 }
 
-export function useTaskColumns({ labels, statuses, priorities }: UseTaskscolumnsProps) {
+export function useTaskColumns({ labels, statuses, priorities, totalTasks }: UseTaskscolumnsProps) {
   // Setup translations
   const { t } = useLaravelReactI18n()
 
@@ -63,10 +64,13 @@ export function useTaskColumns({ labels, statuses, priorities }: UseTaskscolumns
       ),
       cell: ({ row }) => {
         const label = labels.find((label) => label.value === row.original.label?.value)
+        const status = statuses.find((status) => status.value === row.original.status.value)
+
         return (
           <TitleCell
             title={row.getValue('title')}
             label={label}
+            status={status}
           />
         )
       }
@@ -113,6 +117,7 @@ export function useTaskColumns({ labels, statuses, priorities }: UseTaskscolumns
           labels={labels}
           statuses={statuses}
           priorities={priorities}
+          totalTasks={totalTasks}
         />
       )
     }

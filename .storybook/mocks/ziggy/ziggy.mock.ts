@@ -96,6 +96,12 @@ export const Ziggy: Config = {
       wheres: { id: '[0-9]+', project: '[0-9]+' },
       parameters: ['project', 'id']
     },
+    'tasks.updatePosition': {
+      uri: 'dashboard/projects/{project}/tasks/{id}/position',
+      methods: ['PATCH'],
+      wheres: { id: '[0-9]+', project: '[0-9]+' },
+      parameters: ['project', 'id']
+    },
     'users.index': { uri: 'dashboard/users', methods: ['GET', 'HEAD'], wheres: { id: '[0-9]+', project: '[0-9]+' } },
     'profile.edit': { uri: 'settings/profile', methods: ['GET', 'HEAD'], wheres: { id: '[0-9]+', project: '[0-9]+' } },
     'profile.update': { uri: 'settings/profile', methods: ['PATCH'], wheres: { id: '[0-9]+', project: '[0-9]+' } },

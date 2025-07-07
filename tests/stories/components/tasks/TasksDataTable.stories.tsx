@@ -14,13 +14,13 @@ import {
 } from '@stories/dummies/TaskDummies'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-function TasksDataTableWithHooks({ data }: { data: Task[] }) {
-  const columns = useTaskColumns({ labels, statuses, priorities })
+function TasksDataTableWithHooks({ tasks }: { tasks: Task[] }) {
+  const columns = useTaskColumns({ labels, statuses, priorities, totalTasks: tasks.length })
 
   return (
     <TasksDataTable
       columns={columns.columnDef}
-      data={data}
+      data={tasks}
       statuses={statuses}
       priorities={priorities}
     />
@@ -44,6 +44,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    data: [taskDummy1, taskDummy2, taskDummy3, taskDummy4, taskDummy5]
+    tasks: [taskDummy1, taskDummy2, taskDummy3, taskDummy4, taskDummy5]
   }
 }

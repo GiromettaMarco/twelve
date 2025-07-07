@@ -104,6 +104,16 @@ declare module 'ziggy-js' {
         required: true
       }
     ]
+    'tasks.updatePosition': [
+      {
+        name: 'project'
+        required: true
+      },
+      {
+        name: 'id'
+        required: true
+      }
+    ]
     'users.index': []
     'profile.edit': []
     'profile.update': []
