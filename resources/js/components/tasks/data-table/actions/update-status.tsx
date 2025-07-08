@@ -12,7 +12,7 @@ import { useLaravelReactI18n } from 'laravel-react-i18n'
 
 export default function UpdateStatus({ task, statuses }: { task: Task; statuses: Status[] }) {
   // Setup translations
-  const { t } = useLaravelReactI18n()
+  const { tChoice } = useLaravelReactI18n()
 
   function onClick(id: number) {
     router.patch(
@@ -24,7 +24,7 @@ export default function UpdateStatus({ task, statuses }: { task: Task; statuses:
 
   return (
     <DropdownMenuSub>
-      <DropdownMenuSubTrigger>{t('Status')}</DropdownMenuSubTrigger>
+      <DropdownMenuSubTrigger>{tChoice('Status', 1)}</DropdownMenuSubTrigger>
       <DropdownMenuSubContent>
         <DropdownMenuRadioGroup value={task.status.value}>
           {statuses.map((status) => (

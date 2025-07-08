@@ -11,7 +11,7 @@ import { useLaravelReactI18n } from 'laravel-react-i18n'
 
 export default function UpdateLabel({ task, labels }: { task: Task; labels: Label[] }) {
   // Setup translations
-  const { t } = useLaravelReactI18n()
+  const { t, tChoice } = useLaravelReactI18n()
 
   function onClick(id: number | null) {
     router.patch(
@@ -23,7 +23,7 @@ export default function UpdateLabel({ task, labels }: { task: Task; labels: Labe
 
   return (
     <DropdownMenuSub>
-      <DropdownMenuSubTrigger>{t('Label')}</DropdownMenuSubTrigger>
+      <DropdownMenuSubTrigger>{tChoice('Label', 1)}</DropdownMenuSubTrigger>
       <DropdownMenuSubContent>
         <DropdownMenuRadioGroup value={task.label?.value}>
           <DropdownMenuRadioItem

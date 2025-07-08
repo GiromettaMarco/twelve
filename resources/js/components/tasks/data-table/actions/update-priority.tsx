@@ -12,7 +12,7 @@ import { useLaravelReactI18n } from 'laravel-react-i18n'
 
 export default function UpdatePriority({ task, priorities }: { task: Task; priorities: Priority[] }) {
   // Setup translations
-  const { t } = useLaravelReactI18n()
+  const { tChoice } = useLaravelReactI18n()
 
   function onClick(id: number) {
     router.patch(
@@ -24,7 +24,7 @@ export default function UpdatePriority({ task, priorities }: { task: Task; prior
 
   return (
     <DropdownMenuSub>
-      <DropdownMenuSubTrigger>{t('Priority')}</DropdownMenuSubTrigger>
+      <DropdownMenuSubTrigger>{tChoice('Priority', 1)}</DropdownMenuSubTrigger>
       <DropdownMenuSubContent>
         <DropdownMenuRadioGroup value={task.status.value}>
           {priorities.map((priority) => (

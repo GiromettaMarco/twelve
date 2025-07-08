@@ -155,7 +155,7 @@ export default function AddTask({ projectId, labels, statuses, priorities, count
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="task-label">{t('Label')}</Label>
+            <Label htmlFor="task-label">{tChoice('Label', 1)}</Label>
 
             <div className="flex items-center gap-4">
               <Select
@@ -203,7 +203,7 @@ export default function AddTask({ projectId, labels, statuses, priorities, count
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="task-status">{t('Status')}</Label>
+            <Label htmlFor="task-status">{tChoice('Status', 1)}</Label>
 
             <Select
               defaultValue={data.status_id.toString()}
@@ -231,7 +231,7 @@ export default function AddTask({ projectId, labels, statuses, priorities, count
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="task-priority">{t('Priority')}</Label>
+            <Label htmlFor="task-priority">{tChoice('Priority', 1)}</Label>
 
             <Select
               defaultValue={data.priority_id.toString()}

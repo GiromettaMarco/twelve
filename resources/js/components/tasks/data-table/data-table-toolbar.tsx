@@ -17,7 +17,7 @@ interface DataTableToolbarProps<TData> {
 
 export function DataTableToolbar<TData>({ table, statuses, priorities }: DataTableToolbarProps<TData>) {
   // Setup translations
-  const { t } = useLaravelReactI18n()
+  const { t, tChoice } = useLaravelReactI18n()
 
   const isFiltered = table.getState().columnFilters.length > 0
 
@@ -33,14 +33,14 @@ export function DataTableToolbar<TData>({ table, statuses, priorities }: DataTab
         {table.getColumn('status') && (
           <DataTableFacetedFilter
             column={table.getColumn('status')}
-            title="Status"
+            title={tChoice('Status', 1)}
             options={statuses}
           />
         )}
         {table.getColumn('priority') && (
           <DataTableFacetedFilter
             column={table.getColumn('priority')}
-            title={t('Priority')}
+            title={tChoice('Priority', 1)}
             options={priorities}
           />
         )}
@@ -50,7 +50,7 @@ export function DataTableToolbar<TData>({ table, statuses, priorities }: DataTab
             onClick={() => table.resetColumnFilters()}
             className="h-8 px-2 lg:px-3"
           >
-            Reset
+            {t('Reset')}
             <X />
           </Button>
         )}

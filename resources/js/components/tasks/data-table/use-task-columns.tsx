@@ -18,7 +18,7 @@ interface UseTaskscolumnsProps {
 
 export function useTaskColumns({ labels, statuses, priorities, totalTasks }: UseTaskscolumnsProps) {
   // Setup translations
-  const { t } = useLaravelReactI18n()
+  const { t, tChoice } = useLaravelReactI18n()
 
   const columnDef = useMemo<ColumnDef<Task>[]>(
     () => [
@@ -82,7 +82,7 @@ export function useTaskColumns({ labels, statuses, priorities, totalTasks }: Use
         header: ({ column }) => (
           <DataTableColumnHeader
             column={column}
-            title={t('Status')}
+            title={tChoice('Status', 1)}
           />
         ),
         cell: ({ row }) => {
@@ -99,7 +99,7 @@ export function useTaskColumns({ labels, statuses, priorities, totalTasks }: Use
         header: ({ column }) => (
           <DataTableColumnHeader
             column={column}
-            title={t('Priority')}
+            title={tChoice('Priority', 1)}
           />
         ),
         cell: ({ row }) => {
@@ -123,7 +123,7 @@ export function useTaskColumns({ labels, statuses, priorities, totalTasks }: Use
         )
       }
     ],
-    [t, labels, statuses, priorities, totalTasks]
+    [t, tChoice, labels, statuses, priorities, totalTasks]
   )
 
   return { columnDef }
