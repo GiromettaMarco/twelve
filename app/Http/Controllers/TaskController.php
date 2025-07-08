@@ -74,11 +74,8 @@ class TaskController extends Controller
      */
     public function updateLabel(UpdateLabelRequest $request, string $project_id, string $id)
     {
-        /** @var Project $project */
-        $project = $request->user()->projects()->findOrFail($project_id);
-
         /** @var Task $task */
-        $task = Task::whereBelongsTo($project)->findOrFail($id);
+        $task = $request->user()->projects()->findOrFail($project_id)->tasks()->findOrFail($id);
 
         // Save relationship
         $task->label()->associate($request->validated('label_id', null));
@@ -96,11 +93,8 @@ class TaskController extends Controller
      */
     public function updateStatus(UpdateStatusRequest $request, string $project_id, string $id)
     {
-        /** @var Project $project */
-        $project = $request->user()->projects()->findOrFail($project_id);
-
         /** @var Task $task */
-        $task = Task::whereBelongsTo($project)->findOrFail($id);
+        $task = $request->user()->projects()->findOrFail($project_id)->tasks()->findOrFail($id);
 
         // Save relationship
         $task->status()->associate($request->validated('status_id'));
@@ -118,11 +112,8 @@ class TaskController extends Controller
      */
     public function updatePriority(UpdatePriorityRequest $request, string $project_id, string $id)
     {
-        /** @var Project $project */
-        $project = $request->user()->projects()->findOrFail($project_id);
-
         /** @var Task $task */
-        $task = Task::whereBelongsTo($project)->findOrFail($id);
+        $task = $request->user()->projects()->findOrFail($project_id)->tasks()->findOrFail($id);
 
         // Save relationship
         $task->priority()->associate($request->validated('priority_id'));
