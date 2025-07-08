@@ -65,7 +65,7 @@ class TaskController extends Controller
 
         // Redirect with flash message
         return to_route('projects.show', $project_id)
-            ->with('flash', new FlashMessage(__('Task created'), 'success'));
+            ->with('flash', new FlashMessage(__(':Item created', ['item' => trans_choice('Task', 1)]), 'success'));
     }
 
     /**
@@ -84,7 +84,7 @@ class TaskController extends Controller
 
         // Redirect with flash message
         return to_route('projects.show', ['id' => $project_id])
-            ->with('flash', new FlashMessage(__('Label updated'), 'success'));
+            ->with('flash', new FlashMessage(__(':Item updated', ['item' => __('Label')]), 'success'));
     }
 
     /**
@@ -102,7 +102,7 @@ class TaskController extends Controller
 
         // Redirect with flash message
         return to_route('projects.show', ['id' => $project_id])
-            ->with('flash', new FlashMessage(__('Task updated'), 'success'));
+            ->with('flash', new FlashMessage(__(':Item updated', ['item' => trans_choice('Task', 1)]), 'success'));
     }
 
     /**
@@ -121,7 +121,7 @@ class TaskController extends Controller
 
         // Redirect with flash message
         return to_route('projects.show', ['id' => $project_id])
-            ->with('flash', new FlashMessage(__('Status updated'), 'success'));
+            ->with('flash', new FlashMessage(__(':Item updated', ['item' => __('Status')]), 'success'));
     }
 
     /**
@@ -140,7 +140,7 @@ class TaskController extends Controller
 
         // Redirect with flash message
         return to_route('projects.show', ['id' => $project_id])
-            ->with('flash', new FlashMessage(__('Priority updated'), 'success'));
+            ->with('flash', new FlashMessage(__(':Item updated', ['item' => __('Priority')]), 'success'));
     }
 
     /**
@@ -206,7 +206,7 @@ class TaskController extends Controller
 
         // Redirect with flash message
         return to_route('projects.show', ['id' => $project_id])
-            ->with('flash', new FlashMessage(__('Position updated'), 'success'));
+            ->with('flash', new FlashMessage(__(':Item updated', ['item' => __('Position')]), 'success'));
     }
 
     /**
@@ -252,7 +252,7 @@ class TaskController extends Controller
 
         // Redirect with flash message
         return to_route('projects.show', $project_id)
-            ->with('flash', new FlashMessage(__('Task deleted'), 'success'));
+            ->with('flash', new FlashMessage(__(':Item deleted', ['item' => trans_choice('Task', 1)]), 'success'));
     }
 
     /**
