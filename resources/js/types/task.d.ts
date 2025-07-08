@@ -19,6 +19,7 @@ export interface Priority {
 export interface Task {
   id: number
   title: string
+  position: number
   description?: string
   project_id: number
   label?: Label

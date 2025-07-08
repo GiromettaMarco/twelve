@@ -30,7 +30,7 @@ export default function UpdatePosition({ task, max, open, setOpen }: UpdatePosit
   const { t } = useLaravelReactI18n()
 
   const { data, setData, patch, errors, processing, reset } = useForm<Required<{ position: number }>>({
-    position: 0
+    position: task.position
   })
 
   const onSubmit: FormEventHandler = (e) => {
