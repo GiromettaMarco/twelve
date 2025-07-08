@@ -11,7 +11,7 @@ class DeleteTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_user_can_delete_project()
+    public function test_users_can_delete_project()
     {
         $this->actingAs(User::first());
 
