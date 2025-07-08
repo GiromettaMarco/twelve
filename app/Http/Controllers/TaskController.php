@@ -10,7 +10,6 @@ use App\Http\Requests\Task\UpdatePriorityRequest;
 use App\Http\Requests\Task\UpdateStatusRequest;
 use App\Models\Project;
 use App\Models\Task;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,11 +23,8 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request, string $project_id)
     {
-        /** @var User $user */
-        $user = $request->user();
-
         /** @var Project $project */
-        $project = $user->projects()->with('tasks')->findOrFail($project_id);
+        $project = $request->user()->projects()->with('tasks')->findOrFail($project_id);
 
         // Clamp position
         $position = min($request->validated('position', 0), $project->tasks->count());
@@ -78,11 +74,8 @@ class TaskController extends Controller
      */
     public function updateLabel(UpdateLabelRequest $request, string $project_id, string $id)
     {
-        /** @var User $user */
-        $user = $request->user();
-
         /** @var Project $project */
-        $project = $user->projects()->findOrFail($project_id);
+        $project = $request->user()->projects()->findOrFail($project_id);
 
         /** @var Task $task */
         $task = Task::whereBelongsTo($project)->findOrFail($id);
@@ -103,11 +96,8 @@ class TaskController extends Controller
      */
     public function updateStatus(UpdateStatusRequest $request, string $project_id, string $id)
     {
-        /** @var User $user */
-        $user = $request->user();
-
         /** @var Project $project */
-        $project = $user->projects()->findOrFail($project_id);
+        $project = $request->user()->projects()->findOrFail($project_id);
 
         /** @var Task $task */
         $task = Task::whereBelongsTo($project)->findOrFail($id);
@@ -128,11 +118,8 @@ class TaskController extends Controller
      */
     public function updatePriority(UpdatePriorityRequest $request, string $project_id, string $id)
     {
-        /** @var User $user */
-        $user = $request->user();
-
         /** @var Project $project */
-        $project = $user->projects()->findOrFail($project_id);
+        $project = $request->user()->projects()->findOrFail($project_id);
 
         /** @var Task $task */
         $task = Task::whereBelongsTo($project)->findOrFail($id);
@@ -153,11 +140,8 @@ class TaskController extends Controller
      */
     public function updatePosition(UpdatePositionRequest $request, string $project_id, string $id)
     {
-        /** @var User $user */
-        $user = $request->user();
-
         /** @var Project $project */
-        $project = $user->projects()->with('tasks')->findOrFail($project_id);
+        $project = $request->user()->projects()->with('tasks')->findOrFail($project_id);
 
         // Collect related projects
         $project_tasks = $project->tasks;
@@ -222,11 +206,8 @@ class TaskController extends Controller
      */
     public function destroy(Request $request, string $project_id, string $id)
     {
-        /** @var User $user */
-        $user = $request->user();
-
         /** @var Project $project */
-        $project = $user->projects()->with('tasks')->findOrFail($project_id);
+        $project = $request->user()->projects()->with('tasks')->findOrFail($project_id);
 
         // Collect related projects
         $project_tasks = $project->tasks;
