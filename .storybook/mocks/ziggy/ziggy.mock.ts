@@ -78,6 +78,12 @@ export const Ziggy: Config = {
       wheres: { id: '[0-9]+', project: '[0-9]+' },
       parameters: ['project', 'id']
     },
+    'tasks.updateInfo': {
+      uri: 'dashboard/projects/{project}/tasks/{id}/info',
+      methods: ['PATCH'],
+      wheres: { id: '[0-9]+', project: '[0-9]+' },
+      parameters: ['project', 'id']
+    },
     'tasks.updateLabel': {
       uri: 'dashboard/projects/{project}/tasks/{id}/label',
       methods: ['PATCH'],

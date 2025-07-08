@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\FlashMessage;
 use App\Http\Requests\Task\StoreTaskRequest;
+use App\Http\Requests\Task\UpdateInfoRequest;
 use App\Http\Requests\Task\UpdateLabelRequest;
 use App\Http\Requests\Task\UpdatePositionRequest;
 use App\Http\Requests\Task\UpdatePriorityRequest;
@@ -84,6 +85,24 @@ class TaskController extends Controller
         // Redirect with flash message
         return to_route('projects.show', ['id' => $project_id])
             ->with('flash', new FlashMessage(__('Label updated'), 'success'));
+    }
+
+    /**
+     * Update the project title and description.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateInfo(UpdateInfoRequest $request, string $project_id, string $id)
+    {
+        /** @var Task $task */
+        $task = $request->user()->projects()->findOrFail($project_id)->tasks()->findOrFail($id);
+
+        // Update the resource
+        $task->update($request->validated());
+
+        // Redirect with flash message
+        return to_route('projects.show', ['id' => $project_id])
+            ->with('flash', new FlashMessage(__('Task updated'), 'success'));
     }
 
     /**

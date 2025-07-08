@@ -74,6 +74,16 @@ declare module 'ziggy-js' {
         required: true
       }
     ]
+    'tasks.updateInfo': [
+      {
+        name: 'project'
+        required: true
+      },
+      {
+        name: 'id'
+        required: true
+      }
+    ]
     'tasks.updateLabel': [
       {
         name: 'project'

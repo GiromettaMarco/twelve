@@ -45,6 +45,9 @@ Route::prefix('dashboard')
         Route::delete('/projects/{project}/tasks/{id}', [TaskController::class, 'destroy'])
             ->name('tasks.destroy');
 
+        Route::patch('/projects/{project}/tasks/{id}/info', [TaskController::class, 'updateInfo'])
+            ->name('tasks.updateInfo');
+
         Route::patch('/projects/{project}/tasks/{id}/label', [TaskController::class, 'updateLabel'])
             ->name('tasks.updateLabel');
 

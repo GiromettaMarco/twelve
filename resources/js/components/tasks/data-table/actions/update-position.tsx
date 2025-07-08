@@ -16,18 +16,19 @@ import { Slider } from '@/components/ui/slider'
 import type { Task } from '@/types/task'
 import { useForm } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
-import type { FormEventHandler } from 'react'
+import { useState, type FormEventHandler } from 'react'
 
 interface UpdatePositionProps {
   task: Task
   max: number
-  open: boolean
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setParentMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function UpdatePosition({ task, max, open, setOpen }: UpdatePositionProps) {
+export default function UpdatePosition({ task, max, setParentMenuOpen }: UpdatePositionProps) {
   // Setup translations
   const { t } = useLaravelReactI18n()
+
+  const [open, setOpen] = useState(false)
 
   const { data, setData, patch, errors, processing, reset } = useForm<Required<{ position: number }>>({
     position: task.position
@@ -40,15 +41,28 @@ export default function UpdatePosition({ task, max, open, setOpen }: UpdatePosit
       preserveScroll: true,
       onSuccess: () => {
         reset()
+
+        if (setParentMenuOpen) {
+          setParentMenuOpen(open)
+        }
+
         setOpen(false)
       }
     })
   }
 
+  function onOpenChange(open: boolean) {
+    setOpen(open)
+
+    if (!open && setParentMenuOpen) {
+      setParentMenuOpen(open)
+    }
+  }
+
   return (
     <Dialog
       open={open}
-      onOpenChange={setOpen}
+      onOpenChange={onOpenChange}
     >
       <DialogTrigger asChild>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>{t('Reorder')}</DropdownMenuItem>
