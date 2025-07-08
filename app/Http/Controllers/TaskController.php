@@ -292,7 +292,20 @@ class TaskController extends Controller
         $cases = implode(' ', $cases);
         $bindings[] = Carbon::now();
 
-        $query = "UPDATE \"$table\" SET \"position\" = (CASE \"id\" $cases END)::int, \"updated_at\" = ? WHERE \"id\" in ($ids)";
+        $case = "CASE \"id\" $cases END";
+
+        // @NOTE postgres fix
+        if (env('DB_CONNECTION') === 'pgsql') {
+            // @codeCoverageIgnoreStart
+            $case = "($case)::int";
+            // @codeCoverageIgnoreEnd
+        }
+
+        $update = "UPDATE \"$table\"";
+        $set = "SET \"position\" = $case, \"updated_at\" = ?";
+        $where = "WHERE \"id\" in ($ids)";
+
+        $query = "$update $set $where";
 
         return [$query, $bindings];
     }

@@ -288,7 +288,14 @@ class ProjectController extends Controller
         $cases = implode(' ', $cases);
         $bindings[] = Carbon::now();
 
-        $case = "(CASE \"project_id\" $cases END)::int";
+        $case = "CASE \"project_id\" $cases END";
+
+        // @NOTE postgres fix
+        if (env('DB_CONNECTION') === 'pgsql') {
+            // @codeCoverageIgnoreStart
+            $case = "($case)::int";
+            // @codeCoverageIgnoreEnd
+        }
 
         $update = "UPDATE \"$table\"";
         $set = "SET \"position\" = $case, \"updated_at\" = ?";
