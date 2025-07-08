@@ -72,7 +72,7 @@ export function DataTableRowActions<TData extends Task>({
 
         <UpdatePosition
           task={task}
-          max={totalTasks - 1}
+          max={Math.max(0, totalTasks - 1)}
           open={updatePositionOpen}
           setOpen={setUpdatePositionOpen}
         />
