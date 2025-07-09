@@ -1,21 +1,12 @@
 <div align="center">
 <h1>Twelve</h1>
 
-<a href="https://laravel.com/" target="_blank" style="text-decoration: none; margin-inline-end: 0.5rem;">
-  <img height="50" width="50" alt="Laravel" src="docs/laravel.svg"/>
-</a>
-<a href="https://react.dev/" target="_blank" style="text-decoration: none; margin-inline-start: 0.5rem; margin-inline-end: 0.5rem;">
-  <img height="50" width="50" alt="React" src="docs/react.svg"/>
-</a>
-<a href="https://storybook.js.org/" target="_blank" style="text-decoration: none; margin-inline-start: 0.5rem; margin-inline-end: 0.5rem;">
-  <img height="50" width="50" alt="Storybook" src="docs/storybook.svg"/>
-</a>
-<a href="https://www.docker.com/" target="_blank" style="text-decoration: none; margin-inline-start: 0.5rem; margin-inline-end: 0.5rem;">
-  <img height="50" width="50" alt="Docker" src="docs/docker.svg"/>
-</a>
-<a href="https://pnpm.io/" target="_blank" style="text-decoration: none; margin-inline-start: 0.5rem;">
-  <img height="50" width="50" alt="pnpm" src="docs/pnpm.svg"/>
-</a>
+<a href="https://laravel.com/"><img height="50" width="70" alt="Laravel" src="docs/laravel.svg"/></a>
+<a href="https://react.dev/"><img height="50" width="70" alt="React" src="docs/react.svg"/></a>
+<a href="https://www.typescriptlang.org/"><img height="50" width="70" alt="Typescript" src="docs/typescript.svg"/></a>
+<a href="https://storybook.js.org/"><img height="50" width="70" alt="Storybook" src="docs/storybook.svg"/></a>
+<a href="https://www.docker.com/"><img height="50" width="70" alt="Docker" src="docs/docker.svg"/></a>
+<a href="https://pnpm.io/"><img height="50" width="70" alt="pnpm" src="docs/pnpm.svg"/></a>
 
 <p>Example Laravel 12 application with React, Inertia, PhpUnit, Storybook, Docker, pnpm and more.</p>
 </div>
