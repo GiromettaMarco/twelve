@@ -99,7 +99,7 @@ class ProjectController extends Controller
 
         // Redirect with flash message
         return to_route('projects.index')
-            ->with('flash', new FlashMessage(__(':Item created', ['item' => trans_choice('Project', 1)]), 'success'));
+            ->with('flash', new FlashMessage(__('Project created'), 'success'));
     }
 
     /**
@@ -118,7 +118,7 @@ class ProjectController extends Controller
 
         // Redirect with flash message
         return to_route('projects.show', ['id' => $id])
-            ->with('flash', new FlashMessage(__(':Item updated', ['item' => trans_choice('Project', 1)]), 'success'));
+            ->with('flash', new FlashMessage(__('Project updated'), 'success'));
     }
 
     /**
@@ -136,7 +136,7 @@ class ProjectController extends Controller
 
         // Redirect with flash message
         return to_route('projects.show', ['id' => $id])
-            ->with('flash', new FlashMessage(__(':Item updated', ['item' => __('Deadline')]), 'success'));
+            ->with('flash', new FlashMessage(__('Deadline updated'), 'success'));
     }
 
     /**
@@ -182,7 +182,7 @@ class ProjectController extends Controller
 
         // Redirect with flash message
         return to_route('projects.index')
-            ->with('flash', new FlashMessage(__(':Item deleted', ['item' => trans_choice('Project', 1)]), 'success'));
+            ->with('flash', new FlashMessage(__('Project deleted'), 'success'));
     }
 
     /**
