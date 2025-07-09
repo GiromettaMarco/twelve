@@ -36,8 +36,8 @@ export default function Users({ users = [] }: { users?: User[] }) {
               <TableHead>{t('Registration date')}</TableHead>
               <TableHead>{t('Verification date')}</TableHead>
               <TableHead>{t('Last update')}</TableHead>
-              <TableHead>{t('Proj. #')}</TableHead>
-              <TableHead>{t('Permissions')}</TableHead>
+              <TableHead>{t('P #')}</TableHead>
+              <TableHead>{tChoice('Permission', 2)}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
