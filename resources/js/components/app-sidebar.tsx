@@ -1,3 +1,4 @@
+import AppLogo from '@/components/app-logo'
 import { NavFooter } from '@/components/nav-footer'
 import { NavMain } from '@/components/nav-main'
 import { NavUser } from '@/components/nav-user'
@@ -15,7 +16,6 @@ import type { NavItem } from '@/types'
 import { Link } from '@inertiajs/react'
 import { useLaravelReactI18n } from 'laravel-react-i18n'
 import { ChartColumn, LayoutGrid, Stars, Users } from 'lucide-react'
-import AppLogo from './app-logo'
 
 export function AppSidebar() {
   // Setup translations
@@ -72,7 +72,7 @@ export function AppSidebar() {
               asChild
             >
               <Link
-                href="/dashboard"
+                href={route('home')}
                 prefetch
               >
                 <AppLogo />
