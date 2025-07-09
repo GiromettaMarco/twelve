@@ -1,10 +1,30 @@
-# Eleven
+<div align="center">
+<h1>Twelve</h1>
+
+<a href="https://laravel.com/" target="_blank" style="text-decoration: none; margin-inline-end: 0.5rem;">
+  <img height="50" width="50" alt="Laravel" src="docs/laravel.svg"/>
+</a>
+<a href="https://react.dev/" target="_blank" style="text-decoration: none; margin-inline-start: 0.5rem; margin-inline-end: 0.5rem;">
+  <img height="50" width="50" alt="React" src="docs/react.svg"/>
+</a>
+<a href="https://storybook.js.org/" target="_blank" style="text-decoration: none; margin-inline-start: 0.5rem; margin-inline-end: 0.5rem;">
+  <img height="50" width="50" alt="Storybook" src="docs/storybook.svg"/>
+</a>
+<a href="https://www.docker.com/" target="_blank" style="text-decoration: none; margin-inline-start: 0.5rem; margin-inline-end: 0.5rem;">
+  <img height="50" width="50" alt="Docker" src="docs/docker.svg"/>
+</a>
+<a href="https://pnpm.io/" target="_blank" style="text-decoration: none; margin-inline-start: 0.5rem;">
+  <img height="50" width="50" alt="pnpm" src="docs/pnpm.svg"/>
+</a>
+
+<p>Example Laravel 12 application with React, Inertia, PhpUnit, Storybook, Docker, pnpm and more.</p>
+</div>
+
+---
 
 [![Tests](https://github.com/GiromettaMarco/twelve/actions/workflows/tests.yml/badge.svg)](https://github.com/GiromettaMarco/twelve/actions/workflows/tests.yml)
 [![PHP Coverage](docs/php-coverage.svg)](https://github.com/GiromettaMarco/twelve/actions/workflows/tests.yml)
 [![TS Coverage](docs/ts-coverage.svg)](https://github.com/GiromettaMarco/twelve/actions/workflows/tests.yml)
-
-Example Laravel 12 application with React.
 
 ## Requirements
 
@@ -47,6 +67,22 @@ Run the dev server
 
 ```
 pnpm run dev
+```
+
+## Set up for production
+
+Configure the environment in the `.env` file
+
+Cache Laravel files
+
+```
+php artisan optimize
+```
+
+Build assets for production and start the SSR server
+
+```
+pnpm run build:ssr && php artisan inertia:start-ssr
 ```
 
 ## Minimum Sail configuration
@@ -202,6 +238,7 @@ sail artisan migrate --seed
 
 ## Reference
 
+- [Deployment - Laravel 12.x - The PHP Framework For Web Artisans](https://laravel.com/docs/12.x/deployment)
 - [Git - First-Time Git Setup](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
 - [Generating a new SSH key and adding it to the ssh-agent - GitHub Docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 - [PHP Installer in seconds | php.new](https://php.new/)

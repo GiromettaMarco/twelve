@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #f9ad00;
+      }
+
+      .cls-3 {
+        fill: #4e4e4e;
+      }
+    </style>
+  </defs>
+  <path id="b2JZZcA3fT" class="cls-1" d="M0,0H50V50H0Z" />
+  <path id="bj0tb0Y8q" class="cls-2" d="M47.23,16.67H33.34V2.78H47.23Z" />
+  <path id="dkDSTzPj3" class="cls-2" d="M31.94,16.67H18.06V2.78H31.94Z" />
+  <path id="a4vNdcNLpF" class="cls-2" d="M16.67,16.67H2.78V2.78H16.67Z" />
+  <path id="h2t4Zj1jSU" class="cls-2" d="M47.23,31.94H33.34V18.06H47.23Z" />
+  <path id="b4t5pngwvT" class="cls-3" d="M31.94,31.94H18.06V18.06H31.94Z" />
+  <path id="b9s1gd5m2" class="cls-3" d="M31.94,47.22H18.06V33.33H31.94Z" />
+  <path id="cmt9WLvz7" class="cls-3" d="M47.23,47.22H33.34V33.33H47.23Z" />
+  <path id="bJUNqgFSg" class="cls-3" d="M16.67,47.22H2.78V33.33H16.67Z" />
+</svg>
