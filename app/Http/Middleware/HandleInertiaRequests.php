@@ -83,7 +83,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => $request->user() ? [
                 'user' => $request->user(),
                 'permissions' => [
-                    'telescope' => $request->user()->can('view-telescope'),
+                    'telescope' => env('TELESCOPE_ENABLED') && $request->user()->can('view-telescope'),
                     'users' => [
                         'view' => $request->user()->can('view-users'),
                     ],
