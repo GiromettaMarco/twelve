@@ -18,7 +18,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/.pnpm
+/.pnpm-store
 /auth.json
 # No coverage reports
 /reports
