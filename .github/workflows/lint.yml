@@ -1,12 +1,6 @@
-name: CodeQL
+name: lint
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+on: [workflow_dispatch, pull_request, push]
 
 permissions:
   contents: write
@@ -18,10 +12,6 @@ jobs:
   quality:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        php: [8.4]
-
     name: Code Quality
 
     steps:
@@ -31,17 +21,17 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: 8.4
           extensions: json, dom, curl, libxml, mbstring
           coverage: none
-      
-      - name: Install pnpm
+
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10
           run_install: false
 
-      - name: Install Node.js
+      - name: Setup Node with cache
         uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -64,5 +54,5 @@ jobs:
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "fix: auto-fix code style"
+          commit_message: 'fix: auto-fix code style'
           commit_options: '--no-verify'
