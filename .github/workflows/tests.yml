@@ -14,7 +14,7 @@ jobs:
 
     container:
       # https://playwright.dev/docs/docker#pull-the-image
-      image: mcr.microsoft.com/playwright:v1.53.2-noble
+      image: mcr.microsoft.com/playwright:v1.54.0-noble
 
     name: Tests
 
