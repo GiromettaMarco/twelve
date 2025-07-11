@@ -14,16 +14,11 @@ jobs:
 
     container:
       # https://playwright.dev/docs/docker#pull-the-image
-      image: mcr.microsoft.com/playwright:v1.52.0-noble
+      image: mcr.microsoft.com/playwright:v1.53.2-noble
 
     name: Tests
 
     steps:
-      # @NOTE playwright image has a discrepancy between the current user and the owner of the project folder
-      # which prevents git commits due to "detected dubious ownership"
-      - name: Fix Playwright ownership
-        run: chown root:root .
-
       - name: Checkout
         uses: actions/checkout@v4
 
