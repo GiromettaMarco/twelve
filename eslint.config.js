@@ -1,28 +1,21 @@
-import js from '@eslint/js'
 import prettier from 'eslint-config-prettier'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import storybook from 'eslint-plugin-storybook'
-import globals from 'globals'
+import { defineConfig } from 'eslint/config'
 import typescript from 'typescript-eslint'
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-  js.configs.recommended,
+export default defineConfig([
+  // Typescript
   ...typescript.configs.recommended,
+
+  // React
   {
-    ...react.configs.flat.recommended,
-    ...react.configs.flat['jsx-runtime'], // Required for React 17+
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node
-      }
+    plugins: {
+      react: react
     },
     rules: {
-      'react/react-in-jsx-scope': 'off',
-      'react/prop-types': 'off',
-      'react/no-unescaped-entities': 'off'
+      ...react.configs['jsx-runtime'].rules
     },
     settings: {
       react: {
@@ -30,18 +23,23 @@ export default [
       }
     }
   },
+
+  // React Hooks
   {
     plugins: {
       'react-hooks': reactHooks
     },
-    rules: {
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn'
-    }
+    rules: reactHooks.configs.recommended.rules
   },
+
+  // Prettier
+  prettier,
+
+  // Storybook
+  ...storybook.configs['flat/recommended'],
+
+  // Ignores
   {
     ignores: ['vendor', 'node_modules', 'public', 'bootstrap/ssr', 'tailwind.config.js']
-  },
-  prettier, // Turn off all rules that might conflict with Prettier
-  ...storybook.configs['flat/recommended']
-]
+  }
+])
