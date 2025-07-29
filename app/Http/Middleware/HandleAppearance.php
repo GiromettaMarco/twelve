@@ -16,7 +16,15 @@ class HandleAppearance
      */
     public function handle(Request $request, Closure $next): Response
     {
-        View::share('appearance', $request->cookie('appearance') ?? 'system');
+        $appearance_cookie = $request->cookie('appearance');
+
+        if ($appearance_cookie === 'light' || $appearance_cookie === 'dark') {
+            $appearance = $appearance_cookie;
+        } else {
+            $appearance = 'system';
+        }
+
+        View::share('appearance', $appearance);
 
         return $next($request);
     }
