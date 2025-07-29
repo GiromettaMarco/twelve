@@ -1,50 +1,50 @@
 {
-  "compilerOptions": {
-    /* Language and Environment */
-    "target": "ES2022",
-    "jsx": "react-jsx",
+    "compilerOptions": {
+        /* Language and Environment */
+        "target": "ES2022",
+        "jsx": "react-jsx",
 
-    /* Modules */
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./resources/js/*"],
-      "ziggy-js": ["./vendor/tightenco/ziggy"],
-      "@decorators/*": ["./.storybook/decorators/*"],
-      "@mocks/*": ["./.storybook/mocks/*"],
-      "@stories/*": ["./tests/stories/*"]
+        /* Modules */
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./resources/js/*"],
+            "ziggy-js": ["./vendor/tightenco/ziggy"],
+            "@decorators/*": ["./.storybook/decorators/*"],
+            "@mocks/*": ["./.storybook/mocks/*"],
+            "@stories/*": ["./tests/stories/*"]
+        },
+
+        /* JavaScript Support */
+        "allowJs": true,
+
+        /* Emit */
+        "noEmit": true,
+
+        /* Interop Constraints */
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+
+        /* Type Checking */
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+
+        /* Completeness */
+        "skipLibCheck": true
     },
-
-    /* JavaScript Support */
-    "allowJs": true,
-
-    /* Emit */
-    "noEmit": true,
-
-    /* Interop Constraints */
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-
-    /* Type Checking */
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-
-    /* Completeness */
-    "skipLibCheck": true,
-  },
-  "include": [
-    "resources/js/**/*.ts",
-    "resources/js/**/*.d.ts",
-    "resources/js/**/*.tsx",
-    "tests/stories/**/*.ts",
-    "tests/stories/**/*.d.ts",
-    "tests/stories/**/*.tsx",
-    "tests/stories/**/*.mdx",
-    ".storybook/**/*.ts",
-    ".storybook/**/*.d.ts",
-    ".storybook/**/*.tsx",
-  ]
+    "include": [
+        "resources/js/**/*.ts",
+        "resources/js/**/*.d.ts",
+        "resources/js/**/*.tsx",
+        "tests/stories/**/*.ts",
+        "tests/stories/**/*.d.ts",
+        "tests/stories/**/*.tsx",
+        "tests/stories/**/*.mdx",
+        ".storybook/**/*.ts",
+        ".storybook/**/*.d.ts",
+        ".storybook/**/*.tsx"
+    ]
 }

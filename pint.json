@@ -1,4 +1,4 @@
 {
-  "preset": "laravel",
-  "exclude": ["bin"]
+    "preset": "laravel",
+    "exclude": ["bin"]
 }
