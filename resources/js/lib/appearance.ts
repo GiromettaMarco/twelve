@@ -1,9 +1,14 @@
+import { getCookie } from '@/lib/cookie'
 import { isBrowser, isWindow } from '@/lib/utils'
 
 export type Theme = 'light' | 'dark'
 export type Appearance = 'light' | 'dark' | 'system'
 
-const mediaQuery = () => {
+export function isAppearance(appearance: string | undefined): appearance is Appearance {
+  return appearance !== undefined && ['dark', 'light', 'system'].includes(appearance)
+}
+
+function mediaQuery() {
   if (!isBrowser()) {
     return null
   }
@@ -13,7 +18,13 @@ const mediaQuery = () => {
 
 export function getUserStoredAppearance(): Appearance {
   if (isBrowser()) {
-    return (localStorage.getItem('appearance') as Appearance) || 'system'
+    const appearanceCookie = getCookie('appearance')
+
+    if (isAppearance(appearanceCookie)) {
+      return appearanceCookie
+    }
+
+    return 'system'
   }
 
   return 'system'
@@ -47,9 +58,14 @@ export function applyThemeFromAppearance(appearance: Appearance) {
   applyTheme(getThemeFromAppearance(appearance))
 }
 
-const handleSystemThemeChange = () => {
-  const currentAppearance = localStorage.getItem('appearance') as Appearance
-  applyThemeFromAppearance(currentAppearance || 'system')
+function handleSystemThemeChange() {
+  const appearanceCookie = getCookie('appearance')
+
+  if (isAppearance(appearanceCookie)) {
+    applyThemeFromAppearance(appearanceCookie)
+  } else {
+    applyThemeFromAppearance('system')
+  }
 }
 
 export function initializeTheme() {

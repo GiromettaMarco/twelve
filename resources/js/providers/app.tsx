@@ -9,10 +9,7 @@ export default function App({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState(getThemeFromAppearance(storedAppearance))
 
   function updateAppearance(newAppearance: Appearance) {
-    // Store in localStorage for client-side persistence...
-    localStorage.setItem('appearance', newAppearance)
-
-    // Store in cookie for SSR...
+    // Save with cookie
     setCookie('appearance', newAppearance)
 
     // Infer theme
