@@ -37,6 +37,7 @@
         "eslint-plugin-react-hooks": "^5.1.0",
         "eslint-plugin-storybook": "9.0.18",
         "husky": "^9.1.7",
+        "lint-staged": "^16.1.6",
         "msw": "^2.10.2",
         "msw-storybook-addon": "^2.0.5",
         "playwright": "^1.54.0",
@@ -99,6 +100,12 @@
         "laravel-react-i18n": {
             "react": "$react"
         }
+    },
+    "lint-staged": {
+        "resources/**/*": [
+            "prettier --write",
+            "eslint --cache --fix"
+        ]
     },
     "msw": {
         "workerDirectory": [
