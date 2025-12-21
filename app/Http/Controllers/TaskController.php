@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\FlashMessage;
 use App\Http\Requests\Task\StoreTaskRequest;
 use App\Http\Requests\Task\UpdateInfoRequest;
 use App\Http\Requests\Task\UpdateLabelRequest;
@@ -14,6 +13,7 @@ use App\Models\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Sliver\Format\FlashMessage;
 
 class TaskController extends Controller
 {

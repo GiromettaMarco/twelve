@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Helpers\FlashMessage;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Sliver\Format\FlashMessage;
 use Tighten\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
