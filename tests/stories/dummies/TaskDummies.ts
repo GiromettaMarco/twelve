@@ -72,7 +72,8 @@ export const taskDummy1: Task = {
   label: labels[1],
   status: statuses[2],
   priority: priorities[1],
-  project_id: 1
+  project_id: 1,
+  position: 0
 }
 
 export const taskDummy2: Task = {
@@ -81,7 +82,8 @@ export const taskDummy2: Task = {
   label: labels[1],
   status: statuses[0],
   priority: priorities[1],
-  project_id: 1
+  project_id: 1,
+  position: 1
 }
 
 export const taskDummy3: Task = {
@@ -90,7 +92,8 @@ export const taskDummy3: Task = {
   label: labels[0],
   status: statuses[1],
   priority: priorities[2],
-  project_id: 1
+  project_id: 1,
+  position: 2
 }
 
 export const taskDummy4: Task = {
@@ -99,7 +102,8 @@ export const taskDummy4: Task = {
   label: labels[2],
   status: statuses[0],
   priority: priorities[1],
-  project_id: 1
+  project_id: 1,
+  position: 3
 }
 
 export const taskDummy5: Task = {
@@ -108,5 +112,6 @@ export const taskDummy5: Task = {
   label: labels[2],
   status: statuses[4],
   priority: priorities[1],
-  project_id: 1
+  project_id: 1,
+  position: 4
 }
