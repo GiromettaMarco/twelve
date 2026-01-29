@@ -1,0 +1,30 @@
+{
+    "search.exclude": {
+        // Avoid polluting search results with lockfile content
+        "pnpm-lock.yaml": true,
+        "composer.lock": true,
+        // Exclude public vendors
+        "public/vendor/*": true
+    },
+    // Ensure VSCode uses pnpm instead of npm
+    "npm.packageManager": "pnpm",
+    // For those using file-nesting, nest the new files. E.g.:
+    "explorer.fileNesting.patterns": {
+        "package.json": "pnpm-workspace.yaml, pnpm-lock.yaml"
+    },
+
+    // TODO Tree settings
+    "todo-tree.tree.showBadges": true,
+
+    // Tailwind
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+
+    // eslint fix
+    "eslint.useFlatConfig": true,
+    "eslint.options": {
+        "overrideConfigFile": "./eslint.config.js"
+    },
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+}

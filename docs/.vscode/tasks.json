@@ -1,0 +1,84 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "$(debug-alt-small)",
+            "type": "shell",
+            "command": "pnpm run dev",
+            "options": {
+                "statusbar": {
+                    "detail": "dev server",
+                    "color": "#22C1D6"
+                }
+            }
+        },
+        {
+            "label": "$(play)",
+            "type": "shell",
+            "command": "pnpm run build:ssr && php artisan inertia:start-ssr",
+            "options": {
+                "statusbar": {
+                    "detail": "prod server",
+                    "color": "#22C1D6"
+                }
+            }
+        },
+        {
+            "label": "$(remote-explorer-documentation)",
+            "type": "shell",
+            "command": "pnpm run storybook",
+            "options": {
+                "statusbar": {
+                    "detail": "storybook",
+                    "color": "#22C1D6"
+                }
+            }
+        },
+        {
+            "label": "$(mail)",
+            "type": "shell",
+            "command": "Start \"http://localhost:8025/\" && c:/path/to/mailpit/mailpit.exe --database c:/path/to/mailpit/storage/twelve.db",
+            "options": {
+                "statusbar": {
+                    "detail": "mailpit",
+                    "color": "#22C1D6"
+                }
+            }
+        },
+        {
+            "label": "$(test-view-icon)",
+            "type": "shell",
+            "command": "php artisan test --coverage",
+            "options": {
+                "statusbar": {
+                    "detail": "run php tests",
+                    "color": "#22C1D6"
+                }
+            }
+        },
+        {
+            "label": "$(test-view-icon)",
+            "type": "shell",
+            "command": "pnpm run test",
+            "options": {
+                "statusbar": {
+                    "detail": "run js tests",
+                    "color": "#22C1D6"
+                }
+            }
+        },
+        {
+            "label": "$(debug-collapse-all)",
+            "command": "${command:tailwind-fold.toggleAutoFold}",
+            "options": {
+                "statusbar": {
+                    "detail": "Fold/unfold Tailwind CSS classes",
+                    "color": "#22C1D6",
+                    "filePattern": ".*\\.tsx"
+                }
+            }
+        }
+    ]
+}
