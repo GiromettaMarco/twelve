@@ -10,6 +10,8 @@ use App\Models\Priority;
 use App\Models\Project;
 use App\Models\Status;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -53,7 +55,7 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(StoreProjectRequest $request)
     {
@@ -105,7 +107,7 @@ class ProjectController extends Controller
     /**
      * Update the project title and description.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function updateInfo(UpdateInfoRequest $request, string $id)
     {
@@ -124,7 +126,7 @@ class ProjectController extends Controller
     /**
      * Update the project deadline.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function updateDeadline(UpdateDeadlineRequest $request, string $id)
     {
@@ -142,7 +144,7 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy(Request $request, string $id)
     {
@@ -188,7 +190,7 @@ class ProjectController extends Controller
     /**
      * Return to the projects index and print a flash error message.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     protected function failReorder()
     {
@@ -199,7 +201,7 @@ class ProjectController extends Controller
     /**
      * Change the position attribute of multiple projects at once.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function reorder(Request $request)
     {
@@ -264,7 +266,7 @@ class ProjectController extends Controller
     /**
      * Get query and bindings for resetting the position of a collection of projects.
      *
-     * @param  \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project>  $projects
+     * @param  Collection<int, Project>  $projects
      * @param  int  $user_id
      * @param  int|null  $insert  (optional) Start shifting from this position if set
      * @return array

@@ -11,6 +11,8 @@ use App\Http\Requests\Task\UpdateStatusRequest;
 use App\Models\Project;
 use App\Models\Task;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Sliver\Format\FlashMessage;
@@ -20,7 +22,7 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(StoreTaskRequest $request, string $project_id)
     {
@@ -71,7 +73,7 @@ class TaskController extends Controller
     /**
      * Update the task label.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function updateLabel(UpdateLabelRequest $request, string $project_id, string $id)
     {
@@ -90,7 +92,7 @@ class TaskController extends Controller
     /**
      * Update the project title and description.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function updateInfo(UpdateInfoRequest $request, string $project_id, string $id)
     {
@@ -108,7 +110,7 @@ class TaskController extends Controller
     /**
      * Update the task status.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function updateStatus(UpdateStatusRequest $request, string $project_id, string $id)
     {
@@ -127,7 +129,7 @@ class TaskController extends Controller
     /**
      * Update the task priority.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function updatePriority(UpdatePriorityRequest $request, string $project_id, string $id)
     {
@@ -146,7 +148,7 @@ class TaskController extends Controller
     /**
      * Update the task position.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function updatePosition(UpdatePositionRequest $request, string $project_id, string $id)
     {
@@ -212,7 +214,7 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy(Request $request, string $project_id, string $id)
     {
@@ -258,7 +260,7 @@ class TaskController extends Controller
     /**
      * Get query and bindings for resetting the position of a collection of tasks.
      *
-     * @param  \Illuminate\Database\Eloquent\Collection<int, \App\Models\Task>  $tasks
+     * @param  Collection<int, Task>  $tasks
      * @param  int|null  $insert  (optional) Start shifting from this position if set
      * @param  int  $delta  (optional) If $insert is set, shift by this ammount
      * @param  int  $from  (optional) Start counting from ...
