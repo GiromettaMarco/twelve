@@ -3,13 +3,7 @@ import { mergeConfig } from 'vite'
 
 const config: StorybookConfig = {
   stories: ['../tests/stories/**/*.mdx', '../tests/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-  addons: [
-    '@storybook/addon-onboarding',
-    '@storybook/addon-docs',
-    '@storybook/addon-a11y',
-    '@storybook/addon-vitest',
-    '@storybook/addon-themes'
-  ],
+  addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-vitest', '@storybook/addon-themes'],
   framework: {
     name: '@storybook/react-vite',
     options: {}
@@ -19,8 +13,20 @@ const config: StorybookConfig = {
   },
   staticDirs: ['../public'],
   viteFinal: async (config) => {
-    // This alias works only when running tests with the "storybook" command (ui), but not when running the "vitest" command (ci)
-    if (config.resolve) {
+    /**
+     * This alias works only when running tests with the "storybook" command (ui),
+     * but not when running the "vitest" command (ci)
+     */
+    const alias = {
+      '@inertiajs/react': import.meta.resolve('./mocks/@inertiajs/react/index.mock.ts'),
+      '@/providers/app': import.meta.resolve('./mocks/app.mock.tsx')
+    }
+
+    if (!config.resolve) {
+      config.resolve = {
+        alias
+      }
+    } else {
       config.resolve.alias = {
         ...config.resolve?.alias,
         '@inertiajs/react': import.meta.resolve('./mocks/@inertiajs/react/index.mock.ts'),
