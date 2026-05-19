@@ -7,7 +7,6 @@ import laravel from 'laravel-vite-plugin'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
-import tsConfigPaths from 'vite-tsconfig-paths'
 
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url))
 
@@ -24,11 +23,10 @@ export default defineConfig({
       refresh: true
     }),
     react(),
-    tailwindcss(),
-    tsConfigPaths()
+    tailwindcss()
   ],
-  esbuild: {
-    jsx: 'automatic'
+  resolve: {
+    tsconfigPaths: true
   },
   test: {
     reporters: ['default'],
