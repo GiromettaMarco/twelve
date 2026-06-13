@@ -19,7 +19,7 @@ export default function PriorityLabel({ priority, className, ...props }: Priorit
       className={cn('flex items-center', className)}
       {...props}
     >
-      {Icon && <Icon className="text-muted-foreground mr-2 h-4 w-4" />}
+      {Icon && <Icon className="mr-2 h-4 w-4 text-muted-foreground" />}
       <span>{t(priority.label)}</span>
     </div>
   )

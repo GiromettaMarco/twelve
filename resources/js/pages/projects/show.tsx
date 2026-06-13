@@ -62,7 +62,7 @@ export default function Project({ project, labels, statuses, priorities }: Proje
           />
         </div>
 
-        <Separator className="bg-border my-4 h-px" />
+        <Separator className="my-4 h-px bg-border" />
 
         <section className="grid flex-1 gap-4 lg:grid-cols-2 2xl:grid-cols-3">
           <EditProjectInfo

@@ -87,7 +87,7 @@ function Calendar({
   const _monthsClassName = cn('relative flex', props.monthsClassName)
   const _monthCaptionClassName = cn('relative mx-10 flex h-7 items-center justify-center', props.monthCaptionClassName)
   const _weekdaysClassName = cn('flex flex-row', props.weekdaysClassName)
-  const _weekdayClassName = cn('text-muted-foreground w-8 text-sm font-normal', props.weekdayClassName)
+  const _weekdayClassName = cn('w-8 text-sm font-normal text-muted-foreground', props.weekdayClassName)
   const _monthClassName = cn('w-full', props.monthClassName)
   const _captionClassName = cn('relative flex items-center justify-center pt-1', props.captionClassName)
   const _captionLabelClassName = cn('truncate text-sm font-medium', props.captionLabelClassName)
@@ -111,7 +111,7 @@ function Calendar({
   const _rangeStartClassName = cn(buttonRangeClassName, 'day-range-start rounded-s-md', props.rangeStartClassName)
   const _rangeEndClassName = cn(buttonRangeClassName, 'day-range-end rounded-e-md', props.rangeEndClassName)
   const _rangeMiddleClassName = cn(
-    'bg-accent !text-foreground [&>button]:!text-foreground [&>button]:hover:!text-foreground [&>button]:bg-transparent [&>button]:hover:bg-transparent',
+    'bg-accent !text-foreground [&>button]:bg-transparent [&>button]:!text-foreground [&>button]:hover:bg-transparent [&>button]:hover:!text-foreground',
     props.rangeMiddleClassName
   )
   const _selectedClassName = cn(
@@ -120,7 +120,7 @@ function Calendar({
   )
   const _todayClassName = cn('[&>button]:bg-accent [&>button]:text-accent-foreground', props.todayClassName)
   const _outsideClassName = cn(
-    'day-outside text-muted-foreground aria-selected:bg-accent/50 aria-selected:text-muted-foreground opacity-50 aria-selected:opacity-30',
+    'day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30',
     props.outsideClassName
   )
   const _disabledClassName = cn('text-muted-foreground opacity-50', props.disabledClassName)
@@ -407,8 +407,8 @@ function YearGrid({
           <Button
             key={i}
             className={cn(
-              'text-foreground h-7 w-full text-sm font-normal',
-              displayYears.from + i === new Date().getFullYear() && 'bg-accent text-accent-foreground font-medium'
+              'h-7 w-full text-sm font-normal text-foreground',
+              displayYears.from + i === new Date().getFullYear() && 'bg-accent font-medium text-accent-foreground'
             )}
             variant="ghost"
             onClick={() => {

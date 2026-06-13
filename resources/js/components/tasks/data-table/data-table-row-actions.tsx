@@ -49,7 +49,7 @@ export function DataTableRowActions<TData extends Task>({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="data-[state=open]:bg-muted flex h-8 w-8 p-0"
+          className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
         >
           <MoreHorizontal />
           <span className="sr-only">{t('Open menu')}</span>

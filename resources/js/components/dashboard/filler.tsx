@@ -8,7 +8,7 @@ export function Filler1() {
   const { t } = useLaravelReactI18n()
 
   return (
-    <Card className={'bg-reading-back gap-4'}>
+    <Card className={'gap-4 bg-reading-back'}>
       <CardHeader className="flex-none">
         <CardTitle className="flex gap-4 align-middle">
           <Stars className="size-6" />
@@ -16,7 +16,7 @@ export function Filler1() {
         </CardTitle>
       </CardHeader>
 
-      <CardContent className="text-reading-front flex-1">
+      <CardContent className="flex-1 text-reading-front">
         <p>
           Adipisci repellendus ratione laudantium nisi eaque voluptatem fuga quod hic, explicabo amet at laborum maiores
           ducimus et a vel quidem dolorem modi.
@@ -42,7 +42,7 @@ export function Filler2() {
   const { t } = useLaravelReactI18n()
 
   return (
-    <Card className={'bg-reading-back gap-4'}>
+    <Card className={'gap-4 bg-reading-back'}>
       <CardHeader className="flex-none">
         <CardTitle className="flex gap-4 align-middle">
           <Stars className="size-6" />
@@ -50,7 +50,7 @@ export function Filler2() {
         </CardTitle>
       </CardHeader>
 
-      <CardContent className="text-reading-front flex-1">
+      <CardContent className="flex-1 text-reading-front">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda modi inventore, totam vero consequuntur,
           aut animi veritatis tempora nulla facere placeat velit illum explicabo dicta enim ipsum. Vitae ducimus,
