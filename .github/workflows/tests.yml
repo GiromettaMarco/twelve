@@ -1,6 +1,13 @@
 name: tests
 
-on: [workflow_dispatch, pull_request, push]
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -30,6 +37,7 @@ jobs:
         with:
           php-version: 8.4
           extensions: json, dom, curl, libxml, mbstring
+          tools: composer:v2
           coverage: xdebug
 
       - name: Setup pnpm
