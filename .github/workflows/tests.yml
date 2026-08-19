@@ -26,10 +26,11 @@ jobs:
         run: chown root:root .
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@verbose
         with:
           php-version: 8.4
           extensions: json, dom, curl, libxml, mbstring
+          tools: composer:v2
           coverage: xdebug
 
       - name: Setup pnpm
