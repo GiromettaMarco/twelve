@@ -7,17 +7,8 @@ import withLocaleSelector from '@decorators/with-locale-selector'
 import withTheme from '@decorators/with-theme'
 import withZiggy from '@decorators/with-ziggy'
 import type { Preview } from '@storybook/react-vite'
-import { initialize, mswLoader } from 'msw-storybook-addon'
-
-/*
- * Initializes MSW
- * See https://github.com/mswjs/msw-storybook-addon#configuring-msw
- * to learn how to customize it
- */
-initialize({
-  quiet: import.meta.env.MSW_QUIET,
-  onUnhandledRequest: import.meta.env.MSW_ON_UNHANDLED_REQUEST
-})
+import { mswLoader } from 'msw-storybook-addon/csf3'
+import { setupWorker } from 'msw/browser'
 
 const preview: Preview = {
   globalTypes: {
@@ -58,7 +49,16 @@ const preview: Preview = {
   // @NOTE decorators are resolved in stack order
   decorators: [withTheme(), withLocaleSelector(), withI18n(), withZiggy()],
 
-  loaders: [mswLoader] // Add the MSW loader to all stories
+  loaders: [
+    mswLoader(async () => {
+      const worker = setupWorker()
+      await worker.start({
+        onUnhandledRequest: import.meta.env.MSW_ON_UNHANDLED_REQUEST ?? 'bypass',
+        quiet: import.meta.env.MSW_QUIET ?? true
+      })
+      return worker
+    })
+  ] // Add the MSW loader to all stories
 }
 
 export default preview
